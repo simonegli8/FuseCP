@@ -3,6 +3,32 @@ RMDIR /S /Q "Bin"
 FOR /F "tokens=*" %%G IN ('DIR /B /AD /S bin') DO RMDIR /S /Q "%%G"
 FOR /F "tokens=*" %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q "%%G"
 
+IF EXIST "%ProgramFiles%\Microsoft Visual Studio\18\Community\MSBuild\Current\bin\MSBuild.exe" (
+	Set SCPMSBuild="%ProgramFiles%\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
+	Set SCPVSVer=18.0
+	Echo Found VS 2026 Community
+	GOTO Build 
+ )
+IF EXIST "%ProgramFiles%\Microsoft Visual Studio\18\Professional\MSBuild\Current\bin\MSBuild.exe" (
+	Set SCPMSBuild="%ProgramFiles%\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\MSBuild.exe"
+	Set SCPVSVer=18.0
+	Echo Found VS 2026 Professional
+	GOTO Build 
+ )
+IF EXIST "%ProgramFiles%\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\bin\MSBuild.exe" (
+	Set SCPMSBuild="%ProgramFiles%\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\Bin\MSBuild.exe"
+	Set SCPVSVer=18.0
+	Echo Found VS 2026 Enterprise
+	GOTO Build 
+ )
+IF EXIST "%ProgramFiles%\Microsoft Visual Studio\18\Preview\MSBuild\Current\Bin\MSBuild.exe" (
+	Set SCPMSBuild="%ProgramFiles%\Microsoft Visual Studio\18\Preview\MSBuild\Current\Bin\MSBuild.exe"
+	Set SCPVSVer=18.0
+	Echo Found VS 2026 Preview
+	GOTO Build 
+ )
+
+
 IF EXIST "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\bin\MSBuild.exe" (
 	Set SCPMSBuild="%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	Set SCPVSVer=17.0

@@ -250,14 +250,14 @@ public class SystemController
 			}
 			SystemSettings settings = new SystemSettings();
 			settings = new SystemSettings();
-			settings[nameof(hostbill.Url)] = url;
+			settings[SystemSettings.HOSTBILL_INTEGRATION_URL] = url;
 			if (hostbill.Enabled)
 			{
-				settings[nameof(hostbill.Id)] = id;
-				settings[nameof(hostbill.Key)] = key;
+				settings[SystemSettings.HOSTBILL_INTEGRATION_ID] = id;
+				settings[SystemSettings.HOSTBILL_INTEGRATION_KEY] = key;
 			}
 			int result = SetSystemSettings(SystemSettings.HOSTBILL_INTEGRATION, settings);
-			HostBillServerCache = new HostBillServer() { Enabled = hostbill.Enabled, Id = id, Key = key, Url = url };
+			HostBillServerCache = new HostBillServer() { Id = id, Key = key, Url = url };
 		}
 	}
 
@@ -268,13 +268,12 @@ public class SystemController
 			if (HostBillServerCache != null) return HostBillServerCache;
 			var settings = GetSystemSettings(SystemSettings.HOSTBILL_INTEGRATION);
 			var server = new HostBillServer();
-			server.Url = settings[nameof(server.Url)];
-			server.Enabled = !string.IsNullOrEmpty(server.Url);
+			server.Url = settings[SystemSettings.HOSTBILL_INTEGRATION_URL];
 			if (!server.Enabled) server.Id = server.Key = null;
 			else
 			{
-				server.Id = settings[nameof(server.Id)];
-				server.Key = settings[nameof(server.Key)];
+				server.Id = settings[SystemSettings.HOSTBILL_INTEGRATION_ID];
+				server.Key = settings[SystemSettings.HOSTBILL_INTEGRATION_KEY];
 			}
 			HostBillServerCache = server;
 			return server;

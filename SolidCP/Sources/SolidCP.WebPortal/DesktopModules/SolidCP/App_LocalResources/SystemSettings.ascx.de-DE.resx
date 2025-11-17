@@ -177,6 +177,10 @@
   <data name="SettinglblIpAddressRestriction.Text" xml:space="preserve">
     <value>IP-Adressen:</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SettingtxtMfaTokenAppDisplayName.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="SettinglblOwaUrl.Text" xml:space="preserve">
     <value>OWA-URL:</value>
   </data>
@@ -272,5 +276,17 @@
   </data>
   <data name="Settingsconfiguremailtemplates.Text" xml:space="preserve">
     <value>*** Please do not forget to configure your email templates (From name/  From Email address).  They can be configured at:</value>
+  </data>
+  <data name="SettingtxtHBUrl.Text" xml:space="preserve">
+    <value>HostBill API Url:</value>
+  </data>
+  <data name="SettingtxtHBId.Text" xml:space="preserve">
+    <value>HostBill API ID:</value>
+  </data>
+  <data name="SettingtxtHBKey.Text" xml:space="preserve">
+    <value>HostBill API Key:</value>
+  </data>
+  <data name="HeaderHostBillSettings.Text" xml:space="preserve">
+    <value>HostBill:</value>
   </data>
 </root>

@@ -115,10 +115,18 @@ namespace SolidCP.EnterpriseServer
 
 			string domainName = item.Name.Substring(item.Name.IndexOf("@") + 1);
 			if (!DataProvider.CheckMaxEmailAccountsPerDomainQuota(item.PackageId, domainName))
-				return BusinessErrorCodes.ERROR_MAIL_ACCOUNTS_RESOURCE_QUOTA_LIMIT;
+			{
+				// update Quota from HostBill
+				var username = SecurityContext.User.Identity.Name;
+				if (HostBillServer.UpdateMaxEmailAccountsPerDomainQuotaFromHostBill(username))
+				{
+					if (!DataProvider.CheckMaxEmailAccountsPerDomainQuota(item.PackageId, domainName))
+						return BusinessErrorCodes.ERROR_MAIL_ACCOUNTS_RESOURCE_QUOTA_LIMIT;
+				}
+                else return BusinessErrorCodes.ERROR_MAIL_ACCOUNTS_RESOURCE_QUOTA_LIMIT;            }
 
-			// check if mail resource is available
-			int serviceId = PackageController.GetPackageServiceId(item.PackageId, ResourceGroups.Mail);
+            // check if mail resource is available
+            int serviceId = PackageController.GetPackageServiceId(item.PackageId, ResourceGroups.Mail);
 			if (serviceId == 0)
 				return BusinessErrorCodes.ERROR_MAIL_RESOURCE_UNAVAILABLE;
 

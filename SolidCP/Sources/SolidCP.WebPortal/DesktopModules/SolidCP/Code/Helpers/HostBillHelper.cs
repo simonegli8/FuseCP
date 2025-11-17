@@ -10,15 +10,18 @@ namespace SolidCP.Portal.Code.Helpers
 	{
 		public static void SetHostBillIntegration(bool enabled, string id, string key, string url)
 		{
-			ES.Services.System.SetHostBillIntegration(enabled, url);
+			if (!enabled)
+			{
+				url = id = key = null;
+            }
+            ES.Services.System.SetHostBillIntegration(new EnterpriseServer.HostBillServerInfo()
+			{
+				Id = id,
+				Key = key,
+				Url = url
+			});
 		}
 
-		public static void GetHostBillIntegration(out bool enabled, out string url)
-		{
-			url = ES.Services.System.GetHostBillIntegration();
-			enabled = !string.IsNullOrEmpty(url);
-		}
-
-
+		public static EnterpriseServer.HostBillServerInfo GetHostBillIntegration() => ES.Services.System.GetHostBillIntegration();
 	}
 }

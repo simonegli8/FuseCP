@@ -22,7 +22,7 @@ public class HostBillServer : HostBillServerInfo
 		public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 		{
 			var str = reader.GetString();
-			return DateTime.ParseExact(str, "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+			return DateTime.ParseExact(str,new string[] { "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd" }, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
 		}
 
 		public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
@@ -30,32 +30,39 @@ public class HostBillServer : HostBillServerInfo
 			writer.WriteStringValue(value.ToString("yyyy-MM-dd HH:mm:ss"));
 		}
 	}
-	public class HostBillUserInfoResponse
+
+	public class HostBillResponseBase
 	{
-		[JsonPropertyName("status")]
-		public string Status { get; set; }
+        [JsonPropertyName("success")]
+        public bool? Success { get; set; }
 
-		[JsonPropertyName("totalresults")]
-		public int TotalResults { get; set; }
+        [JsonPropertyName("error")]
+        public string[] Error { get; set; }
 
+        [JsonPropertyName("info")]
+        public string[] Info { get; set; }
+
+        [JsonPropertyName("call")]
+		public string Call { get; set; }
+
+		[JsonPropertyName("server_time")]
+		public int ServerTime { get; set; }
+
+    }
+    public class HostBillGetClientsResponse: HostBillResponseBase
+	{
 		[JsonPropertyName("clients")]
 		public List<HostBillClient> Clients { get; set; }
 	}
-
-	public class HostBillClientResponse
-	{
-		[JsonPropertyName("status")]
-		public string Status { get; set; }
-
-		[JsonPropertyName("client")]
-		public HostBillClient Client { get; set; }
-	}
-    public class HostBillCreateClientResponse
+    public class HostBillGetClientResponse : HostBillResponseBase
     {
-        [JsonPropertyName("success")]
-        public bool Success { get; set; }
-        [JsonPropertyName("message")]
-        public string Message { get; set; }
+        [JsonPropertyName("client")]
+        public HostBillClient Client { get; set; }
+    }
+
+
+    public class HostBillAddClientResponse: HostBillResponseBase
+    {
         [JsonPropertyName("client_id")]
         public int ClientId { get; set; }
     }
@@ -139,8 +146,20 @@ public class HostBillServer : HostBillServerInfo
 		[JsonPropertyName("status")]
 		public string Status { get; set; }
 
-		[JsonPropertyName("client")]
+        [JsonPropertyName("error")]
+        public string[] Error { get; set; }
+
+        [JsonPropertyName("client")]
 		public HostBillClient Client { get; set; }
+	}
+
+	public class VerifyClientLoginResponse: HostBillResponseBase
+	{
+		[JsonPropertyName("client_id")]
+		public int ClientId { get; set; }
+
+		[JsonPropertyName("mfa_status")]
+		public int MfaStatus { get; set; }
 	}
 	#endregion
 
@@ -149,17 +168,8 @@ public class HostBillServer : HostBillServerInfo
 		var server = GetHostBillIntegration();
 		if (!server.Enabled) return null;
 
-		string apiUrl = $"{server.Url}/api/";
-		var data = $"sld={server.Id}&cmd={cmd}&{parameters}";
-		// Generate HostBill signature (HMAC-MD5)
-		string signature;
-		using (var hmac = new HMACMD5(Encoding.UTF8.GetBytes(server.Key)))
-		{
-			byte[] hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
-			signature = BitConverter.ToString(hash).Replace("-", "").ToLower();
-		}
-
-		data += $"&hash={signature}";
+		string apiUrl = $"{server.Url}/api.php";
+		var data = $"api_id={Uri.EscapeDataString(server.Id)}&api_key={Uri.EscapeDataString(server.Key)}&outputformat=json&call={cmd}&{parameters}";
 
 		var client = new RestClient(apiUrl);
 		var request = new RestRequest("", method);
@@ -168,7 +178,7 @@ public class HostBillServer : HostBillServerInfo
 
 		var response = client.Execute<T>(request);
 
-		if (!response.IsSuccessful) throw new InvalidOperationException($"REST Error: {response.StatusCode}");
+		if (!response.IsSuccessful) throw new InvalidOperationException($"REST Error: {response.ErrorMessage} {response.StatusCode}");
 
 		return response.Data;
 	}
@@ -197,10 +207,18 @@ public class HostBillServer : HostBillServerInfo
 			}
 		};
 
-		var response = CallApi<HostBillCreateClientResponse>("client.create",
-			$"username={Uri.EscapeDataString(client.Username)}&firstname={Uri.EscapeDataString(client.FirstName)}&lastname={Uri.EscapeDataString(client.LastName)}&companyname={Uri.EscapeDataString(client.CompanyName)}&email={Uri.EscapeDataString(client.Email)}&phonenumber={Uri.EscapeDataString(client.PhoneNumber)}&address1={Uri.EscapeDataString(client.Address1)}&city={Uri.EscapeDataString(client.City)}&state={Uri.EscapeDataString(client.State)}&postcode={Uri.EscapeDataString(client.Postcode)}&country={Uri.EscapeDataString(client.Country)}&currency_id={Uri.EscapeDataString(client.CurrencyId)}&language={Uri.EscapeDataString(client.Language)}&password={Uri.EscapeDataString(password)}");
-
-		if (!response.Success) throw new InvalidOperationException($"HostBill user creation failed: {response.Message}");
+		try
+		{
+			var response = CallApi<HostBillAddClientResponse>("addClient",
+				$"username={Uri.EscapeDataString(client.Username)}&firstname={Uri.EscapeDataString(client.FirstName)}&lastname={Uri.EscapeDataString(client.LastName)}&companyname={Uri.EscapeDataString(client.CompanyName)}&email={Uri.EscapeDataString(client.Email)}&phonenumber={Uri.EscapeDataString(client.PhoneNumber)}&address1={Uri.EscapeDataString(client.Address1)}&city={Uri.EscapeDataString(client.City)}&state={Uri.EscapeDataString(client.State)}&postcode={Uri.EscapeDataString(client.Postcode)}&country={Uri.EscapeDataString(client.Country)}&currency_id={Uri.EscapeDataString(client.CurrencyId)}&language={Uri.EscapeDataString(client.Language)}&password={Uri.EscapeDataString(password)}");
+			if (response == null || response.Success != true)
+			{
+                throw new InvalidOperationException($"HostBill user creation failed: {response.Error.FirstOrDefault()}");
+            }
+		} catch (Exception ex)
+		{
+			throw new InvalidOperationException($"HostBill user creation failed: {ex.Message}", ex);
+        }
     }
 
 	// returns null on success or error message otherwise
@@ -211,32 +229,50 @@ public class HostBillServer : HostBillServerInfo
 
 		try
 		{
-			var authResponse = CallApi<AuthenticateResponse>("authenticateclient", $"username={Uri.EscapeDataString(username)}&password={Uri.EscapeDataString(password)}");
-			if (authResponse != null && authResponse.Status == "OK")
+			var verifyClientLoginResponse = CallApi<VerifyClientLoginResponse>("verifyClientLogin", $"email={Uri.EscapeDataString(username)}&password={Uri.EscapeDataString(password)}");
+			if (verifyClientLoginResponse != null && verifyClientLoginResponse.Success == true)
 			{
-				var user = authResponse.Client;
-				UserController.AddUser(new UserInfo
+				var userId = verifyClientLoginResponse.ClientId;
+				var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={userId}");
+				if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
 				{
-					Address = user.Address1,
-					City = user.City,
-					CompanyName = user.CompanyName,
-					Country = user.Country,
-					Created = user.DateCreated,
-					Email = user.Email,
-					FirstName = user.FirstName,
-					LastName = user.LastName,
-					OwnerId = 1,
-					PrimaryPhone = user.PhoneNumber,
-					State = user.State,
-					Role = UserRole.User,
-					Zip = user.Postcode,
-					Username = username,
-				}, false, password, false);
-				return null;
-			}
-			else return authResponse.Status;
+					var user = getClientDetailsResponse.Client;
+					UserController.AddUser(new UserInfo
+					{
+						Address = user.Address1,
+						City = user.City,
+						CompanyName = user.CompanyName,
+						Country = user.Country,
+						Created = user.DateCreated,
+						Email = user.Email,
+						FirstName = user.FirstName,
+						LastName = user.LastName,
+						OwnerId = 1,
+						PrimaryPhone = user.PhoneNumber,
+						State = user.State,
+						Role = UserRole.User,
+						Zip = user.Postcode,
+						Username = username,
+						Status = UserStatus.Active,
+					}, false, password, false);
+                    return null;
+                } return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
+            }
+			else return verifyClientLoginResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
 		} catch (Exception ex) {
 			return ex.Message;
 		}
 	}
+
+	public static bool UpdateMaxEmailAccountsPerDomainQuotaFromHostBill(string username)
+	{
+		var server = GetHostBillIntegration();
+		if (!server.Enabled) return false;
+
+		
+		//var clientResponse = CallApi<HostBillClientResponse>("client.getinfo", $"username={Uri.EscapeDataString(username)}");
+		//TODO get quota
+
+		return true;
+    }
 }

@@ -123,7 +123,8 @@ namespace SolidCP.EnterpriseServer
 
 
                 // compare user passwords
-                if ((CryptoUtils.SHA1(user.Password) == password) || (user.Password == password))
+                if ((CryptoUtils.SHA1(user.Password) == password) || (user.Password == password) ||
+					user.Password == CryptoUtils.SHA1(password) || CryptoUtils.SHA1(user.Password) == CryptoUtils.SHA1(password))
                 {
                     switch (user.OneTimePasswordState)
                     {

@@ -330,10 +330,22 @@
   <data name="SettingTwilioURL.Text" xml:space="preserve">
     <value>Visit &amp;lt;a  href='https://www.twilio.com'/&amp;gt;https://www.twilio.com&amp;lt;/a&amp;gt; to get your Twilio Information.</value>
   </data>
-  <data name="btnTwillioDisable.Text" xml:space="preserve">
+  <data name="S" xml:space="preserve">
     <value>&amp;lt;span class='fa fa-ban' aria-hidden='true'&amp;gt;&amp;nbsp;&amp;lt;/span&amp;gt;&amp;nbsp;Disable</value>
   </data>
   <data name="Settingsconfiguremailtemplates.Text" xml:space="preserve">
     <value>*** Please do not forget to configure your email templates (From name/  From Email address).  They can be configured at:</value>
+  </data>
+  <data name="SettingtxtHBUrl.Text" xml:space="preserve">
+    <value>HostBill API Url:</value>
+  </data>
+  <data name="SettingtxtHBId.Text" xml:space="preserve">
+    <value>HostBill API ID:</value>
+  </data>
+  <data name="SettingtxtHBKey.Text" xml:space="preserve">
+    <value>HostBill API Key:</value>
+  </data>
+  <data name="HeaderHostBillSettings.Text" xml:space="preserve">
+    <value>HOSTBILL SETTINGS</value>
   </data>
 </root>

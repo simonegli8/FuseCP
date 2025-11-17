@@ -204,6 +204,16 @@ namespace SolidCP.Portal
                 txtMfaTokenAppDisplayName.Text = settings.GetValueOrDefault(SCP.SystemSettings.MFA_TOKEN_APP_DISPLAY_NAME, string.Empty);
                 chkCanPeerChangeMFa.Checked = settings.GetValueOrDefault(SCP.SystemSettings.MFA_CAN_PEER_CHANGE_MFA, true);
             }
+
+            // HostBill settings
+            settings = ES.Services.System.GetSystemSettings(SCP.SystemSettings.HOSTBILL_INTEGRATION);
+
+            if (settings != null)
+            {
+                txtHBUrl.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_URL, string.Empty);
+                txtHBId.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_ID, string.Empty);
+                txtHBKey.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_KEY, string.Empty);
+            }
         }
         private void SaveSMTP()
         {
@@ -239,10 +249,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
-
                 // BACKUP
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
                 settings[BACKUPS_PATH] = txtBackupsPath.Text.Trim();
 
                 int result = ES.Services.System.SetSystemSettings(
@@ -302,9 +310,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
                 // FILE MANAGER
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
                 settings[FILE_MANAGER_EDITABLE_EXTENSIONS] = Regex.Replace(txtFileManagerEditableExtensions.Text, @"[\r\n]+", ",");
 
 
@@ -329,9 +336,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
                 // RDS Server
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
                 settings[RDS_MAIN_CONTROLLER] = ddlRdsController.SelectedValue;
                 int result = ES.Services.System.SetSystemSettings(SCP.SystemSettings.RDS_SETTINGS, settings);
             }
@@ -347,9 +353,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
                 // OWA Portal
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
 
                 settings[SCP.SystemSettings.WEBDAV_OWA_ENABLED_KEY] = chkEnableOwa.Checked.ToString();
                 settings[SCP.SystemSettings.WEBDAV_OWA_URL] = txtOwaUrl.Text;
@@ -374,9 +379,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
                 // Cloud Portal
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
                 settings[WEBDAV_PORTAL_URL] = txtWebdavPortalUrl.Text;
                 settings[SCP.SystemSettings.WEBDAV_PASSWORD_RESET_ENABLED_KEY] = chkEnablePasswordReset.Checked.ToString();
                 settings[SCP.SystemSettings.WEBDAV_PASSWORD_RESET_LINK_LIFE_SPAN] = txtPasswordResetLinkLifeSpan.Text;
@@ -401,10 +405,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
-
                 // Twilio portal
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
                 settings[SCP.SystemSettings.TWILIO_ACCOUNTSID_KEY] = txtAccountSid.Text;
                 settings[SCP.SystemSettings.TWILIO_AUTHTOKEN_KEY] = txtAuthToken.Text;
                 settings[SCP.SystemSettings.TWILIO_PHONEFROM_KEY] = txtPhoneFrom.Text;
@@ -436,10 +438,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
-
                 //AccessIPs
-                settings = new SCP.SystemSettings();
+               var settings = new SCP.SystemSettings();
                 settings[SCP.SystemSettings.ACCESS_IPs] = txtIPAddress.Text;
 
                 int result = ES.Services.System.SetSystemSettings(SCP.SystemSettings.ACCESS_IP_SETTINGS, settings);
@@ -463,10 +463,8 @@ namespace SolidCP.Portal
         {
             try
             {
-                SCP.SystemSettings settings = new SCP.SystemSettings();
-
                 // authentication settings
-                settings = new SCP.SystemSettings();
+                var settings = new SCP.SystemSettings();
                 settings[SCP.SystemSettings.MFA_TOKEN_APP_DISPLAY_NAME] = txtMfaTokenAppDisplayName.Text.Trim();
                 settings[SCP.SystemSettings.MFA_CAN_PEER_CHANGE_MFA] = chkCanPeerChangeMFa.Checked ? "True" : "False";
 
@@ -487,6 +485,35 @@ namespace SolidCP.Portal
 
             ShowSuccessMessage("SYSTEM_SETTINGS_SAVE");
         }
+
+        private void SaveHostBill()
+        {
+            try
+            {
+                // HostBill settings
+                /*var settings = new SCP.SystemSettings();
+                settings[SCP.SystemSettings.HOSTBILL_INTEGRATION_URL] = txtHBUrl.Text.Trim();
+                settings[SCP.SystemSettings.HOSTBILL_INTEGRATION_ID] = txtHBId.Text.Trim();
+                settings[SCP.SystemSettings.HOSTBILL_INTEGRATION_KEY] = txtHBKey.Text.Trim();
+
+                int result = ES.Services.System.SetSystemSettings(SCP.SystemSettings.HOSTBILL_INTEGRATION, settings);
+                */
+                var url = txtHBUrl.Text.Trim();
+                var id = txtHBId.Text.Trim();
+                var key = txtHBKey.Text.Trim();
+                var enabled = !string.IsNullOrEmpty(url);
+                if (!enabled) url = id = key = null;
+
+                ES.Services.System.SetHostBillIntegration(new SCP.HostBillServerInfo() { Url = url, Id = id, Key = key });
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage("SYSTEM_SETTINGS_SAVE", ex);
+                return;
+            }
+
+            ShowSuccessMessage("SYSTEM_SETTINGS_SAVE");
+    }
 
         #region Button Calls
         protected void btnSaveSMTP_Click(object sender, EventArgs e)
@@ -533,6 +560,10 @@ namespace SolidCP.Portal
         protected void btnAuthenticationSettings_Click(object sender, EventArgs e)
         {
             SaveAuthentication();
+        }
+        protected void btnHostBillSettings_Click(object sender, EventArgs e)
+        {
+            SaveHostBill();
         }
         #endregion
     }

@@ -448,10 +448,12 @@ namespace SolidCP.Portal
 
         public static int AuthenticateUser(string username, string password, string ipAddress)
         {
+            const bool SHA1Password = false;
+
             esAuthentication authService = new esAuthentication();
             ConfigureEnterpriseServerProxy(authService, false);
 
-            string passwordSH = SHA1(password);
+            string passwordSH = SHA1Password ? SHA1(password) : password;
 
             try
             {

@@ -50,6 +50,11 @@ namespace SolidCP.EnterpriseServer
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            ServicePointManager.SecurityProtocol =
+                SecurityProtocolType.Tls13 |
+                SecurityProtocolType.Tls12 |
+                SecurityProtocolType.Tls11 |
+                SecurityProtocolType.Tls;
         }
 
         protected void Application_End(object sender, EventArgs e)

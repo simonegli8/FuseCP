@@ -66,3 +66,4 @@ bin
 /SolidCP/CleanRelease_marc.ps1
 /SolidCP/CleanRelease2.ps1
 /SolidCP/CleanDebug.ps1
+packages/
