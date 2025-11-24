@@ -35,6 +35,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Linq;
 using SolidCP.EnterpriseServer.Base.HostedSolution;
 using SolidCP.Providers.HostedSolution;
 using Microsoft.ApplicationBlocks.Data;
@@ -270,6 +271,16 @@ namespace SolidCP.EnterpriseServer
                 new SqlParameter("@maximumRows", maximumRows));
         }
 
+        public static DataSet GetUserByDomains(IEnumerable<string> domains)
+        {
+            return SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text,
+                $@"
+SELECT DISTINCT u.UserID, u.Username, d.DomainName
+FROM dbo.Users u
+INNER JOIN dbo.HostingSpaces hs ON u.UserID = hs.UserID
+INNER JOIN dbo.Domains d ON hs.SpaceID = d.SpaceID
+WHERE d.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')))}');");
+        }
         public static DataSet GetUsers(int actorId, int ownerId, bool recursive)
         {
             return SqlHelper.ExecuteDataset(ConnectionString, CommandType.StoredProcedure,

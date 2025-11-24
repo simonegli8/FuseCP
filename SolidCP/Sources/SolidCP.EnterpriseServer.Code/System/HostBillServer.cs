@@ -1,19 +1,23 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
+using System.Data;
 using System.Net.PeerToPeer;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace SolidCP.EnterpriseServer;
 
 
-public class HostBillServer : HostBillServerInfo
-{
+public class HostBillServer {
+	
 	//SystemController SystemController;
 	public static HostBillServerInfo GetHostBillIntegration() => SystemController.GetHostBillIntegration();
 	#region --- Typed Models ---
@@ -31,7 +35,19 @@ public class HostBillServer : HostBillServerInfo
 		}
 	}
 
-	public class HostBillResponseBase
+	public class PaginationResult
+	{
+		[JsonPropertyName("totalpages")]
+		public int TotalPages { get; set; }
+		[JsonPropertyName("perpage")]
+		public int ItemsPerPage { get; set; }
+		[JsonPropertyName("sorterrecords")]
+		public int TotalRecords { get; set; }
+		[JsonPropertyName("sorterpage")]
+		public int NextPage { get; set; }
+
+    }
+    public class HostBillResponseBase
 	{
         [JsonPropertyName("success")]
         public bool? Success { get; set; }
@@ -48,6 +64,8 @@ public class HostBillServer : HostBillServerInfo
 		[JsonPropertyName("server_time")]
 		public int ServerTime { get; set; }
 
+		[JsonPropertyName("sorter")]
+		public PaginationResult Sorter { get; set; }
     }
     public class HostBillGetClientsResponse: HostBillResponseBase
 	{
@@ -161,14 +179,55 @@ public class HostBillServer : HostBillServerInfo
 		[JsonPropertyName("mfa_status")]
 		public int MfaStatus { get; set; }
 	}
-	#endregion
 
-	public static T CallApi<T>(string cmd, string parameters, Method method = Method.Post) where T : class
+	public class AccountRelation
+	{
+		[JsonPropertyName("parent_type")]
+		public string ParentType { get; set; }
+		[JsonPropertyName("parent_id")]
+		public int ParentId { get; set; }
+		[JsonPropertyName("child_type")]
+        public string ChildType { get; set; }
+		[JsonPropertyName("child_id")]
+        public int ChildId { get; set; }
+    }
+
+	public class Domain
+	{
+		[JsonPropertyName("name")]
+		public string Name { get; set; }
+		[JsonPropertyName("id")]
+		public int Id { get; set; }
+		[JsonPropertyName("cid")]
+		public int ClientId { get; set; }
+    }
+	public class GetDomainsResponse : HostBillResponseBase
+	{
+		[JsonPropertyName("domains")]
+		public List<Domain> Domains { get; set; }
+    }
+    public class GetDomainLicensesResponse : HostBillResponseBase
+	{
+		[JsonPropertyName("domains")]
+		public List<DomainLicense> Domains { get; set; }
+    }
+	public class DomainLicense
+	{
+		[JsonPropertyName("Name")]
+		public string Name { get; set; }
+		[JsonPropertyName("Quantity")]
+		public int Quantity { get; set; }
+		[JsonPropertyName("Product")]
+		public string Product { get; set; }
+    }
+    #endregion
+
+    public static T CallApi<T>(string cmd, string parameters, Method method = Method.Post) where T : class
 	{
 		var server = GetHostBillIntegration();
 		if (!server.Enabled) return null;
 
-		string apiUrl = $"{server.Url}/api.php";
+		string apiUrl = cmd != "getDomainLicenses" ? $"{server.Url}/api.php": $"{server.Url}/apiextended.php"; 
 		var data = $"api_id={Uri.EscapeDataString(server.Id)}&api_key={Uri.EscapeDataString(server.Key)}&outputformat=json&call={cmd}&{parameters}";
 
 		var client = new RestClient(apiUrl);
@@ -222,7 +281,7 @@ public class HostBillServer : HostBillServerInfo
     }
 
 	// returns null on success or error message otherwise
-	public static string AuthenticateAndAddHostBillUser(string username, string password)
+	public static string AuthenticateAndSyncHostBillUser(string username, string password)
 	{
 		var server = GetHostBillIntegration();
 		if (!server.Enabled) return null;
@@ -236,26 +295,56 @@ public class HostBillServer : HostBillServerInfo
 				var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={userId}");
 				if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
 				{
-					var user = getClientDetailsResponse.Client;
-					UserController.AddUser(new UserInfo
+					var domains = GetDomains(username, userId);
+					var userData = DataProvider.GetUserByDomains(domains);
+					if (userData == null || userData.Tables.Count > 0 && userData.Tables[0].Rows.Count > 0)
 					{
-						Address = user.Address1,
-						City = user.City,
-						CompanyName = user.CompanyName,
-						Country = user.Country,
-						Created = user.DateCreated,
-						Email = user.Email,
-						FirstName = user.FirstName,
-						LastName = user.LastName,
-						OwnerId = 1,
-						PrimaryPhone = user.PhoneNumber,
-						State = user.State,
-						Role = UserRole.User,
-						Zip = user.Postcode,
-						Username = username,
-						Status = UserStatus.Active,
-					}, false, password, false);
-                    return null;
+						userId = ((int)userData.Tables[0].Rows[0]["UserID"]);
+					}
+					else
+					{
+						var user = getClientDetailsResponse.Client;
+						userId = UserController.AddUser(new UserInfo
+						{
+							Address = user.Address1,
+							City = user.City,
+							CompanyName = user.CompanyName,
+							Country = user.Country,
+							Created = user.DateCreated,
+							Email = user.Email,
+							FirstName = user.FirstName,
+							LastName = user.LastName,
+							OwnerId = 1,
+							PrimaryPhone = user.PhoneNumber,
+							State = user.State,
+							Role = UserRole.User,
+							Zip = user.Postcode,
+							Username = username,
+							Status = UserStatus.Active,
+						}, false, password, false);
+						return null;
+					}
+					var scpDomains = new List<string>();
+					var userDomainsSet = UserController.GetUserDomainsPaged(userId,null, null, null, 0, int.MaxValue);
+					var userDomains = userDomainsSet.Tables[0].Rows.OfType<DataRow>()
+						.Select(row => (string)row["DomainName"]);
+
+					var newDomains = domains.Except(userDomains);
+					var deletedDomains = userDomains.Except(domains);
+
+					var packages = PackageController.GetMyPackages(userId)
+						.FirstOrDefault(package => package.PackageName == "Emails");
+					if (packages == null)
+					{
+						server.
+						PackageController.AddPackage(userId, )
+					}
+
+					foreach (var domain in newDomains)
+					{
+
+					}
+
                 } return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
             }
 			else return verifyClientLoginResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
@@ -264,15 +353,82 @@ public class HostBillServer : HostBillServerInfo
 		}
 	}
 
-	public static bool UpdateMaxEmailAccountsPerDomainQuotaFromHostBill(string username)
+	public static IEnumerable<DomainLicense> GetDomainQuotaFromHostBill(string username, int? clientId = null)
+	{
+		const int DefaultLicenses = 5;
+		var server = GetHostBillIntegration();
+		if (!server.Enabled) return null;
+
+		if (clientId == null)
+		{
+			var clientsResponse = CallApi<HostBillGetClientsResponse>("getClients", $"page=1&filter[email]={Uri.EscapeDataString(username)}");
+			clientId = clientsResponse?.Clients?.FirstOrDefault()?.Id;
+		}
+		if (clientId == null) return null;
+
+		var domainsResponse = CallApi<GetDomainLicensesResponse>("getDomainLicenses", $"client_id={clientId}");
+		var domains = domainsResponse?.Domains;
+		return domains
+			?.GroupBy(d => d.Name)
+			.Select(d => new DomainLicense()
+			{
+				Name = d.Key,
+				Quantity = d.Sum(dl =>
+				{
+					if (dl.Product == null) return DefaultLicenses;
+					var nmatch = Regex.Match(dl.Product, @"\d+");
+					if (!nmatch.Success) return dl.Quantity * DefaultLicenses;
+					int n = dl.Quantity * DefaultLicenses;
+					int.TryParse(nmatch.Value, out n);
+					return n;
+				})
+			});
+	}
+
+	public static bool UpdateDomainMailAccountLicensesFromHostBill(string username, int? clientId = null)
 	{
 		var server = GetHostBillIntegration();
 		if (!server.Enabled) return false;
 
-		
-		//var clientResponse = CallApi<HostBillClientResponse>("client.getinfo", $"username={Uri.EscapeDataString(username)}");
-		//TODO get quota
-
+		var domains = GetDomainQuotaFromHostBill(username, clientId);
+		foreach (var domain in domains)
+		{
+			DataProvider.SetMaxEmailAccountsForDomain(domain.Quantity, domain.Name);
+        }
 		return true;
     }
+
+	public static List<string> GetDomains(string username, int? clientId = null)
+	{
+		var server = GetHostBillIntegration();
+		if (!server.Enabled) return new List<string>();
+
+		string clientName = null;
+        if (clientId == null)
+        {
+            var clientsResponse = CallApi<HostBillGetClientsResponse>("getClients", $"page=1&filter[email]={Uri.EscapeDataString(username)}");
+			var client = clientsResponse?.Clients?.FirstOrDefault();
+            clientId = client?.Id;
+			if (client != null) clientName = $"{client.FirstName} {client.LastName}";
+        } else
+		{
+			var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={clientId}");
+			var client = getClientDetailsResponse?.Client;
+			if (client != null) clientName = $"{client.FirstName} {client.LastName}";
+        }
+		if (clientId == null) return null;
+
+        var domains = new List<string>();
+		GetDomainsResponse domainsResponse;
+		var page = 0;
+		do
+		{
+			domainsResponse = CallApi<GetDomainsResponse>("getDomains", $"page={page}{(clientName != null ? $"&filter[client_name]={clientName}" : "")}");
+			domains.AddRange(domainsResponse?.Domains?.Where(d => d.ClientId == clientId).Select(d => d.Name) ?? Enumerable.Empty<string>());
+        } while (domainsResponse?.Sorter != null && domainsResponse.Sorter.TotalPages > page++);
+
+		return domains;
+    }
+
+
 }
