@@ -235,19 +235,22 @@ public class SystemController
 	}
 
 	static readonly object HostBillServerCacheLock = new object();
-	internal static HostBillServer HostBillServerCache = null;
+	internal static HostBillServerInfo HostBillServerCache = null;
 	public static void SetHostBillIntegration(HostBillServerInfo hostbill)
 	{
 		lock (HostBillServerCacheLock)
 		{
-			string url, id, key;
-			if (!hostbill.Enabled) url = id = key = null;
+			string url, id, key, plan, ekey, addon;
+			if (!hostbill.Enabled) url = id = key = plan = ekey = addon = null;
 			else
 			{
 				url = hostbill.Url;
 				id = hostbill.Id;
 				key = hostbill.Key;
-			}
+				ekey = hostbill.ExtendedKey;
+				plan = hostbill.DefaultHostingPlan;
+				addon = hostbill.DomainAddOn;
+            }
 			SystemSettings settings = new SystemSettings();
 			settings = new SystemSettings();
 			settings[SystemSettings.HOSTBILL_INTEGRATION_URL] = url;
@@ -255,9 +258,12 @@ public class SystemController
 			{
 				settings[SystemSettings.HOSTBILL_INTEGRATION_ID] = id;
 				settings[SystemSettings.HOSTBILL_INTEGRATION_KEY] = key;
-			}
+				settings[SystemSettings.HOSTBILL_INTEGRATION_EXTENDED_KEY] = ekey;
+				settings[SystemSettings.HOSTBILL_INTEGRATION_DEFAULT_HOSTING_PLAN] = plan;
+				settings[SystemSettings.HOSTBILL_INTEGRATION_DOMAIN_ADDON] = addon;
+            }
 			int result = SetSystemSettings(SystemSettings.HOSTBILL_INTEGRATION, settings);
-			HostBillServerCache = new HostBillServer() { Id = id, Key = key, Url = url };
+			HostBillServerCache = new HostBillServerInfo() { Id = id, Key = key, Url = url, DefaultHostingPlan = plan, DomainAddOn = addon };
 		}
 	}
 
@@ -267,20 +273,23 @@ public class SystemController
 		{
 			if (HostBillServerCache != null) return HostBillServerCache;
 			var settings = GetSystemSettings(SystemSettings.HOSTBILL_INTEGRATION);
-			var server = new HostBillServer();
+			var server = new HostBillServerInfo();
 			server.Url = settings[SystemSettings.HOSTBILL_INTEGRATION_URL];
-			if (!server.Enabled) server.Id = server.Key = null;
+			if (!server.Enabled) server.Id = server.Key = server.DefaultHostingPlan = null;
 			else
 			{
 				server.Id = settings[SystemSettings.HOSTBILL_INTEGRATION_ID];
 				server.Key = settings[SystemSettings.HOSTBILL_INTEGRATION_KEY];
-			}
+				server.ExtendedKey = settings[SystemSettings.HOSTBILL_INTEGRATION_EXTENDED_KEY];
+				server.DefaultHostingPlan = settings[SystemSettings.HOSTBILL_INTEGRATION_DEFAULT_HOSTING_PLAN];
+				server.DomainAddOn = settings[SystemSettings.HOSTBILL_INTEGRATION_DOMAIN_ADDON];
+            }
 			HostBillServerCache = server;
 			return server;
 		}
 	}
 
 	public static void CreateHostBillUser(UserInfo user, string password) => HostBillServer.CreateHostBillUser(user, password);
-
-    public static string AuthenticateAndAddHostBillUser(string username, string password) => HostBillServer.AuthenticateAndAddHostBillUser(username, password);
+    public static string AuthenticateAndSyncHostBillUser(string username, string password, string ip) => HostBillServer.AuthenticateAndSyncHostBillUser(username, password, ip);
+    public static bool UpdateDomainMailAccountLicensesFromHostBill(string username, int? clientId = null) => HostBillServer.UpdateDomainMailAccountLicensesFromHostBill(username, clientId);
 }

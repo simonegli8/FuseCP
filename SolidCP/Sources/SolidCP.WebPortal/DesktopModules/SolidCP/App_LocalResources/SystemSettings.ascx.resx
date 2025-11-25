@@ -348,4 +348,13 @@
   <data name="HeaderHostBillSettings.Text" xml:space="preserve">
     <value>HOSTBILL SETTINGS</value>
   </data>
+  <data name="SettingddlHBAddon.Text" xml:space="preserve">
+    <value>HostBill Domain Addon:</value>
+  </data>
+  <data name="SettingtxtHBExtKey.Text" xml:space="preserve">
+    <value>HostBill API Extended Key:</value>
+  </data>
+  <data name="SettingddlHBPlan.Text" xml:space="preserve">
+    <value>HostBill Default Hosting Plan:</value>
+  </data>
 </root>

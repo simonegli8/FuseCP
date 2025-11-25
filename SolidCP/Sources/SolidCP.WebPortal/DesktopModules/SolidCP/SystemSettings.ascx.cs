@@ -40,6 +40,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Linq;
 using SolidCP.EnterpriseServer.Base.Common;
 using SCP = SolidCP.EnterpriseServer;
 using System.Text.RegularExpressions;
@@ -208,11 +209,28 @@ namespace SolidCP.Portal
             // HostBill settings
             settings = ES.Services.System.GetSystemSettings(SCP.SystemSettings.HOSTBILL_INTEGRATION);
 
+            var plans = ES.Services.Packages.GetHostingPlans(PanelSecurity.SelectedUserId).Tables[0].Rows
+                .OfType<DataRow>()
+                .Select(row => row["PlanName"])
+                .ToList();
+            ddlHBPlan.DataSource = plans;
+            ddlHBPlan.DataBind();
+            
+            var addons = ES.Services.Packages.GetHostingAddons(PanelSecurity.SelectedUserId).Tables[0].Rows
+                .OfType<DataRow>()
+                .Select(row => row["PlanName"])
+                .ToList();
+            ddlHBAddon.DataSource = addons;
+            ddlHBAddon.DataBind();
+
             if (settings != null)
             {
                 txtHBUrl.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_URL, string.Empty);
                 txtHBId.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_ID, string.Empty);
                 txtHBKey.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_KEY, string.Empty);
+                txtHBExtKey.Text = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_EXTENDED_KEY, string.Empty);
+                ddlHBPlan.SelectedValue = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_DEFAULT_HOSTING_PLAN, string.Empty);
+                ddlHBAddon.SelectedValue = settings.GetValueOrDefault(SCP.SystemSettings.HOSTBILL_INTEGRATION_DOMAIN_ADDON, string.Empty);
             }
         }
         private void SaveSMTP()
@@ -501,10 +519,13 @@ namespace SolidCP.Portal
                 var url = txtHBUrl.Text.Trim();
                 var id = txtHBId.Text.Trim();
                 var key = txtHBKey.Text.Trim();
+                var ekey = txtHBExtKey.Text.Trim();
+                var plan = ddlHBPlan.SelectedValue.Trim();
+                var addon = ddlHBAddon.SelectedValue.Trim();
                 var enabled = !string.IsNullOrEmpty(url);
                 if (!enabled) url = id = key = null;
 
-                ES.Services.System.SetHostBillIntegration(new SCP.HostBillServerInfo() { Url = url, Id = id, Key = key });
+                ES.Services.System.SetHostBillIntegration(new SCP.HostBillServerInfo() { Url = url, Id = id, Key = key, ExtendedKey = ekey, DefaultHostingPlan = plan, DomainAddOn = addon });
             }
             catch (Exception ex)
             {

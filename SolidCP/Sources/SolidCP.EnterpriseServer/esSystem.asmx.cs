@@ -105,6 +105,8 @@ namespace SolidCP.EnterpriseServer
 		public void CreateHostBillUser(UserInfo user, string password) => SystemController.CreateHostBillUser(user, password);
 
 		[WebMethod]
-		public string AuthenticateAndAddHostBillUser(string username, string password) => SystemController.AuthenticateAndAddHostBillUser(username, password);
+		public string AuthenticateAndSyncHostBillUser(string username, string password, string ip) => SystemController.AuthenticateAndSyncHostBillUser(username, password, ip);
+		[WebMethod]
+		public bool UpdateDomainMailAccountLicensesFromHostBill(string username, int? userId = null) => SystemController.UpdateDomainMailAccountLicensesFromHostBill(username, userId);
     }
 }

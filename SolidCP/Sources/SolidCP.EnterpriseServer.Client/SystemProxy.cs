@@ -48,7 +48,9 @@ namespace SolidCP.EnterpriseServer {
         
         private System.Threading.SendOrPostCallback CreateHostBillUserOperationCompleted;
         
-        private System.Threading.SendOrPostCallback AuthenticateAndAddHostBillUserOperationCompleted;
+        private System.Threading.SendOrPostCallback AuthenticateAndSyncHostBillUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateDomainMailAccountLicensesFromHostBillOperationCompleted;
         
         /// <remarks/>
         public esSystem() {
@@ -86,7 +88,10 @@ namespace SolidCP.EnterpriseServer {
         public event CreateHostBillUserCompletedEventHandler CreateHostBillUserCompleted;
         
         /// <remarks/>
-        public event AuthenticateAndAddHostBillUserCompletedEventHandler AuthenticateAndAddHostBillUserCompleted;
+        public event AuthenticateAndSyncHostBillUserCompletedEventHandler AuthenticateAndSyncHostBillUserCompleted;
+        
+        /// <remarks/>
+        public event UpdateDomainMailAccountLicensesFromHostBillCompletedEventHandler UpdateDomainMailAccountLicensesFromHostBillCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetSystemSettings", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -498,46 +503,93 @@ namespace SolidCP.EnterpriseServer {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AuthenticateAndAddHostBillUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string AuthenticateAndAddHostBillUser(string username, string password) {
-            object[] results = this.Invoke("AuthenticateAndAddHostBillUser", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AuthenticateAndSyncHostBillUser", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string AuthenticateAndSyncHostBillUser(string username, string password, string ip) {
+            object[] results = this.Invoke("AuthenticateAndSyncHostBillUser", new object[] {
                         username,
-                        password});
+                        password,
+                        ip});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginAuthenticateAndAddHostBillUser(string username, string password, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("AuthenticateAndAddHostBillUser", new object[] {
+        public System.IAsyncResult BeginAuthenticateAndSyncHostBillUser(string username, string password, string ip, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("AuthenticateAndSyncHostBillUser", new object[] {
                         username,
-                        password}, callback, asyncState);
+                        password,
+                        ip}, callback, asyncState);
         }
         
         /// <remarks/>
-        public string EndAuthenticateAndAddHostBillUser(System.IAsyncResult asyncResult) {
+        public string EndAuthenticateAndSyncHostBillUser(System.IAsyncResult asyncResult) {
             object[] results = this.EndInvoke(asyncResult);
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void AuthenticateAndAddHostBillUserAsync(string username, string password) {
-            this.AuthenticateAndAddHostBillUserAsync(username, password, null);
+        public void AuthenticateAndSyncHostBillUserAsync(string username, string password, string ip) {
+            this.AuthenticateAndSyncHostBillUserAsync(username, password, ip, null);
         }
         
         /// <remarks/>
-        public void AuthenticateAndAddHostBillUserAsync(string username, string password, object userState) {
-            if ((this.AuthenticateAndAddHostBillUserOperationCompleted == null)) {
-                this.AuthenticateAndAddHostBillUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAuthenticateAndAddHostBillUserOperationCompleted);
+        public void AuthenticateAndSyncHostBillUserAsync(string username, string password, string ip, object userState) {
+            if ((this.AuthenticateAndSyncHostBillUserOperationCompleted == null)) {
+                this.AuthenticateAndSyncHostBillUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAuthenticateAndSyncHostBillUserOperationCompleted);
             }
-            this.InvokeAsync("AuthenticateAndAddHostBillUser", new object[] {
+            this.InvokeAsync("AuthenticateAndSyncHostBillUser", new object[] {
                         username,
-                        password}, this.AuthenticateAndAddHostBillUserOperationCompleted, userState);
+                        password,
+                        ip}, this.AuthenticateAndSyncHostBillUserOperationCompleted, userState);
         }
         
-        private void OnAuthenticateAndAddHostBillUserOperationCompleted(object arg) {
-            if ((this.AuthenticateAndAddHostBillUserCompleted != null)) {
+        private void OnAuthenticateAndSyncHostBillUserOperationCompleted(object arg) {
+            if ((this.AuthenticateAndSyncHostBillUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AuthenticateAndAddHostBillUserCompleted(this, new AuthenticateAndAddHostBillUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.AuthenticateAndSyncHostBillUserCompleted(this, new AuthenticateAndSyncHostBillUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateDomainMailAccountLicensesFromHostBill", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool UpdateDomainMailAccountLicensesFromHostBill(string username, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> userId) {
+            object[] results = this.Invoke("UpdateDomainMailAccountLicensesFromHostBill", new object[] {
+                        username,
+                        userId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginUpdateDomainMailAccountLicensesFromHostBill(string username, System.Nullable<int> userId, System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("UpdateDomainMailAccountLicensesFromHostBill", new object[] {
+                        username,
+                        userId}, callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public bool EndUpdateDomainMailAccountLicensesFromHostBill(System.IAsyncResult asyncResult) {
+            object[] results = this.EndInvoke(asyncResult);
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateDomainMailAccountLicensesFromHostBillAsync(string username, System.Nullable<int> userId) {
+            this.UpdateDomainMailAccountLicensesFromHostBillAsync(username, userId, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateDomainMailAccountLicensesFromHostBillAsync(string username, System.Nullable<int> userId, object userState) {
+            if ((this.UpdateDomainMailAccountLicensesFromHostBillOperationCompleted == null)) {
+                this.UpdateDomainMailAccountLicensesFromHostBillOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateDomainMailAccountLicensesFromHostBillOperationCompleted);
+            }
+            this.InvokeAsync("UpdateDomainMailAccountLicensesFromHostBill", new object[] {
+                        username,
+                        userId}, this.UpdateDomainMailAccountLicensesFromHostBillOperationCompleted, userState);
+        }
+        
+        private void OnUpdateDomainMailAccountLicensesFromHostBillOperationCompleted(object arg) {
+            if ((this.UpdateDomainMailAccountLicensesFromHostBillCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateDomainMailAccountLicensesFromHostBillCompleted(this, new UpdateDomainMailAccountLicensesFromHostBillCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -765,17 +817,17 @@ namespace SolidCP.EnterpriseServer {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
-    public delegate void AuthenticateAndAddHostBillUserCompletedEventHandler(object sender, AuthenticateAndAddHostBillUserCompletedEventArgs e);
+    public delegate void AuthenticateAndSyncHostBillUserCompletedEventHandler(object sender, AuthenticateAndSyncHostBillUserCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AuthenticateAndAddHostBillUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class AuthenticateAndSyncHostBillUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal AuthenticateAndAddHostBillUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal AuthenticateAndSyncHostBillUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -785,6 +837,32 @@ namespace SolidCP.EnterpriseServer {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
+    public delegate void UpdateDomainMailAccountLicensesFromHostBillCompletedEventHandler(object sender, UpdateDomainMailAccountLicensesFromHostBillCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.42")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateDomainMailAccountLicensesFromHostBillCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UpdateDomainMailAccountLicensesFromHostBillCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

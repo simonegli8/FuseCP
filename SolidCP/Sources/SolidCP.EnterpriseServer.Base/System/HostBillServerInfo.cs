@@ -11,7 +11,9 @@ namespace SolidCP.EnterpriseServer
 		public bool Enabled => !string.IsNullOrEmpty(Url);
 		public string Id { get; set; }
 		public string Key { get; set; }
+		public string ExtendedKey { get; set; }
 		public string Url { get; set; }
 		public string DefaultHostingPlan { get; set; }
+		public string DomainAddOn { get; set; }
     }
 }

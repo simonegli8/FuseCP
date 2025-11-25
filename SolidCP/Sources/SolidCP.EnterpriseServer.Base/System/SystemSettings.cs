@@ -85,6 +85,9 @@ namespace SolidCP.EnterpriseServer
         public const string HOSTBILL_INTEGRATION_URL = "HostBillIntegrationUrl";
         public const string HOSTBILL_INTEGRATION_ID = "HostBillIntegrationId";
         public const string HOSTBILL_INTEGRATION_KEY = "HostBillIntegrationKey";
+        public const string HOSTBILL_INTEGRATION_DEFAULT_HOSTING_PLAN = "HostBillIntegrationDefaultHostingPlan";
+        public const string HOSTBILL_INTEGRATION_EXTENDED_KEY = "HostBillIntegrationExtendedKey";
+        public const string HOSTBILL_INTEGRATION_DOMAIN_ADDON = "HostBillIntegrationDomainAddon";
 
         public static readonly SystemSettings Empty = new SystemSettings { SettingsArray = new string[][] {} };
 

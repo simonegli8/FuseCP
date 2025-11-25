@@ -30,16 +30,17 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE)  ARISING  IN  ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+using Google.Authenticator;
 using System;
-using System.Data;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
+using System.Data;
 using System.Linq;
-using Google.Authenticator;
+using System.Net.Mail;
+using System.Runtime.ConstrainedExecution;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace SolidCP.EnterpriseServer
 {
@@ -71,7 +72,7 @@ namespace SolidCP.EnterpriseServer
                 // check if the user exists
                 if (user == null && searchHostBill)
                 {
-					var msg = SystemController.AuthenticateAndAddHostBillUser(username, password);
+					var msg = SystemController.AuthenticateAndSyncHostBillUser(username, password, ip);
 					if (msg == null) // success
 					{
 						user = GetUserInternally(username);
@@ -122,32 +123,41 @@ namespace SolidCP.EnterpriseServer
                 }
 
 
-                // compare user passwords
-                if ((CryptoUtils.SHA1(user.Password) == password) || (user.Password == password) ||
+				// compare user passwords
+				if ((CryptoUtils.SHA1(user.Password) == password) || (user.Password == password) ||
 					user.Password == CryptoUtils.SHA1(password) || CryptoUtils.SHA1(user.Password) == CryptoUtils.SHA1(password))
-                {
-                    switch (user.OneTimePasswordState)
-                    {
-                        case OneTimePasswordStates.Active:
-                            result = BusinessSuccessCodes.SUCCESS_USER_ONETIMEPASSWORD;
-                            OneTimePasswordHelper.FireSuccessAuth(user);
-                            break;
-                        case OneTimePasswordStates.Expired:
-                            if (lockOut >= 0) DataProvider.UpdateUserFailedLoginAttempt(user.UserId, lockOut, false);
-                            TaskManager.WriteWarning("Expired one time password");
-                            return BusinessErrorCodes.ERROR_USER_EXPIRED_ONETIMEPASSWORD;
-                            break;
-                    }
-                }
-                else
-                {
-                    if (lockOut >= 0)
-                        DataProvider.UpdateUserFailedLoginAttempt(user.UserId, lockOut, false);
+				{
+					switch (user.OneTimePasswordState)
+					{
+						case OneTimePasswordStates.Active:
+							result = BusinessSuccessCodes.SUCCESS_USER_ONETIMEPASSWORD;
+							OneTimePasswordHelper.FireSuccessAuth(user);
+							break;
+						case OneTimePasswordStates.Expired:
+							if (lockOut >= 0) DataProvider.UpdateUserFailedLoginAttempt(user.UserId, lockOut, false);
+							TaskManager.WriteWarning("Expired one time password");
+							return BusinessErrorCodes.ERROR_USER_EXPIRED_ONETIMEPASSWORD;
+							break;
+					}
+				}
+				else
+				{
+					var msg = SystemController.AuthenticateAndSyncHostBillUser(username, password, ip);
+					if (msg != null)
+					{
 
-                    TaskManager.WriteWarning("Wrong password");
-                    return BusinessErrorCodes.ERROR_USER_WRONG_PASSWORD;  
-                }
-                    
+						if (lockOut >= 0)
+							DataProvider.UpdateUserFailedLoginAttempt(user.UserId, lockOut, false);
+
+						TaskManager.WriteWarning("Wrong password");
+						return BusinessErrorCodes.ERROR_USER_WRONG_PASSWORD;
+					}
+					else
+					{
+						DataProvider.ChangeUserPassword(user.UserId, user.UserId, CryptoUtils.SHA1(password));
+					}
+				}
+
                 DataProvider.UpdateUserFailedLoginAttempt(user.UserId, lockOut, true);
 
                 // check status

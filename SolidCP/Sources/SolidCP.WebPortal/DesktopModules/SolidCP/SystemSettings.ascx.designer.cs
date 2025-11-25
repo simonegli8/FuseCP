@@ -618,6 +618,60 @@ namespace SolidCP.Portal
 		protected global::System.Web.UI.WebControls.TextBox txtHBKey;
 
 		/// <summary>
+		/// SettingtxtHBExtKey control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.Localize SettingtxtHBExtKey;
+
+		/// <summary>
+		/// txtHBExtKey control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.TextBox txtHBExtKey;
+
+		/// <summary>
+		/// SettingddlHBPlan control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.Localize SettingddlHBPlan;
+
+		/// <summary>
+		/// ddlHBPlan control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.DropDownList ddlHBPlan;
+
+		/// <summary>
+		/// SettingddlHBAddon control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.Localize SettingddlHBAddon;
+
+		/// <summary>
+		/// ddlHBAddon control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.DropDownList ddlHBAddon;
+
+		/// <summary>
 		/// StyleButton10 control.
 		/// </summary>
 		/// <remarks>

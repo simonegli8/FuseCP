@@ -275,11 +275,11 @@ namespace SolidCP.EnterpriseServer
         {
             return SqlHelper.ExecuteDataset(ConnectionString, CommandType.Text,
                 $@"
-SELECT DISTINCT u.UserID, u.Username, d.DomainName
-FROM dbo.Users u
-INNER JOIN dbo.HostingSpaces hs ON u.UserID = hs.UserID
-INNER JOIN dbo.Domains d ON hs.SpaceID = d.SpaceID
-WHERE d.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')))}');");
+SELECT DISTINCT U.UserID, U.Username, D.DomainName
+FROM dbo.Users AS U
+INNER JOIN dbo.Packages AS P ON U.UserID = P.UserID
+INNER JOIN dbo.Domains AS D ON P.PackageID = D.PackageID
+WHERE D.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')))}');");
         }
         public static DataSet GetUsers(int actorId, int ownerId, bool recursive)
         {

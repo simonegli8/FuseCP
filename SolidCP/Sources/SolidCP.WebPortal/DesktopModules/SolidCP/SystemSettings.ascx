@@ -516,6 +516,42 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <CPCC:H5Label runat="server" for="txtHBExtKey" class="col-sm-2 control-label">
+                                        <asp:Localize ID="SettingtxtHBExtKey" runat="server" meta:resourcekey="SettingtxtHBExtKey" />
+                                    </CPCC:H5Label>
+                                    <div class="col-sm-6">
+                                        <asp:TextBox runat="server" Rows="10" ID="txtHBExtKey" CssClass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <CPCC:H5Label runat="server" for="ddlHBPlan" class="col-sm-2 control-label">
+                                        <asp:Localize ID="SettingddlHBPlan" runat="server" meta:resourcekey="SettingddlHBPlan" />
+                                    </CPCC:H5Label>
+                                    <div class="col-sm-6">
+                                        <asp:DropDownList runat="server" Rows="10" ID="ddlHBPlan" CssClass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <CPCC:H5Label runat="server" for="ddlHBAddon" class="col-sm-2 control-label">
+                                        <asp:Localize ID="SettingddlHBAddon" runat="server" meta:resourcekey="SettingddlHBAddon" />
+                                    </CPCC:H5Label>
+                                    <div class="col-sm-6">
+                                        <asp:DropDownList runat="server" Rows="10" ID="ddlHBAddon" CssClass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </fieldset>
                     <hr />
