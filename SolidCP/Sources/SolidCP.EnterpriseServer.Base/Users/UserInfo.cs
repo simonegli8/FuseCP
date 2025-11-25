@@ -114,6 +114,8 @@ namespace SolidCP.EnterpriseServer
             ecommerceEnabled = src.ecommerceEnabled;
             subscriberNumber = src.subscriberNumber;
             MfaMode = src.MfaMode;
+            HostBillClientId = src.HostBillClientId;
+            HostBillAccountRef = src.HostBillAccountRef;
         }
 
         /// <summary>
@@ -322,6 +324,8 @@ namespace SolidCP.EnterpriseServer
             set { this.htmlMail = value; }
         }
 
+        public int HostBillClientId { get; set; }  
+        public string HostBillAccountRef { get; set; }
         public string CompanyName
         {
             get { return this.companyName; }

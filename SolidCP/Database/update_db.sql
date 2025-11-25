@@ -3,7 +3,7 @@ GO
 -- update database version
 DECLARE @build_version nvarchar(10), @build_date datetime
 SET @build_version = N'1.5.1'
-SET @build_date = '1-1-2025T00:00:00' -- ISO 8601 Format (YYYY-MM-DDTHH:MM:SS)
+SET @build_date = '2025-11-25T00:00:00' -- ISO 8601 Format (YYYY-MM-DDTHH:MM:SS)
 
 IF NOT EXISTS (SELECT * FROM [dbo].[Versions] WHERE [DatabaseVersion] = @build_version)
 BEGIN
@@ -10058,7 +10058,7 @@ SELECT
 	U.OwnerEmail,
 	U.PackagesNumber,
 	U.CompanyName,
-	U.EcommerceEnabled
+	U.EcommerceEnabled,
 FROM @Users AS TU
 INNER JOIN UsersDetailed AS U ON TU.UserID = U.UserID
 WHERE TU.ItemPosition BETWEEN @StartRow AND @EndRow'
@@ -20427,3 +20427,273 @@ BEGIN
 		)
 	);
 END;
+
+-- Adding HostBillClientID & HostBillAccountRef to Users
+IF NOT EXISTS (
+	SELECT 1 
+	FROM sys.columns 
+	WHERE Name = N'HostBillClientID' 
+	  AND Object_ID = Object_ID(N'dbo.Users')
+)
+ALTER TABLE [dbo].[Users]
+ADD [HostBillClientID] INT NULL,
+[HostBillAccountRef] nvarchar(100) NULL;
+GO
+
+ALTER PROCEDURE [dbo].[GetUserByUsernameInternally]
+(
+	@Username nvarchar(50)
+)
+AS
+	SELECT
+		U.UserID,
+		U.RoleID,
+		U.StatusID,
+		U.SubscriberNumber,
+		U.LoginStatusId,
+		U.FailedLogins,
+		U.OwnerID,
+		U.Created,
+		U.Changed,
+		U.IsDemo,
+		U.Comments,
+		U.IsPeer,
+		U.Username,
+		U.Password,
+		U.FirstName,
+		U.LastName,
+		U.Email,
+		U.SecondaryEmail,
+		U.Address,
+		U.City,
+		U.State,
+		U.Country,
+		U.Zip,
+		U.PrimaryPhone,
+		U.SecondaryPhone,
+		U.Fax,
+		U.InstantMessenger,
+		U.HtmlMail,
+		U.CompanyName,
+		U.EcommerceEnabled,
+		U.[AdditionalParams],
+		U.OneTimePasswordState,
+		U.MfaMode,
+		U.PinSecret,
+		U.HostBillClientID,
+		U.HostBillAccountRef
+
+	FROM Users AS U
+	WHERE U.Username = @Username
+
+	RETURN
+GO
+
+ALTER PROCEDURE [dbo].[GetUserByIdInternally]
+(
+	@UserID int
+)
+AS
+	SELECT
+		U.UserID,
+		U.RoleID,
+		U.StatusID,
+		U.SubscriberNumber,
+		U.LoginStatusId,
+		U.FailedLogins,
+		U.OwnerID,
+		U.Created,
+		U.Changed,
+		U.IsDemo,
+		U.Comments,
+		U.IsPeer,
+		U.Username,
+		U.Password,
+		U.FirstName,
+		U.LastName,
+		U.Email,
+		U.SecondaryEmail,
+		U.Address,
+		U.City,
+		U.State,
+		U.Country,
+		U.Zip,
+		U.PrimaryPhone,
+		U.SecondaryPhone,
+		U.Fax,
+		U.InstantMessenger,
+		U.HtmlMail,
+		U.CompanyName,
+		U.EcommerceEnabled,
+		U.[AdditionalParams],
+		U.OneTimePasswordState,
+		U.MfaMode,
+		U.PinSecret,
+		U.HostBillClientID,
+		U.HostBillAccountRef
+
+	FROM Users AS U
+	WHERE U.UserID = @UserID
+
+	RETURN
+GO
+
+IF EXISTS (SELECT * FROM SYS.OBJECTS WHERE type = 'P' AND name = 'GetUserByHostBillIdInternally')
+DROP PROCEDURE [dbo].[GetUserByHostBillIdInternally]
+GO
+
+CREATE PROCEDURE [dbo].[GetUserByHostBillIdInternally]
+(
+	@HostBillClientID int
+)
+AS
+	SELECT
+		U.UserID,
+		U.RoleID,
+		U.StatusID,
+		U.SubscriberNumber,
+		U.LoginStatusId,
+		U.FailedLogins,
+		U.OwnerID,
+		U.Created,
+		U.Changed,
+		U.IsDemo,
+		U.Comments,
+		U.IsPeer,
+		U.Username,
+		U.Password,
+		U.FirstName,
+		U.LastName,
+		U.Email,
+		U.SecondaryEmail,
+		U.Address,
+		U.City,
+		U.State,
+		U.Country,
+		U.Zip,
+		U.PrimaryPhone,
+		U.SecondaryPhone,
+		U.Fax,
+		U.InstantMessenger,
+		U.HtmlMail,
+		U.CompanyName,
+		U.EcommerceEnabled,
+		U.[AdditionalParams],
+		U.OneTimePasswordState,
+		U.MfaMode,
+		U.PinSecret,
+		U.HostBillClientID,
+		U.HostBillAccountRef
+
+	FROM Users AS U
+	WHERE U.HostBillClientID = @HostBillClientID
+
+	RETURN
+GO
+
+ALTER PROCEDURE [dbo].[GetUserByUsername]
+(
+	@ActorID int,
+	@Username nvarchar(50)
+)
+AS
+
+	SELECT
+		U.UserID,
+		U.RoleID,
+		U.StatusID,
+		U.SubscriberNumber,
+		U.LoginStatusId,
+		U.FailedLogins,
+		U.OwnerID,
+		U.Created,
+		U.Changed,
+		U.IsDemo,
+		U.Comments,
+		U.IsPeer,
+		U.Username,
+		CASE WHEN dbo.CanGetUserPassword(@ActorID, UserID) = 1 THEN U.Password
+		ELSE '' END AS Password,
+		U.FirstName,
+		U.LastName,
+		U.Email,
+		U.SecondaryEmail,
+		U.Address,
+		U.City,
+		U.State,
+		U.Country,
+		U.Zip,
+		U.PrimaryPhone,
+		U.SecondaryPhone,
+		U.Fax,
+		U.InstantMessenger,
+		U.HtmlMail,
+		U.CompanyName,
+		U.EcommerceEnabled,
+		U.[AdditionalParams],
+		U.MfaMode,
+		CASE WHEN dbo.CanGetUserPassword(@ActorID, UserID) = 1 THEN U.PinSecret
+		ELSE '' END AS PinSecret,
+		U.HostBillClientID,
+		U.HostBillAccountRef
+
+	FROM Users AS U
+	WHERE U.Username = @Username
+	AND dbo.CanGetUserDetails(@ActorID, UserID) = 1 -- actor user rights
+
+	RETURN
+GO
+
+ALTER PROCEDURE [dbo].[GetUserById]
+(
+	@ActorID int,
+	@UserID int
+)
+AS
+	-- user can retrieve his own account, his users accounts
+	-- and his reseller account (without pasword)
+	SELECT
+		U.UserID,
+		U.RoleID,
+		U.StatusID,
+		U.SubscriberNumber,
+		U.LoginStatusId,
+		U.FailedLogins,
+		U.OwnerID,
+		U.Created,
+		U.Changed,
+		U.IsDemo,
+		U.Comments,
+		U.IsPeer,
+		U.Username,
+		CASE WHEN dbo.CanGetUserPassword(@ActorID, @UserID) = 1 THEN U.Password
+		ELSE '' END AS Password,
+		U.FirstName,
+		U.LastName,
+		U.Email,
+		U.SecondaryEmail,
+		U.Address,
+		U.City,
+		U.State,
+		U.Country,
+		U.Zip,
+		U.PrimaryPhone,
+		U.SecondaryPhone,
+		U.Fax,
+		U.InstantMessenger,
+		U.HtmlMail,
+		U.CompanyName,
+		U.EcommerceEnabled,
+		U.[AdditionalParams],
+		U.MfaMode,
+		CASE WHEN dbo.CanGetUserPassword(@ActorID, @UserID) = 1 THEN U.PinSecret
+		ELSE '' END AS PinSecret,
+		U.HostBillClientID,
+		U.HostBillAccountRef
+
+	FROM Users AS U
+	WHERE U.UserID = @UserID
+	AND dbo.CanGetUserDetails(@ActorID, @UserID) = 1 -- actor user rights
+
+	RETURN
+GO

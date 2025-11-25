@@ -489,6 +489,9 @@ namespace SolidCP.EnterpriseServer
 			}
 		}
 
+		internal static UserInfoInternal GetUserByHostBillIdInternally(int hostBillClientId) {
+			return GetUser(DataProvider.GetUserByHostBillIdInternally(hostBillClientId));
+        }
 
 		internal static UserInfoInternal GetUserInternally(int userId)
 		{

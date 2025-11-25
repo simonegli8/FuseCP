@@ -67,7 +67,7 @@ public class HostBillServer {
 		[JsonPropertyName("sorter")]
 		public PaginationResult Sorter { get; set; }
     }
-    public class HostBillGetClientsResponse: HostBillResponseBase
+    public class GetClientsResponse: HostBillResponseBase
 	{
 		[JsonPropertyName("clients")]
 		public List<HostBillClient> Clients { get; set; }
@@ -158,7 +158,9 @@ public class HostBillServer {
 
 		[JsonExtensionData]
 		public Dictionary<string, object> AdditionalData { get; set; }
-	}
+		[JsonPropertyName("accountref")]
+		public string AccountRef { get; set; }
+    }
 	public class AuthenticateResponse
 	{
 		[JsonPropertyName("status")]
@@ -292,134 +294,129 @@ public class HostBillServer {
 			var verifyClientLoginResponse = CallApi<VerifyClientLoginResponse>("verifyClientLogin", $"email={Uri.EscapeDataString(username)}&password={Uri.EscapeDataString(password)}");
 			if (verifyClientLoginResponse != null && verifyClientLoginResponse.Success == true)
 			{
-				var userId = verifyClientLoginResponse.ClientId;
-				var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={userId}");
-				if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
+				var hbUserId = verifyClientLoginResponse.ClientId;
+				int userId = -1;
+                var scpuser = UserController.GetUserByHostBillIdInternally(hbUserId);
+                if (scpuser != null)
+                {
+                    userId = scpuser.UserId;
+                    if ((CryptoUtils.SHA1(scpuser.Password) != password) && (scpuser.Password != password) ||
+                        scpuser.Password != CryptoUtils.SHA1(password) && CryptoUtils.SHA1(scpuser.Password) != CryptoUtils.SHA1(password))
+                    {
+                        UserController.ChangeUserPassword(scpuser.Username, scpuser.Password, CryptoUtils.SHA1(password), ip);
+                    }
+                }
+                else
+                {
+                    var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={hbUserId}");
+					if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
+					{
+                        var hbUser = getClientDetailsResponse.Client;
+                        userId = UserController.AddUser(new UserInfo
+                        {
+                            Address = hbUser.Address1,
+                            City = hbUser.City,
+                            CompanyName = hbUser.CompanyName,
+                            Country = hbUser.Country,
+                            Created = hbUser.DateCreated,
+                            Email = hbUser.Email,
+                            FirstName = hbUser.FirstName,
+                            LastName = hbUser.LastName,
+                            OwnerId = 1,
+                            PrimaryPhone = hbUser.PhoneNumber,
+                            State = hbUser.State,
+                            Role = UserRole.User,
+                            Zip = hbUser.Postcode,
+                            Username = username,
+                            Status = UserStatus.Active,
+							HostBillClientId = hbUserId,
+							HostBillAccountRef = hbUser.AccountRef
+                        }, false, password, false);
+                    } else return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
+                }
+                var domains = GetDomains(username, hbUserId);
+				var scpDomains = new List<string>();
+				var userDomainsSet = UserController.GetUserDomainsPaged(hbUserId,null, null, null, 0, int.MaxValue);
+				var userDomains = userDomainsSet.Tables[1].Rows.OfType<DataRow>()
+					.Select(row => (string)row["DomainName"])
+					.ToList();
+
+				var newDomains = domains.Except(userDomains);
+				var deletedDomains = userDomains.Except(domains);
+
+				var package = PackageController.GetMyPackages(hbUserId)
+					.FirstOrDefault(package => package.PackageName == server.DefaultHostingPlan);
+				int packageId = 0;
+				if (package == null)
 				{
-					var domains = GetDomains(username, userId);
-					var userData = DataProvider.GetUserByDomains(domains);
-					if (userData == null || userData.Tables.Count > 0 && userData.Tables[0].Rows.Count > 0)
+					var hostingplans = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingPlans(1));
+                    var planId = hostingplans.FirstOrDefault(plan => plan.PlanName == server.DefaultHostingPlan)?.PlanId;
+					if (planId.HasValue)
 					{
-						userId = ((int)userData.Tables[0].Rows[0]["UserID"]);
+						var result = PackageController.AddPackage(hbUserId, planId.Value, server.DefaultHostingPlan, "", (int)PackageStatus.Active, DateTime.Now, false);
+						packageId = result.Result;
 					}
-					else
+					else return "HostBill user sync, DefaultHostingPlan does not exist.";
+                } else packageId = package.PackageId;
+
+				if (packageId < 0) return "HostBill user could not be synchronized: unable to create hosting package.";
+
+				var allocatedDomains = PackageController.GetPackageQuota(packageId, Quotas.OS_DOMAINS).QuotaAllocatedValue;
+				if (allocatedDomains >= 0 && domains.Count > allocatedDomains)
+				{
+					var addons = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingAddons(1));
+					var addon = addons.FirstOrDefault(a => a.IsAddon && a.PlanName == server.DomainAddOn);
+					if (addon != null)
 					{
-						var user = getClientDetailsResponse.Client;
-						var scpuser = UserController.GetUserInternally(username);
-						if (scpuser != null)
+						var packageAddon = ObjectUtils.CreateListFromDataSet<PackageAddonInfo>(
+							PackageController.GetPackageAddons(packageId))
+							.FirstOrDefault(a => a.PlanId == addon.PlanId);
+						if (packageAddon != null)
 						{
-							userId = scpuser.UserId;
-							if ((CryptoUtils.SHA1(scpuser.Password) != password) && (scpuser.Password != password) ||
-								scpuser.Password != CryptoUtils.SHA1(password) && CryptoUtils.SHA1(scpuser.Password) != CryptoUtils.SHA1(password))
-							{
-								UserController.ChangeUserPassword(scpuser.Username, scpuser.Password, CryptoUtils.SHA1(password), ip);
-							}
+							packageAddon.Quantity += domains.Count - allocatedDomains;
+							PackageController.UpdatePackageAddon(packageAddon);
 						}
 						else
 						{
-							userId = UserController.AddUser(new UserInfo
+							var pa = new PackageAddonInfo
 							{
-								Address = user.Address1,
-								City = user.City,
-								CompanyName = user.CompanyName,
-								Country = user.Country,
-								Created = user.DateCreated,
-								Email = user.Email,
-								FirstName = user.FirstName,
-								LastName = user.LastName,
-								OwnerId = 1,
-								PrimaryPhone = user.PhoneNumber,
-								State = user.State,
-								Role = UserRole.User,
-								Zip = user.Postcode,
-								Username = username,
-								Status = UserStatus.Active,
-							}, false, password, false);
+								PackageId = packageId,
+								PlanId = addon.PlanId,
+								Quantity = domains.Count - allocatedDomains,
+								PlanName = addon.PlanName,
+								PurchaseDate = DateTime.Now,
+								StatusId = (int)PackageStatus.Active
+							};
+							PackageController.AddPackageAddon(pa);
 						}
 					}
-					var scpDomains = new List<string>();
-					var userDomainsSet = UserController.GetUserDomainsPaged(userId,null, null, null, 0, int.MaxValue);
-					var userDomains = userDomainsSet.Tables[1].Rows.OfType<DataRow>()
-						.Select(row => (string)row["DomainName"])
-						.ToList();
+					else return "HostBill Domain Addon not found.";
+                }
 
-					var newDomains = domains.Except(userDomains);
-					var deletedDomains = userDomains.Except(domains);
-
-					var package = PackageController.GetMyPackages(userId)
-						.FirstOrDefault(package => package.PackageName == server.DefaultHostingPlan);
-					int packageId = 0;
-					if (package == null)
+                foreach (var domain in newDomains)
+				{
+					if (ServerController.CheckDomain(domain) < 0) return $"Domain {domain} already exists";
+					var now = DateTime.Now;
+                    ServerController.AddDomain(new DomainInfo
 					{
-						var hostingplans = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingPlans(1));
-                        var planId = hostingplans.FirstOrDefault(plan => plan.PlanName == server.DefaultHostingPlan)?.PlanId;
-						if (planId.HasValue)
-						{
-							var result = PackageController.AddPackage(userId, planId.Value, server.DefaultHostingPlan, "", (int)PackageStatus.Active, DateTime.Now, false);
-							packageId = result.Result;
-						}
-						else return "HostBill user sync, DefaultHostingPlan does not exist.";
-                    } else packageId = package.PackageId;
-
-					if (packageId < 0) return "HostBill user could not be synchronized: unable to create hosting package.";
-
-					var allocatedDomains = PackageController.GetPackageQuota(packageId, Quotas.OS_DOMAINS).QuotaAllocatedValue;
-					if (allocatedDomains >= 0 && domains.Count > allocatedDomains)
-					{
-						var addons = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingAddons(1));
-						var addon = addons.FirstOrDefault(a => a.IsAddon && a.PlanName == server.DomainAddOn);
-						if (addon != null)
-						{
-							var packageAddon = ObjectUtils.CreateListFromDataSet<PackageAddonInfo>(
-								PackageController.GetPackageAddons(packageId))
-								.FirstOrDefault(a => a.PlanId == addon.PlanId);
-							if (packageAddon != null)
-							{
-								packageAddon.Quantity += domains.Count - allocatedDomains;
-								PackageController.UpdatePackageAddon(packageAddon);
-							}
-							else
-							{
-								var pa = new PackageAddonInfo
-								{
-									PackageId = packageId,
-									PlanId = addon.PlanId,
-									Quantity = domains.Count - allocatedDomains,
-									PlanName = addon.PlanName,
-									PurchaseDate = DateTime.Now,
-									StatusId = (int)PackageStatus.Active
-								};
-								PackageController.AddPackageAddon(pa);
-							}
-						}
-						else return "HostBill Domain Addon not found.";
-                    }
-
-                    foreach (var domain in newDomains)
-					{
-						if (ServerController.CheckDomain(domain) < 0) return $"Domain {domain} already exists";
-						var now = DateTime.Now;
-                        ServerController.AddDomain(new DomainInfo
-						{
-							DomainName = domain,
-							PackageId = packageId,
-							CreationDate = now,
-							HostingAllowed = true,
-							IsDomainPointer = false,
-							IsPreviewDomain = false,
-							IsSubDomain = false,
-							LastUpdateDate = now,
-							MailDomainName = domain,
-							ExpirationDate = now.AddYears(1)
-						}, false, true);
-					}
-					foreach (var domain in deletedDomains)
-					{
-						var domainId = ServerController.GetDomain(domain)?.DomainId;
-						if (domainId.HasValue) ServerController.DeleteDomain(domainId.Value);
-					}
-					return null;
-                } return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
+						DomainName = domain,
+						PackageId = packageId,
+						CreationDate = now,
+						HostingAllowed = true,
+						IsDomainPointer = false,
+						IsPreviewDomain = false,
+						IsSubDomain = false,
+						LastUpdateDate = now,
+						MailDomainName = domain,
+						ExpirationDate = now.AddYears(1)
+					}, false, true);
+				}
+				foreach (var domain in deletedDomains)
+				{
+					var domainId = ServerController.GetDomain(domain)?.DomainId;
+					if (domainId.HasValue) ServerController.DeleteDomain(domainId.Value);
+				}
+				return null;
             }
 			else return verifyClientLoginResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
 		} catch (Exception ex) {
@@ -435,7 +432,7 @@ public class HostBillServer {
 
 		if (clientId == null)
 		{
-			var clientsResponse = CallApi<HostBillGetClientsResponse>("getClients", $"page=1&filter[email]={Uri.EscapeDataString(username)}");
+			var clientsResponse = CallApi<GetClientsResponse>("getClients", $"page=1&filter[email]={Uri.EscapeDataString(username)}");
 			clientId = clientsResponse?.Clients?.FirstOrDefault()?.Id;
 		}
 		if (clientId == null) return null;
@@ -480,7 +477,7 @@ public class HostBillServer {
 		string clientName = null;
         if (clientId == null)
         {
-            var clientsResponse = CallApi<HostBillGetClientsResponse>("getClients", $"page=1&filter[email]={Uri.EscapeDataString(username)}");
+            var clientsResponse = CallApi<GetClientsResponse>("getClients", $"page=1&filter[email]={Uri.EscapeDataString(username)}");
 			var client = clientsResponse?.Clients?.FirstOrDefault();
             clientId = client?.Id;
 			if (client != null) clientName = $"{client.FirstName} {client.LastName}";

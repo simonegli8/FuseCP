@@ -313,13 +313,18 @@ WHERE D.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')
                 new SqlParameter("@ItemID", itemId));
         }
 
-
-
         public static IDataReader GetUserByIdInternally(int userId)
         {
             return (IDataReader)SqlHelper.ExecuteReader(ConnectionString, CommandType.StoredProcedure,
                 ObjectQualifier + "GetUserByIdInternally",
                 new SqlParameter("@UserID", userId));
+        }
+
+        public static IDataReader GetUserByHostBillIdInternally(int hostBillClientId)
+        {
+            return (IDataReader)SqlHelper.ExecuteReader(ConnectionString, CommandType.StoredProcedure,
+                ObjectQualifier + "GetUserByHostBillIdInternally",
+                new SqlParameter("@HostBillClientID", hostBillClientId));
         }
 
         public static IDataReader GetUserByUsernameInternally(string username)
