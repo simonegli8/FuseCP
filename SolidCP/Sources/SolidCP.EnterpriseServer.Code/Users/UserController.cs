@@ -849,7 +849,9 @@ namespace SolidCP.EnterpriseServer
 					user.HtmlMail,
 					user.CompanyName,
 					user.EcommerceEnabled,
-                    user.AdditionalParams);
+                    user.AdditionalParams,
+					user.HostBillClientId,
+					user.HostBillAccountRef);
 
 				return 0;
 			}

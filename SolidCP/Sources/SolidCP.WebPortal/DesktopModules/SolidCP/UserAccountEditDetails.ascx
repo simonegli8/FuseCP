@@ -34,6 +34,13 @@
             </div>
     </div>
     <div class="form-group">
+	    <asp:Label ID="lblAccountRef" runat="server" meta:resourcekey="lblAccountRef" Text="Account Number:" AssociatedControlID="txtAccountRef" CssClass="col-sm-2"></asp:Label>
+        <div class="col-sm-10">	
+		    <asp:TextBox id="txtAccountRef" runat="server" CssClass="form-control" ></asp:TextBox>
+        </div>
+    </div>
+
+    <div class="form-group">
 				<asp:Label ID="lblEmail" runat="server" meta:resourcekey="lblEmail" Text="E-mail:" AssociatedControlID="txtEmail" CssClass="col-sm-2"></asp:Label>
 <div class="col-sm-10">	
                 <uc2:EmailControl id="txtEmail" runat="server" CssClass="form-control">

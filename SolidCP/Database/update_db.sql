@@ -20907,3 +20907,88 @@ exec sp_executesql @sql, N'@StartRow int, @MaximumRows int, @UserID int, @Filter
 
 RETURN
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE [dbo].[UpdateUser]
+(
+	@ActorID int,
+	@UserID int,
+	@RoleID int,
+	@StatusID int,
+	@SubscriberNumber nvarchar(32),
+	@LoginStatusId int,
+	@IsDemo bit,
+	@IsPeer bit,
+	@Comments ntext,
+	@FirstName nvarchar(50),
+	@LastName nvarchar(50),
+	@Email nvarchar(255),
+	@SecondaryEmail nvarchar(255),
+	@Address nvarchar(200),
+	@City nvarchar(50),
+	@State nvarchar(50),
+	@Country nvarchar(50),
+	@Zip varchar(20),
+	@PrimaryPhone varchar(30),
+	@SecondaryPhone varchar(30),
+	@Fax varchar(30),
+	@InstantMessenger nvarchar(200),
+	@HtmlMail bit,
+	@CompanyName nvarchar(100),
+	@EcommerceEnabled BIT,
+	@AdditionalParams NVARCHAR(max),
+	@HostBillClientID int,
+	@HostBillAccountRef nvarchar(100)
+)
+AS
+
+	-- check actor rights
+	IF dbo.CanUpdateUserDetails(@ActorID, @UserID) = 0
+	BEGIN
+		RETURN
+	END
+
+	IF @LoginStatusId = 0
+	BEGIN
+		UPDATE Users SET
+			FailedLogins = 0
+		WHERE UserID = @UserID
+	END
+
+	UPDATE Users SET
+		RoleID = @RoleID,
+		StatusID = @StatusID,
+		SubscriberNumber = @SubscriberNumber,
+		LoginStatusId = @LoginStatusId,
+		Changed = GetDate(),
+		IsDemo = @IsDemo,
+		IsPeer = @IsPeer,
+		Comments = @Comments,
+		FirstName = @FirstName,
+		LastName = @LastName,
+		Email = @Email,
+		SecondaryEmail = @SecondaryEmail,
+		Address = @Address,
+		City = @City,
+		State = @State,
+		Country = @Country,
+		Zip = @Zip,
+		PrimaryPhone = @PrimaryPhone,
+		SecondaryPhone = @SecondaryPhone,
+		Fax = @Fax,
+		InstantMessenger = @InstantMessenger,
+		HtmlMail = @HtmlMail,
+		CompanyName = @CompanyName,
+		EcommerceEnabled = @EcommerceEnabled,
+		[AdditionalParams] = @AdditionalParams,
+		HostBillClientID = @HostBillClientID,
+		HostBillAccountRef = @HostBillAccountRef
+	WHERE UserID = @UserID
+
+	RETURN
+
+GO

@@ -296,47 +296,74 @@ public class HostBillServer {
 			{ // User was found in HostBill
 				var hbUserId = verifyClientLoginResponse.ClientId;
 				int userId = -1;
-                var scpuser = UserController.GetUserByHostBillIdInternally(hbUserId);
-                if (scpuser != null) // user exists in SolidCP
-                {
-                    userId = scpuser.UserId;
+                UserInfo scpuser = UserController.GetUserByHostBillIdInternally(hbUserId);
+				if (scpuser != null) // user exists in SolidCP
+				{
+					userId = scpuser.UserId;
+					var intuser = scpuser as UserInfoInternal;
 					// update user's password if changed
-                    if ((CryptoUtils.SHA1(scpuser.Password) != password) && (scpuser.Password != password) ||
-                        scpuser.Password != CryptoUtils.SHA1(password) && CryptoUtils.SHA1(scpuser.Password) != CryptoUtils.SHA1(password))
-                    {
-                        UserController.ChangeUserPassword(scpuser.Username, scpuser.Password, CryptoUtils.SHA1(password), ip);
-                    }
-                }
-                else // User does not exist in SolidCP, create it
-                {
-                    var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={hbUserId}");
+					if ((CryptoUtils.SHA1(intuser.Password) != password) && (intuser.Password != password) ||
+						intuser.Password != CryptoUtils.SHA1(password) && CryptoUtils.SHA1(intuser.Password) != CryptoUtils.SHA1(password))
+					{
+						UserController.ChangeUserPassword(scpuser.Username, intuser.Password, CryptoUtils.SHA1(password), ip);
+					}
+					// Sync user data
+					var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={hbUserId}");
 					if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
 					{
-                        var hbUser = getClientDetailsResponse.Client;
-                        userId = UserController.AddUser(new UserInfo
-                        {
-                            Address = hbUser.Address1,
-                            City = hbUser.City,
-                            CompanyName = hbUser.CompanyName,
-                            Country = hbUser.Country,
-                            Created = hbUser.DateCreated,
-                            Email = hbUser.Email,
-                            FirstName = hbUser.FirstName,
-                            LastName = hbUser.LastName,
-                            OwnerId = 1,
-                            PrimaryPhone = hbUser.PhoneNumber,
-                            State = hbUser.State,
-                            Role = UserRole.User,
-                            Zip = hbUser.Postcode,
-                            Username = username,
-                            Status = UserStatus.Active,
+						var hbuser = getClientDetailsResponse.Client;
+						if (scpuser.Username != hbuser.Email || scpuser.Address != hbuser.Address1 || scpuser.City != hbuser.City || scpuser.Email != hbuser.Email ||
+							scpuser.CompanyName != hbuser.CompanyName || scpuser.Country != hbuser.Country || scpuser.FirstName != hbuser.FirstName ||
+							scpuser.LastName != hbuser.LastName || scpuser.HostBillAccountRef != hbuser.AccountRef || scpuser.PrimaryPhone != hbuser.PhoneNumber ||
+							scpuser.State != hbuser.State || scpuser.Zip != hbuser.Postcode)
+						{
+							scpuser.Address = hbuser.Address1;
+							scpuser.City = hbuser.City;
+							scpuser.Username = scpuser.Email = hbuser.Email;
+							scpuser.CompanyName = hbuser.CompanyName;
+							scpuser.Country = hbuser.Country;
+							scpuser.FirstName = hbuser.FirstName;
+							scpuser.LastName = hbuser.LastName;
+							scpuser.HostBillAccountRef = hbuser.AccountRef;
+							scpuser.PrimaryPhone = hbuser.PhoneNumber;
+							scpuser.State = hbuser.State;
+							scpuser.Zip = hbuser.Postcode;
+							UserController.UpdateUser(scpuser);
+						}
+					}
+				}
+				else // User does not exist in SolidCP, create it
+				{
+					var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={hbUserId}");
+					if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
+					{
+						var hbUser = getClientDetailsResponse.Client;
+						userId = UserController.AddUser(scpuser = new UserInfo
+						{
+							Address = hbUser.Address1,
+							City = hbUser.City,
+							CompanyName = hbUser.CompanyName,
+							Country = hbUser.Country,
+							Created = hbUser.DateCreated,
+							Email = hbUser.Email,
+							FirstName = hbUser.FirstName,
+							LastName = hbUser.LastName,
+							OwnerId = 1,
+							PrimaryPhone = hbUser.PhoneNumber,
+							State = hbUser.State,
+							Role = UserRole.User,
+							Zip = hbUser.Postcode,
+							Username = username,
+							Status = UserStatus.Active,
 							HostBillClientId = hbUserId,
 							HostBillAccountRef = hbUser.AccountRef
-                        }, false, password, false);
-                    } else return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
-                }
+						}, false, password, false);
+						scpuser.UserId = userId;
+					}
+					else return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
+				}
 
-				// Sync users domains from HostBill
+                // Sync users domains from HostBill
                 var domains = GetHostBillDomains(username, hbUserId);
 				var scpDomains = new List<string>();
 				var userDomainsSet = // UserController.GetUserDomainsPaged(userId,null, null, null, 0, int.MaxValue);

@@ -30,22 +30,23 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE)  ARISING  IN  ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+using Microsoft.ApplicationBlocks.Data;
+using Microsoft.Win32;
+using SolidCP.EnterpriseServer.Base.HostedSolution;
+using SolidCP.Providers.DNS;
+using SolidCP.Providers.DomainLookup;
+using SolidCP.Providers.HostedSolution;
+using SolidCP.Providers.OS;
+using SolidCP.Providers.RemoteDesktopServices;
+using SolidCP.Providers.StorageSpaces;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text.RegularExpressions;
 using System.Linq;
-using SolidCP.EnterpriseServer.Base.HostedSolution;
-using SolidCP.Providers.HostedSolution;
-using Microsoft.ApplicationBlocks.Data;
-using System.Collections.Generic;
-using Microsoft.Win32;
-using SolidCP.Providers.OS;
-using SolidCP.Providers.RemoteDesktopServices;
-using SolidCP.Providers.DNS;
-using SolidCP.Providers.DomainLookup;
-using SolidCP.Providers.StorageSpaces;
+using System.Text.RegularExpressions;
+using static SolidCP.EnterpriseServer.HostBillServer;
 
 namespace SolidCP.EnterpriseServer
 {
@@ -402,7 +403,8 @@ WHERE D.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')
             bool isPeer, string comments, string firstName, string lastName, string email, string secondaryEmail,
             string address, string city, string country, string state, string zip,
             string primaryPhone, string secondaryPhone, string fax, string instantMessenger, bool htmlMail,
-            string companyName, bool ecommerceEnabled, string additionalParams)
+            string companyName, bool ecommerceEnabled, string additionalParams,
+            int? hostBillClientId, string hostBillAccountRef)
         {
             // update user
             SqlHelper.ExecuteNonQuery(ConnectionString, CommandType.StoredProcedure,
@@ -432,7 +434,9 @@ WHERE D.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')
                 new SqlParameter("@htmlMail", htmlMail),
                 new SqlParameter("@CompanyName", companyName),
                 new SqlParameter("@EcommerceEnabled", ecommerceEnabled),
-                new SqlParameter("@AdditionalParams", additionalParams));
+                new SqlParameter("@AdditionalParams", additionalParams),
+                new SqlParameter("@HostBillClientID", hostBillClientId),
+                new SqlParameter("@HostBillAccountRef", hostBillAccountRef));
         }
 
         public static void UpdateUserFailedLoginAttempt(int userId, int lockOut, bool reset)
