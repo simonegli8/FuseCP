@@ -60,8 +60,8 @@ REM %WSE_CLEAN% .\SolidCP.EnterpriseServer.Client\ImportProxy.cs
 REM %WSDL% %SERVER_URL%/esLync.asmx /out:.\SolidCP.EnterpriseServer.Client\LyncProxy.cs /namespace:SolidCP.EnterpriseServer.Lync /type:webClient
 REM %WSE_CLEAN% .\SolidCP.EnterpriseServer.Client\LyncProxy.cs
 
-REM %WSDL% %SERVER_URL%/esMailServers.asmx /out:.\SolidCP.EnterpriseServer.Client\MailServersProxy.cs /namespace:SolidCP.EnterpriseServer.MailServers /type:webClient
-REM %WSE_CLEAN% .\SolidCP.EnterpriseServer.Client\MailServersProxy.cs
+%WSDL% %SERVER_URL%/esMailServers.asmx /out:.\SolidCP.EnterpriseServer.Client\MailServersProxy.cs /namespace:SolidCP.EnterpriseServer.MailServers /type:webClient
+%WSE_CLEAN% .\SolidCP.EnterpriseServer.Client\MailServersProxy.cs
 
 REM %WSDL% %SERVER_URL%/esOCS.asmx /out:.\SolidCP.EnterpriseServer.Client\OCSProxy.cs /namespace:SolidCP.EnterpriseServer.OCS /type:webClient
 REM %WSE_CLEAN% .\SolidCP.EnterpriseServer.Client\OCSProxy.cs

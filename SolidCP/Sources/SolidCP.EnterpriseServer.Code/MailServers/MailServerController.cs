@@ -30,19 +30,21 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE)  ARISING  IN  ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
-using System.IO;
-using System.Web.Script.Serialization;
-using System.Xml;
-using System.Xml.Serialization;
 using SolidCP.EnterpriseServer;
 using SolidCP.EnterpriseServer.Base;
 using SolidCP.EnterpriseServer.Code.MailServers;
 using SolidCP.Providers;
 using SolidCP.Providers.Mail;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data;
+using System.IO;
+using System.IO.Packaging;
+using System.Web.Script.Serialization;
+using System.Web.Services.Description;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SolidCP.EnterpriseServer
 {
@@ -71,8 +73,45 @@ namespace SolidCP.EnterpriseServer
 			return items.ConvertAll(
 				new Converter<ServiceProviderItem, MailAccount>(ConvertItemToMailAccount));
 		}
+		public static bool CanAutoLogin(int packageId)
+		{
+            // check account
+            int accountCheck = SecurityContext.CheckAccount(DemandAccount.NotDemo | DemandAccount.IsActive);
+            if (accountCheck < 0) return false;
 
-		private static MailAccount ConvertItemToMailAccount(ServiceProviderItem item)
+            // check package
+            int packageCheck = SecurityContext.CheckPackage(packageId, DemandPackage.IsActive);
+            if (packageCheck < 0) return false;
+
+            // check if mail resource is available
+            int serviceId = PackageController.GetPackageServiceId(packageId, ResourceGroups.Mail);
+            if (serviceId == 0) return false;
+
+            MailServer mail = new MailServer();
+            ServiceProviderProxy.Init(mail, serviceId);
+            return mail.CanAutoLogin();
+        }
+
+		public static string AutoLogin(int packageId, string email, string password)
+		{
+            // check account
+            int accountCheck = SecurityContext.CheckAccount(DemandAccount.NotDemo | DemandAccount.IsActive);
+            if (accountCheck < 0) return null;
+
+            // check package
+            int packageCheck = SecurityContext.CheckPackage(packageId, DemandPackage.IsActive);
+            if (packageCheck < 0) return null;
+
+            // check if mail resource is available
+            int serviceId = PackageController.GetPackageServiceId(packageId, ResourceGroups.Mail);
+            if (serviceId == 0) return null;
+
+            MailServer mail = new MailServer();
+            ServiceProviderProxy.Init(mail, serviceId);
+            return mail.AutoLogin(email, password);
+        }
+
+        private static MailAccount ConvertItemToMailAccount(ServiceProviderItem item)
 		{
 			MailAccount account = (MailAccount)item;
 			account.Password = CryptoUtils.Decrypt(account.Password);

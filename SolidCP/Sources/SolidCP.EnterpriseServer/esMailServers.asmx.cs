@@ -94,6 +94,16 @@ namespace SolidCP.EnterpriseServer
             return MailServerController.DeleteMailAccount(itemId);
         }
         [WebMethod]
+        public bool CanAutoLogin(int packageId)
+        {
+            return MailServerController.CanAutoLogin(packageId);
+        }
+        [WebMethod]
+        public string AutoLogin(int packageId, string email, string password)
+        {
+            return MailServerController.AutoLogin(packageId, email, password);
+        }
+        [WebMethod]
 		public DataSet GetMaxMailAccountsPerDomain(int PackageId) => MailServerController.GetMaxMailAccountsPerDomain(PackageId);
 		[WebMethod]
 		public void SetMaxEmailAccountsForDomain(int? max, string domain) => MailServerController.SetMaxEmailAccountsForDomain(max, domain);

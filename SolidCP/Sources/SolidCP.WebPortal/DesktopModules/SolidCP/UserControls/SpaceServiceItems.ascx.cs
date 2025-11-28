@@ -113,15 +113,15 @@ namespace SolidCP.Portal.UserControls
             string localizedButtonText = HostModule.GetLocalizedString(btnAddItem.Text + ".Text");
             if (localizedButtonText != null)
                 btnAddItem.Text = localizedButtonText;
-
+            
             // visibility
             chkRecursive.Visible = (PanelSecurity.SelectedUser.Role != UserRole.User);
             gvItems.Columns[2].Visible = !String.IsNullOrEmpty(ViewLinkText);
             gvItems.Columns[3].Visible = gvItems.Columns[4].Visible =
                                          (PanelSecurity.SelectedUser.Role != UserRole.User) && chkRecursive.Checked;
             gvItems.Columns[5].Visible = (PanelSecurity.SelectedUser.Role == UserRole.Administrator);
-            gvItems.Columns[6].Visible = (PanelSecurity.EffectiveUser.Role == UserRole.Administrator);
-
+            gvItems.Columns[6].Visible = GroupName == "Mail" && ES.Services.MailServers.CanAutoLogin(PanelSecurity.PackageId); 
+            gvItems.Columns[7].Visible = (PanelSecurity.EffectiveUser.Role == UserRole.Administrator);
             ShowActionList();
 
             if (!IsPostBack)
@@ -205,6 +205,15 @@ namespace SolidCP.Portal.UserControls
 
                 // refresh the list
                 gvItems.DataBind();
+            } else if (e.CommandName == "AutoLogin")
+            {
+                int itemId = Utils.ParseInt(e.CommandArgument.ToString(), 0);
+
+                var account = ES.Services.MailServers.GetMailAccount(itemId);
+                var url = ES.Services.MailServers.AutoLogin(PanelSecurity.PackageId, account.Name, account.Password);
+                var script = $"window.open('{url}', '_blank');";
+                ClientScriptManager cs = Page.ClientScript;
+                cs.RegisterClientScriptBlock(typeof(SpaceServiceItems), "AutoLogin", script);
             }
         }
 

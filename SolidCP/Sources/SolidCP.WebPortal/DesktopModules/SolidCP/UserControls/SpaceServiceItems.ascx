@@ -102,6 +102,15 @@
         </asp:TemplateField>
         <asp:TemplateField>
 			<ItemTemplate>
+				<CPCC:StyleButton ID="cmdAutoLogin" runat="server" 
+ 					CommandName="AutoLogin" CommandArgument='<%# Eval("ItemID") %>'
+					CssClass="btn btn-default btn-sm">
+                    <i class="fa fa-enverope">&nbsp;</i>&nbsp;<asp:Localize runat="server" meta:resourcekey="cmdAutoLoginText"/>
+                </CPCC:StyleButton>
+			</ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField>
+			<ItemTemplate>
 				<CPCC:StyleButton ID="cmdDetach" runat="server" 
  					CommandName="Detach" CommandArgument='<%# Eval("ItemID") %>'
 					CssClass="btn btn-default btn-sm" OnClientClick="return confirm('Remove this item?');">
