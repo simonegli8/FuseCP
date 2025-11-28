@@ -764,9 +764,9 @@ namespace SolidCP.EnterpriseServer
             UpdateUser(user);
         }
 
-		public static int UpdateUser(UserInfo user)
+		public static int UpdateUser(UserInfo user, bool hostBill = true)
 		{
-			return UpdateUser(null, user);
+			return UpdateUser(null, user, hostBill);
 		}
 
 		public static int UpdateUserAsync(string taskId, UserInfo user)
@@ -779,7 +779,7 @@ namespace SolidCP.EnterpriseServer
 			return 0;
 		}
 
-		public static int UpdateUser(string taskId, UserInfo user)
+		public static int UpdateUser(string taskId, UserInfo user, bool hostBill = true)
 		{
 			try
 			{
@@ -853,6 +853,7 @@ namespace SolidCP.EnterpriseServer
 					user.HostBillClientId,
 					user.HostBillAccountRef);
 
+				if (hostBill == true) HostBillServer.UpdateHostBillUser(user);
 				return 0;
 			}
 			catch (System.Threading.ThreadAbortException ex)

@@ -161,7 +161,30 @@ public class HostBillServer {
 		[JsonPropertyName("accountref")]
 		public string AccountRef { get; set; }
     }
-	public class AuthenticateResponse
+	public class SetPasswordResponse
+	{
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+
+        [JsonPropertyName("error")]
+        public string[] Error { get; set; }
+
+        [JsonPropertyName("client_id")]
+        public int ClientId { get; set; }
+    }
+    public class SetClientDetailsResponse
+    {
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+
+        [JsonPropertyName("error")]
+        public string[] Error { get; set; }
+
+        [JsonPropertyName("client")]
+        public bool Client { get; set; }
+    }
+
+    public class AuthenticateResponse
 	{
 		[JsonPropertyName("status")]
 		public string Status { get; set; }
@@ -282,9 +305,57 @@ public class HostBillServer {
 			throw new InvalidOperationException($"HostBill user creation failed: {ex.Message}", ex);
         }
     }
+    public static void UpdateHostBillUser(UserInfo user, string password = null)
+    {
+        var server = GetHostBillIntegration();
+        if (!server.Enabled) return;
 
-	// returns null on success or error message otherwise
-	public static string AuthenticateAndSyncHostBillUser(string username, string password, string ip = "")
+		if (user.Username.Contains('@') && user.HostBillClientId > 0)
+		{
+			HostBillClient hbclient = null;
+
+			if (password != null)
+			{
+				var verifyClientLoginResponse = CallApi<VerifyClientLoginResponse>("verifyClientLogin", $"email={Uri.EscapeDataString(user.Username)}&password={Uri.EscapeDataString(password)}");
+				if (verifyClientLoginResponse == null || verifyClientLoginResponse.Success != true)
+				{ // User & password was not found in HostBill
+
+					// change password in HostBill
+					var getClientsResponse = CallApi<GetClientsResponse>("getClients", $"filter[email]={Uri.EscapeDataString(user.Username)}");
+					if (getClientsResponse != null && getClientsResponse.Success != true)
+					{ // user found but password must change
+						hbclient = getClientsResponse.Clients.FirstOrDefault();
+						if (hbclient != null)
+						{
+							var setPasswordResponse = CallApi<SetPasswordResponse>("passwordChange", $"client_id={hbclient.Id}&password={Uri.EscapeDataString(password)}");
+						}
+						else
+						{
+							CreateHostBillUser(user, password);
+							return;
+						}
+					}
+				}
+			}
+			if (hbclient == null)
+			{
+				var getClientsResponse = CallApi<GetClientsResponse>("getClients", $"filter[email]={Uri.EscapeDataString(user.Username)}");
+				if (getClientsResponse != null && getClientsResponse.Success != true) hbclient = getClientsResponse.Clients.FirstOrDefault();
+			}
+
+			if (hbclient == null)
+			{
+				CreateHostBillUser(user, password);
+			}
+			else
+			{
+				var setClientDetailsRepsonse = CallApi<SetClientDetailsResponse>("setClientDetails", $"id={hbclient.Id}&firstname={user.FirstName}&lastname={user.LastName}&email={user.Username}&phonenumber={user.PrimaryPhone}&address1={user.Address}&city={user.City}&state={user.State}&postcode={user.Zip}&country={user.Country}&companyname={user.CompanyName}");
+			}
+		}
+    }
+
+    // returns null on success or error message otherwise
+    public static string AuthenticateAndSyncHostBillUser(string username, string password, string ip = "")
 	{
 		var server = GetHostBillIntegration();
 		if (!server.Enabled) return null;
@@ -328,7 +399,7 @@ public class HostBillServer {
 							scpuser.PrimaryPhone = hbuser.PhoneNumber;
 							scpuser.State = hbuser.State;
 							scpuser.Zip = hbuser.Postcode;
-							UserController.UpdateUser(scpuser);
+							UserController.UpdateUser(scpuser, false);
 						}
 					}
 				}
@@ -366,6 +437,7 @@ public class HostBillServer {
                 // Sync users domains from HostBill
                 var domains = GetHostBillDomains(username, hbUserId);
 				var scpDomains = new List<string>();
+				// TODO correct version of GetUserDomains also for peers
 				var userDomainsSet = // UserController.GetUserDomainsPaged(userId,null, null, null, 0, int.MaxValue);
 					DataProvider.GetUserDomainsPaged(userId, userId, "", "", "", 0, int.MaxValue); // need to use DataProvider, since actorId might be -1 when not logged in
                 var userDomains = userDomainsSet.Tables[1].Rows.OfType<DataRow>()
