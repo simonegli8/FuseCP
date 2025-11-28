@@ -61,7 +61,7 @@ namespace SolidCP.EnterpriseServer
             // start task
             TaskManager.StartTask("USER", "AUTHENTICATE", username);
             TaskManager.WriteParameter("IP", ip);
-
+			bool syncedHostBill = false;
             try
             {
                 int result = 0;
@@ -75,6 +75,7 @@ namespace SolidCP.EnterpriseServer
 					var msg = SystemController.AuthenticateAndSyncHostBillUser(username, password, ip);
 					if (msg == null) // success
 					{
+						syncedHostBill=true;
 						user = GetUserInternally(username);
 					}
 					else
@@ -154,11 +155,17 @@ namespace SolidCP.EnterpriseServer
 					}
 					else
 					{
+						syncedHostBill = true;
 						DataProvider.ChangeUserPassword(user.UserId, user.UserId, CryptoUtils.SHA1(password));
 					}
 				}
 
                 DataProvider.UpdateUserFailedLoginAttempt(user.UserId, lockOut, true);
+
+				if (!syncedHostBill && user.HostBillClientId > 0) // If it's a HostBill user, sync
+				{
+                    var msg = SystemController.AuthenticateAndSyncHostBillUser(username, password, ip);
+                }
 
                 // check status
                 if (user.Status == UserStatus.Cancelled)
@@ -679,7 +686,9 @@ namespace SolidCP.EnterpriseServer
 					user.InstantMessenger,
 					user.HtmlMail,
 					user.CompanyName,
-					user.EcommerceEnabled);
+					user.EcommerceEnabled,
+					user.HostBillClientId,
+					user.HostBillAccountRef);
 
 				if (userId == -1)
 				{

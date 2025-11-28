@@ -293,20 +293,21 @@ public class HostBillServer {
 		{
 			var verifyClientLoginResponse = CallApi<VerifyClientLoginResponse>("verifyClientLogin", $"email={Uri.EscapeDataString(username)}&password={Uri.EscapeDataString(password)}");
 			if (verifyClientLoginResponse != null && verifyClientLoginResponse.Success == true)
-			{
+			{ // User was found in HostBill
 				var hbUserId = verifyClientLoginResponse.ClientId;
 				int userId = -1;
                 var scpuser = UserController.GetUserByHostBillIdInternally(hbUserId);
-                if (scpuser != null)
+                if (scpuser != null) // user exists in SolidCP
                 {
                     userId = scpuser.UserId;
+					// update user's password if changed
                     if ((CryptoUtils.SHA1(scpuser.Password) != password) && (scpuser.Password != password) ||
                         scpuser.Password != CryptoUtils.SHA1(password) && CryptoUtils.SHA1(scpuser.Password) != CryptoUtils.SHA1(password))
                     {
                         UserController.ChangeUserPassword(scpuser.Username, scpuser.Password, CryptoUtils.SHA1(password), ip);
                     }
                 }
-                else
+                else // User does not exist in SolidCP, create it
                 {
                     var getClientDetailsResponse = CallApi<HostBillGetClientResponse>("getClientDetails", $"id={hbUserId}");
 					if (getClientDetailsResponse != null && getClientDetailsResponse.Success == true)
@@ -334,26 +335,29 @@ public class HostBillServer {
                         }, false, password, false);
                     } else return getClientDetailsResponse.Error?.FirstOrDefault() ?? "HostBill user could not authenticate.";
                 }
-                var domains = GetDomains(username, hbUserId);
+
+				// Sync users domains from HostBill
+                var domains = GetHostBillDomains(username, hbUserId);
 				var scpDomains = new List<string>();
-				var userDomainsSet = UserController.GetUserDomainsPaged(hbUserId,null, null, null, 0, int.MaxValue);
-				var userDomains = userDomainsSet.Tables[1].Rows.OfType<DataRow>()
+				var userDomainsSet = // UserController.GetUserDomainsPaged(userId,null, null, null, 0, int.MaxValue);
+					DataProvider.GetUserDomainsPaged(userId, userId, "", "", "", 0, int.MaxValue); // need to use DataProvider, since actorId might be -1 when not logged in
+                var userDomains = userDomainsSet.Tables[1].Rows.OfType<DataRow>()
 					.Select(row => (string)row["DomainName"])
 					.ToList();
 
 				var newDomains = domains.Except(userDomains);
 				var deletedDomains = userDomains.Except(domains);
 
-				var package = PackageController.GetMyPackages(hbUserId)
+				var package = PackageController.GetMyPackages(userId)
 					.FirstOrDefault(package => package.PackageName == server.DefaultHostingPlan);
 				int packageId = 0;
-				if (package == null)
+				if (package == null) // User has no Spaces, create one
 				{
 					var hostingplans = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingPlans(1));
                     var planId = hostingplans.FirstOrDefault(plan => plan.PlanName == server.DefaultHostingPlan)?.PlanId;
 					if (planId.HasValue)
 					{
-						var result = PackageController.AddPackage(hbUserId, planId.Value, server.DefaultHostingPlan, "", (int)PackageStatus.Active, DateTime.Now, false);
+						var result = PackageController.AddPackage(userId, planId.Value, server.DefaultHostingPlan, "", (int)PackageStatus.Active, DateTime.Now, false);
 						packageId = result.Result;
 					}
 					else return "HostBill user sync, DefaultHostingPlan does not exist.";
@@ -361,22 +365,23 @@ public class HostBillServer {
 
 				if (packageId < 0) return "HostBill user could not be synchronized: unable to create hosting package.";
 
+				// Allocate domain Quotas
 				var allocatedDomains = PackageController.GetPackageQuota(packageId, Quotas.OS_DOMAINS).QuotaAllocatedValue;
 				if (allocatedDomains >= 0 && domains.Count > allocatedDomains)
 				{
 					var addons = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingAddons(1));
 					var addon = addons.FirstOrDefault(a => a.IsAddon && a.PlanName == server.DomainAddOn);
-					if (addon != null)
+					if (addon != null) // Create domain Quota AddOns
 					{
 						var packageAddon = ObjectUtils.CreateListFromDataSet<PackageAddonInfo>(
 							PackageController.GetPackageAddons(packageId))
 							.FirstOrDefault(a => a.PlanId == addon.PlanId);
-						if (packageAddon != null)
+						if (packageAddon != null) // The user already has the domain Quota AddOn
 						{
 							packageAddon.Quantity += domains.Count - allocatedDomains;
 							PackageController.UpdatePackageAddon(packageAddon);
 						}
-						else
+						else // Create a new domain Quota AddOn
 						{
 							var pa = new PackageAddonInfo
 							{
@@ -393,8 +398,8 @@ public class HostBillServer {
 					else return "HostBill Domain Addon not found.";
                 }
 
-                foreach (var domain in newDomains)
-				{
+                foreach (var domain in newDomains) // Create new domains from HostBill, TODO set domain status too
+                {
 					if (ServerController.CheckDomain(domain) < 0) return $"Domain {domain} already exists";
 					var now = DateTime.Now;
                     ServerController.AddDomain(new DomainInfo
@@ -411,7 +416,7 @@ public class HostBillServer {
 						ExpirationDate = now.AddYears(1)
 					}, false, true);
 				}
-				foreach (var domain in deletedDomains)
+				foreach (var domain in deletedDomains) // Delete domains not present in HostBill, TODO set domain status too
 				{
 					var domainId = ServerController.GetDomain(domain)?.DomainId;
 					if (domainId.HasValue) ServerController.DeleteDomain(domainId.Value);
@@ -469,7 +474,7 @@ public class HostBillServer {
 		return true;
     }
 
-	public static List<string> GetDomains(string username, int? clientId = null)
+	public static List<string> GetHostBillDomains(string username, int? clientId = null)
 	{
 		var server = GetHostBillIntegration();
 		if (!server.Enabled) return new List<string>();

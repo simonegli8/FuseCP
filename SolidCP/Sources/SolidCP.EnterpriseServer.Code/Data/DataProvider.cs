@@ -355,7 +355,8 @@ WHERE D.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')
             string firstName, string lastName, string email, string secondaryEmail,
             string address, string city, string country, string state, string zip,
             string primaryPhone, string secondaryPhone, string fax, string instantMessenger, bool htmlMail,
-            string companyName, bool ecommerceEnabled)
+            string companyName, bool ecommerceEnabled,
+            int? hostBillClientId, string hostBillAccountRef)
         {
             SqlParameter prmUserId = new SqlParameter("@UserID", SqlDbType.Int);
             prmUserId.Direction = ParameterDirection.Output;
@@ -390,7 +391,9 @@ WHERE D.DomainName IN ('{string.Join("','", domains.Where(d => !d.Contains('\'')
                 new SqlParameter("@instantMessenger", instantMessenger),
                 new SqlParameter("@htmlMail", htmlMail),
                 new SqlParameter("@CompanyName", companyName),
-                new SqlParameter("@EcommerceEnabled", ecommerceEnabled));
+                new SqlParameter("@EcommerceEnabled", ecommerceEnabled),
+                new SqlParameter("@HostBillClientID", hostBillClientId),
+                new SqlParameter("@HostBillAccountRef", hostBillAccountRef));
 
             return Convert.ToInt32(prmUserId.Value);
         }

@@ -1,5 +1,5 @@
-USE [SolidCPMac]
-GO
+--USE [SolidCPMac]
+--GO
 -- update database version
 DECLARE @build_version nvarchar(10), @build_date datetime
 SET @build_version = N'1.5.1'
@@ -10058,7 +10058,7 @@ SELECT
 	U.OwnerEmail,
 	U.PackagesNumber,
 	U.CompanyName,
-	U.EcommerceEnabled,
+	U.EcommerceEnabled
 FROM @Users AS TU
 INNER JOIN UsersDetailed AS U ON TU.UserID = U.UserID
 WHERE TU.ItemPosition BETWEEN @StartRow AND @EndRow'
@@ -20696,4 +20696,214 @@ AS
 	AND dbo.CanGetUserDetails(@ActorID, @UserID) = 1 -- actor user rights
 
 	RETURN
+GO
+
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+
+ALTER PROCEDURE [dbo].[AddUser]
+(
+	@ActorID int,
+	@UserID int OUTPUT,
+	@OwnerID int,
+	@RoleID int,
+	@StatusID int,
+	@SubscriberNumber nvarchar(32),
+	@LoginStatusID int,
+	@IsDemo bit,
+	@IsPeer bit,
+	@Comments ntext,
+	@Username nvarchar(50),
+	@Password nvarchar(200),
+	@FirstName nvarchar(50),
+	@LastName nvarchar(50),
+	@Email nvarchar(255),
+	@SecondaryEmail nvarchar(255),
+	@Address nvarchar(200),
+	@City nvarchar(50),
+	@State nvarchar(50),
+	@Country nvarchar(50),
+	@Zip varchar(20),
+	@PrimaryPhone varchar(30),
+	@SecondaryPhone varchar(30),
+	@Fax varchar(30),
+	@InstantMessenger nvarchar(200),
+	@HtmlMail bit,
+	@CompanyName nvarchar(100),
+	@EcommerceEnabled bit,
+	@HostBillClientID int,
+	@HostBillAccountRef nvarchar(100)
+)
+AS
+
+-- check if the user already exists
+IF EXISTS(SELECT UserID FROM Users WHERE Username = @Username)
+BEGIN
+	SET @UserID = -1
+	RETURN
+END
+
+-- check actor rights
+IF dbo.CanCreateUser(@ActorID, @OwnerID) = 0
+BEGIN
+	SET @UserID = -2
+	RETURN
+END
+
+INSERT INTO Users
+(
+	OwnerID,
+	RoleID,
+	StatusID,
+	SubscriberNumber,
+	LoginStatusID,
+	Created,
+	Changed,
+	IsDemo,
+	IsPeer,
+	Comments,
+	Username,
+	Password,
+	FirstName,
+	LastName,
+	Email,
+	SecondaryEmail,
+	Address,
+	City,
+	State,
+	Country,
+	Zip,
+	PrimaryPhone,
+	SecondaryPhone,
+	Fax,
+	InstantMessenger,
+	HtmlMail,
+	CompanyName,
+	EcommerceEnabled,
+	HostBillClientID,
+	HostBillAccountRef
+)
+VALUES
+(
+	@OwnerID,
+	@RoleID,
+	@StatusID,
+	@SubscriberNumber,
+	@LoginStatusID,
+	GetDate(),
+	GetDate(),
+	@IsDemo,
+	@IsPeer,
+	@Comments,
+	@Username,
+	@Password,
+	@FirstName,
+	@LastName,
+	@Email,
+	@SecondaryEmail,
+	@Address,
+	@City,
+	@State,
+	@Country,
+	@Zip,
+	@PrimaryPhone,
+	@SecondaryPhone,
+	@Fax,
+	@InstantMessenger,
+	@HtmlMail,
+	@CompanyName,
+	@EcommerceEnabled,
+	@HostBillClientID,
+	@HostBillAccountRef
+)
+
+SET @UserID = SCOPE_IDENTITY()
+
+RETURN
+GO
+
+
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER OFF
+GO
+
+ALTER PROCEDURE [dbo].[GetUserDomainsPaged]
+(
+	@ActorID int,
+	@UserID int,
+	@FilterColumn nvarchar(50) = '',
+	@FilterValue nvarchar(50) = '',
+	@SortColumn nvarchar(50),
+	@StartRow int,
+	@MaximumRows int
+)
+AS
+-- build query and run it to the temporary table
+DECLARE @sql nvarchar(2000)
+
+SET @sql = '
+DECLARE @HasUserRights bit
+SET @HasUserRights = dbo.CheckActorUserRights(@ActorID, @UserID)
+
+DECLARE @EndRow int
+SET @EndRow = @StartRow + @MaximumRows
+DECLARE @Users TABLE
+(
+	ItemPosition int IDENTITY(1,1),
+	UserID int,
+	DomainID int
+)
+INSERT INTO @Users (UserID, DomainID)
+SELECT
+	U.UserID,
+	D.DomainID
+FROM Users AS U
+INNER JOIN UsersTree(@UserID, 1) AS UT ON U.UserID = UT.UserID
+LEFT OUTER JOIN Packages AS P ON U.UserID = P.UserID
+LEFT OUTER JOIN Domains AS D ON P.PackageID = D.PackageID
+WHERE
+	U.UserID = @UserID AND U.IsPeer = 0
+	AND @HasUserRights = 1 '
+
+IF @FilterColumn <> '' AND @FilterValue <> ''
+SET @sql = @sql + ' AND ' + @FilterColumn + ' LIKE @FilterValue '
+
+IF @SortColumn <> '' AND @SortColumn IS NOT NULL
+SET @sql = @sql + ' ORDER BY ' + @SortColumn + ' '
+
+SET @sql = @sql + ' SELECT COUNT(UserID) FROM @Users;
+SELECT
+	U.UserID,
+	U.RoleID,
+	U.StatusID,
+	U.SubscriberNumber,
+	U.LoginStatusId,
+	U.FailedLogins,
+	U.OwnerID,
+	U.Created,
+	U.Changed,
+	U.IsDemo,
+	U.Comments,
+	U.IsPeer,
+	U.Username,
+	U.FirstName,
+	U.LastName,
+	U.Email,
+	D.DomainName
+FROM @Users AS TU
+INNER JOIN Users AS U ON TU.UserID = U.UserID
+LEFT OUTER JOIN Domains AS D ON TU.DomainID = D.DomainID
+WHERE TU.ItemPosition BETWEEN @StartRow AND @EndRow'
+
+exec sp_executesql @sql, N'@StartRow int, @MaximumRows int, @UserID int, @FilterValue nvarchar(50), @ActorID int',
+@StartRow, @MaximumRows, @UserID, @FilterValue, @ActorID
+
+
+RETURN
 GO
