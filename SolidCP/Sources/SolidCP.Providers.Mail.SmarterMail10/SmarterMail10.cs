@@ -1310,11 +1310,14 @@ namespace SolidCP.Providers.Mail
 			}
 		}
 
-		#endregion
+        public virtual bool CanAutoLogin() => false;
+        public virtual string AutoLogin(string email, string password) => null;
 
-		#region Mail Aliases
+        #endregion
 
-		public bool MailAliasExists(string mailAliasName)
+        #region Mail Aliases
+
+        public bool MailAliasExists(string mailAliasName)
 		{
 			try
 			{

@@ -641,6 +641,8 @@ namespace SolidCP.Providers.Mail
 
             return majorVersion >= 11 || majorVersion >= 10 && minVersion >= 4;
         }
+        public bool CanAutoLogin() => false;
+        public string AutoLogin(string email, string password) => null;
 
         #region Domains
 

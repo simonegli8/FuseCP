@@ -328,6 +328,41 @@ namespace SolidCP.Server
                 throw;
             }
         }
+
+        [WebMethod, SoapHeader("settings")]
+        public bool CanAutoLogin()
+        {
+            try
+            {
+                Log.WriteStart("'{0}' CanAutoLogin", ProviderSettings.ProviderName);
+                var res = MailProvider.CanAutoLogin();
+                Log.WriteEnd("'{0}' CanAutoLogin", ProviderSettings.ProviderName);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Log.WriteError(String.Format("'{0}' CanAutoLogin", ProviderSettings.ProviderName), ex);
+                throw;
+            }
+        }
+
+        [WebMethod, SoapHeader("settings")]
+        public string AutoLogin(string accountName, string password)
+        {
+            try
+            {
+                Log.WriteStart("'{0}' AutoLogin", ProviderSettings.ProviderName);
+                var res = MailProvider.AutoLogin(accountName, password);
+                Log.WriteEnd("'{0}' AutoLogin", ProviderSettings.ProviderName);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Log.WriteError(String.Format("'{0}' AutoLogin", ProviderSettings.ProviderName), ex);
+                throw;
+            }
+        }
+
         #endregion
 
         #region Mail Aliases

@@ -536,6 +536,8 @@ namespace SolidCP.Providers.Mail
         #endregion
 
         #region MailBoxes
+        public virtual bool CanAutoLogin() => false;
+        public virtual string AutoLogin(string email, string password) => null;
 
         public void CreateAccount(MailAccount mailbox)
         {

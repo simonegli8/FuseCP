@@ -333,6 +333,13 @@ Public Class hMailServer5
 #End Region
 
 #Region "IMailServer members"
+    Public Overridable Function CanAutoLogin() As Boolean Implements SolidCP.Providers.Mail.IMailServer.CanAutoLogin
+        Return False
+    End Function
+
+    Public Overridable Function AutoLogin(mailboxName As String, password As String) As String Implements SolidCP.Providers.Mail.IMailServer.AutoLogin
+        Return Nothing
+    End Function
     Public Function AccountExists(ByVal mailboxName As String) As Boolean Implements IMailServer.AccountExists
         ' find existing domain
         Dim objDomain As Service = GetDomainObject(GetDomainName(mailboxName))

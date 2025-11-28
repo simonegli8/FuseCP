@@ -1020,11 +1020,13 @@ namespace SolidCP.Providers.Mail
 		}
 
 
-		#endregion
+        #endregion
 
-		#region Mail Accounts
+        #region Mail Accounts
+        public virtual bool CanAutoLogin() => false;
+        public virtual string AutoLogin(string email, string password) => null;
 
-		public bool AccountExists(string mailboxName)
+        public bool AccountExists(string mailboxName)
 		{
 			try
 			{

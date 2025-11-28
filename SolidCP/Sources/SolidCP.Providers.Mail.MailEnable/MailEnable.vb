@@ -910,6 +910,13 @@ Public Class MailEnable
         ' delete account folder
         DeleteMailBoxDirectory(name)
     End Sub
+    Public Overridable Function CanAutoLogin() As Boolean Implements IMailServer.CanAutoLogin
+        Return False
+    End Function
+
+    Public Overridable Function AutoLogin(mailboxName As String, password As String) As String Implements IMailServer.AutoLogin
+        Return Nothing
+    End Function
 
     Public Function MailAliasExists(ByVal mailAliasName As String) As Boolean Implements IMailServer.MailAliasExists
         Return AccountExists(mailAliasName)

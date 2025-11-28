@@ -113,6 +113,15 @@ namespace SolidCP.Providers.Mail
         {
             get { return ProviderSettings["DefaultDomainHostName"]; }
         }
+        protected bool AutoLoginEnabled
+        {
+			get
+			{
+				bool res;
+				bool.TryParse(ProviderSettings["AutoLoginEnabled"], out res);
+				return res;
+			}
+        }
 
         #endregion
 
@@ -937,9 +946,34 @@ namespace SolidCP.Providers.Mail
             return (DailyStatistics[])days.ToArray(typeof(DailyStatistics));
         }
 
-        #endregion
+		#endregion
 
-        #region Mail Accounts
+		#region Mail Accounts
+		public virtual bool CanAutoLogin() => AutoLoginEnabled;
+        public virtual string AutoLogin(string email, string password)
+		{
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+            HttpClient client = new HttpClient();
+            var loginData = new
+            {
+                username = email,
+                password
+            };
+            var loginDatajson = JsonConvert.SerializeObject(loginData);
+            var authinput_post = new StringContent(loginDatajson, Encoding.UTF8, "application/json");
+            var authurl = ServiceUrl + "/api/v1/auth/authenticate-user";
+
+			return Task.Run(async () =>
+			{
+				var authresponse = await client.PostAsync(authurl, authinput_post);
+				authresponse.EnsureSuccessStatusCode();
+				var authresult = await authresponse.Content.ReadAsStringAsync();
+				AuthToken authdata = JsonConvert.DeserializeObject<AuthToken>(authresult);
+				return authdata;
+			}).Result?.autoLoginUrl;
+        }
 
         public bool AccountExists(string mailboxName)
 		{

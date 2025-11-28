@@ -364,6 +364,13 @@ Public Class hMailServer
 			End If
 		End If
 	End Sub
+	Public Overridable Function CanAutoLogin() As Boolean Implements SolidCP.Providers.Mail.IMailServer.CanAutoLogin
+		Return False
+	End Function
+
+	Public Overridable Function AutoLogin(mailboxName As String, password As String) As String Implements SolidCP.Providers.Mail.IMailServer.AutoLogin
+		Return Nothing
+	End Function
 
 	Public Sub CreateDomain(ByVal domain As MailDomain) Implements IMailServer.CreateDomain
 		Dim objDomain As New Service()

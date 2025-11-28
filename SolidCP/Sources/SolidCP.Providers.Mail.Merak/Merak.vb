@@ -467,6 +467,13 @@ ContinueFor1:
         SaveMailbox(accountObject)
 
     End Sub
+    Public Overridable Function CanAutoLogin() As Boolean Implements IMailServer.CanAutoLogin
+        Return False
+    End Function
+
+    Public Overridable Function AutoLogin(mailboxName As String, password As String) As String Implements IMailServer.AutoLogin
+        Return Nothing
+    End Function
 
     Public Overridable Sub UpdateAllAccounts()
 

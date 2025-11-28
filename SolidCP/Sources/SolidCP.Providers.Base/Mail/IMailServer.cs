@@ -58,6 +58,8 @@ namespace SolidCP.Providers.Mail
         void CreateAccount(MailAccount mailbox);
         void UpdateAccount(MailAccount mailbox);
         void DeleteAccount(string mailboxName);
+        bool CanAutoLogin();
+        string AutoLogin(string mailboxName, string password);
 
         //forwardings (mail aliases)
 	    bool MailAliasExists(string mailAliasName);

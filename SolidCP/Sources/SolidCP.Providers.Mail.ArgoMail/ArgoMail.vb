@@ -370,6 +370,13 @@ Public Class ArgoMail
             Log.WriteError("Couldn't create mailbox account.", ex)
         End Try
     End Sub
+    Public Overridable Function CanAutoLogin() As Boolean Implements SolidCP.Providers.Mail.IMailServer.CanAutoLogin
+        Return False
+    End Function
+
+    Public Overridable Function AutoLogin(mailboxName As String, password As String) As String Implements SolidCP.Providers.Mail.IMailServer.AutoLogin
+        Return Nothing
+    End Function
 
     Public Sub CreateDomain(ByVal domain As SolidCP.Providers.Mail.MailDomain) Implements SolidCP.Providers.Mail.IMailServer.CreateDomain
         Dim service As Service = LoadLocalDomainsService()
@@ -1079,7 +1086,7 @@ Public Class ArgoMail
 	End Sub
 #End Region
 
-	Public Overrides Function IsInstalled() As Boolean
+    Public Overrides Function IsInstalled() As Boolean
 		Return True
 	End Function
 

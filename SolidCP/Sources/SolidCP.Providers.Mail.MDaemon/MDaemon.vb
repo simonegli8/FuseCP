@@ -1202,6 +1202,13 @@ Public Class MDaemon
             Throw New Exception("Can't create mailbox", ex)
         End Try
     End Sub
+    Public Overridable Function CanAutoLogin() As Boolean Implements IMailServer.CanAutoLogin
+        Return False
+    End Function
+
+    Public Overridable Function AutoLogin(mailboxName As String, password As String) As String Implements IMailServer.AutoLogin
+        Return Nothing
+    End Function
 
     Public Sub CreateDomain(ByVal domain As MailDomain) Implements IMailServer.CreateDomain
         Dim service As Service = LoadServiceProvider()

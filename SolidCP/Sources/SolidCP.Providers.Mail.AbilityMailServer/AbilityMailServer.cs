@@ -512,7 +512,8 @@ namespace SolidCP.Providers.Mail
 
 		#endregion
 
-
+		public virtual bool CanAutoLogin() => false;
+		public virtual string AutoLogin(string email, string password) => null;
         public override bool  IsInstalled()
         {
             string name = null;

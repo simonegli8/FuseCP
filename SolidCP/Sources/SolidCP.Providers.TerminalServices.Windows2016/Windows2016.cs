@@ -48,8 +48,6 @@ using SolidCP.Providers.OS;
 using SolidCP.Providers.Common;
 
 using System.Management;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
 using System.Collections.ObjectModel;
 using System.DirectoryServices;
 using System.Security.Cryptography.X509Certificates;
