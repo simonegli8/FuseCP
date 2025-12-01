@@ -23,6 +23,14 @@
         <td class="Normal"><asp:Literal ID="litSubscriberNumber" runat="server"></asp:Literal></td>
     </tr>
     <tr>
+        <td class="SubHead"><asp:Localize ID="locAccountRef" runat="server" meta:resourcekey="locAccountRef" Text="Account Ref:"/></td>
+        <td class="Normal"><asp:Literal ID="litAccountRef" runat="server"></asp:Literal></td>
+    </tr>
+    <tr>
+        <td class="SubHead"><asp:Localize ID="locHostBillClientId" runat="server" meta:resourcekey="locHostBillClientId" Text="HostBill Client ID:"/></td>
+        <td class="Normal"><asp:Literal ID="litHostBillClientID" runat="server"></asp:Literal></td>
+    </tr>
+    <tr>
         <td class="SubHead"><asp:Localize ID="locEmail" runat="server" meta:resourcekey="locEmail" Text="E-mail:"/></td>
         <td class="Normal"><asp:HyperLink ID="lnkEmail" runat="server"></asp:HyperLink></td>
     </tr>
@@ -39,7 +47,7 @@
         <td class="Normal"><asp:Literal ID="litUpdated" runat="server"></asp:Literal></td>
     </tr>
 </table>
-                                <div class="Normal">
+<div class="Normal">
     <div class="ToolLink">
         <asp:HyperLink ID="lnkSummaryLetter" runat="server" meta:resourcekey="lnkSummaryLetter" Text="View Summary Letter"></asp:HyperLink>
     </div>

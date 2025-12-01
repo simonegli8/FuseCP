@@ -87,8 +87,9 @@ namespace SolidCP.Portal
                     txtFirstName.Text = PortalAntiXSS.DecodeOld(user.FirstName);
                     txtLastName.Text = PortalAntiXSS.DecodeOld(user.LastName);
                     txtSubscriberNumber.Text = PortalAntiXSS.DecodeOld(user.SubscriberNumber);
+                    txtAccountRef.Text = PortalAntiXSS.DecodeOld(user.HostBillAccountRef);
+                    txtHostBillClientId.Text = PortalAntiXSS.DecodeOld(user.HostBillClientId.ToString());
                     txtEmail.Text = user.Email;
-                    txtAccountRef.Text = user.HostBillAccountRef;
                     txtSecondaryEmail.Text = user.SecondaryEmail;
                     ddlMailFormat.SelectedIndex = user.HtmlMail ? 1 : 0;
                     lblUsername.Text = user.Username;
