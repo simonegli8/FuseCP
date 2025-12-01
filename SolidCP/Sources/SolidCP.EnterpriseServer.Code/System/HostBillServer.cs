@@ -500,19 +500,7 @@ public class HostBillServer {
                 {
 					if (ServerController.CheckDomain(domain) < 0) return $"Domain {domain} already exists";
 					var now = DateTime.Now;
-                    ServerController.AddDomain(new DomainInfo
-					{
-						DomainName = domain,
-						PackageId = packageId,
-						CreationDate = now,
-						HostingAllowed = true,
-						IsDomainPointer = false,
-						IsPreviewDomain = false,
-						IsSubDomain = false,
-						LastUpdateDate = now,
-						MailDomainName = domain,
-						ExpirationDate = now.AddYears(1)
-					}, false, true);
+					ServerController.AddDomainWithProvisioning(packageId, domain, DomainType.Domain, false, 0, 0, true, false, true, "");
 				}
 				foreach (var domain in deletedDomains) // Delete domains not present in HostBill, TODO set domain status too
 				{
