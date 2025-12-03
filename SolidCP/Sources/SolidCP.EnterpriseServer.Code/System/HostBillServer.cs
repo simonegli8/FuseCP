@@ -456,7 +456,7 @@ public class HostBillServer {
                     var planId = hostingplans.FirstOrDefault(plan => plan.PlanName == server.DefaultHostingPlan)?.PlanId;
 					if (planId.HasValue)
 					{
-						var result = PackageController.AddPackage(userId, planId.Value, server.DefaultHostingPlan, "", (int)PackageStatus.Active, DateTime.Now, false);
+						var result = PackageController.AddPackageWithResources(userId, planId.Value, server.DefaultHostingPlan, (int)PackageStatus.Active, false, true, newDomains.FirstOrDefault() ?? "", false, false, false, "", false, "");
 						packageId = result.Result;
 					}
 					else return "HostBill user sync, DefaultHostingPlan does not exist.";
