@@ -456,7 +456,7 @@ public class HostBillServer {
                     var planId = hostingplans.FirstOrDefault(plan => plan.PlanName == server.DefaultHostingPlan)?.PlanId;
 					if (planId.HasValue)
 					{
-						var result = PackageController.AddPackageWithResources(userId, planId.Value, server.DefaultHostingPlan, (int)PackageStatus.Active, false, true, newDomains.FirstOrDefault() ?? "", false, false, false, "", false, "");
+						var result = PackageController.AddPackage(userId, planId.Value, server.DefaultHostingPlan, "", (int)PackageStatus.Active, DateTime.Now, false, false);
 						packageId = result.Result;
 					}
 					else return "HostBill user sync, DefaultHostingPlan does not exist.";
@@ -464,8 +464,9 @@ public class HostBillServer {
 
 				if (packageId < 0) return "HostBill user could not be synchronized: unable to create hosting package.";
 
-				// Allocate domain Quotas
-				var allocatedDomains = PackageController.GetPackageQuota(packageId, Quotas.OS_DOMAINS).QuotaAllocatedValue;
+
+                // Allocate domain Quotas
+                var allocatedDomains = PackageController.GetPackageQuota(packageId, Quotas.OS_DOMAINS).QuotaAllocatedValue;
 				if (allocatedDomains >= 0 && domains.Count > allocatedDomains)
 				{
 					var addons = ObjectUtils.CreateListFromDataSet<HostingPlanInfo>(PackageController.GetHostingAddons(1));
@@ -501,9 +502,37 @@ public class HostBillServer {
                 {
 					if (ServerController.CheckDomain(domain) < 0) return $"Domain {domain} already exists";
 					var now = DateTime.Now;
-					ServerController.AddDomainWithProvisioning(packageId, domain, DomainType.Domain, false, 0, 0, true, false, true, "");
-				}
-				foreach (var domain in deletedDomains) // Delete domains not present in HostBill, TODO set domain status too
+					var domainId = ServerController.AddDomainWithProvisioning(packageId, domain, DomainType.Domain, false, 0, 0, true, false, true, "");
+                    var domainInfo = ServerController.GetDomain(domainId);
+                    if (domainInfo != null)
+                    {
+                        if (domainInfo.ZoneItemId != 0)
+                        {
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Os, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Dns, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Ftp, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2000, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2005, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2008, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2012, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2014, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2016, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2017, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2019, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2022, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MySql4, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MySql5, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MySql8, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MariaDB, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Statistics, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.VPS, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.VPS2012, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.VPSForPC, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.RDS, domainInfo, "");
+                        }
+                    }
+                }
+                foreach (var domain in deletedDomains) // Delete domains not present in HostBill, TODO set domain status too
 				{
 					var domainId = ServerController.GetDomain(domain)?.DomainId;
 					if (domainId.HasValue) ServerController.DeleteDomain(domainId.Value);
