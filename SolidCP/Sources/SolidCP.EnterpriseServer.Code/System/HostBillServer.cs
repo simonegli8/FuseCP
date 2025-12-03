@@ -440,7 +440,8 @@ public class HostBillServer {
 				var userDomainsSet = // UserController.GetUserDomainsPaged(userId,null, null, null, 0, int.MaxValue);
 					DataProvider.GetUserDomainsPaged(userId, userId, "", "", "", 0, int.MaxValue); // need to use DataProvider, since actorId might be -1 when not logged in
                 var userDomains = userDomainsSet.Tables[1].Rows.OfType<DataRow>()
-					.Select(row => (string)row["DomainName"])
+					.Select(row => row.IsNull("DomainName") ? null : row["DomainName"] as string)
+					.Where(domain => domain != null)
 					.ToList();
 
 				var newDomains = domains.Except(userDomains);
