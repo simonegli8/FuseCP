@@ -93,6 +93,7 @@ namespace SolidCP.Portal.ProviderControls
             cbEnableDomainAdmin.Checked = Utils.ParseBool(settings[Constants.EnableDomainAdministrators], false);
             chkSEEnable.Checked = Utils.ParseBool(settings["EnableMailFilter"], false);
             txtDefaultDomainHostName.Text = settings["DefaultDomainHostName"];
+            cbAutoLoginEnabled.Checked = Utils.ParseBool(settings[Constants.AutoLoginEnabled], false);
         }
 
         public void SaveSettings(StringDictionary settings)
@@ -106,6 +107,7 @@ namespace SolidCP.Portal.ProviderControls
             settings[Constants.EnableDomainAdministrators] = cbEnableDomainAdmin.Checked.ToString();
             settings["EnableMailFilter"] = chkSEEnable.Checked.ToString();
             settings["DefaultDomainHostName"] = txtDefaultDomainHostName.Text.Trim();
+            settings[Constants.AutoLoginEnabled] = cbAutoLoginEnabled.Checked.ToString();
         }
 
         protected void gvSEDestinations_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -510,6 +510,7 @@ public class HostBillServer {
                         {
                             ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Os, domainInfo, "");
                             ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Dns, domainInfo, "");
+                            ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Mail, domainInfo, "");
                             ServerController.AddServiceDNSRecords(packageId, ResourceGroups.Ftp, domainInfo, "");
                             ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2000, domainInfo, "");
                             ServerController.AddServiceDNSRecords(packageId, ResourceGroups.MsSql2005, domainInfo, "");

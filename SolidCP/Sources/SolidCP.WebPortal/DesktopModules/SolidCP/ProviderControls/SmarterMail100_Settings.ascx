@@ -58,8 +58,7 @@
 	<tr>
 	    <td></td>
 	    <td><asp:CheckBox runat="server" ID="cbEnableDomainAdmin" meta:resourcekey="cbEnableDomainAdmin"/></td>
-	</tr>
-		
+	</tr>		
 </table>
 
 <div id="SeDiv" runat="server">

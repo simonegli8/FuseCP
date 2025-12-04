@@ -87,6 +87,7 @@ namespace SolidCP.Providers.Common
         public const string Currency = "Currency";
 
         public const string BaseLanguage = "BaseLanguage";
-   
+
+        public const string AutoLoginEnabled = "AutoLoginEnabled";
     }
 }

@@ -56,6 +56,10 @@
 	    <td><asp:CheckBox runat="server" ID="cbEnableDomainAdmin" meta:resourcekey="cbEnableDomainAdmin"/></td>
 	</tr>
 	<tr>
+	    <td></td>
+	    <td><asp:CheckBox runat="server" ID="cbAutoLoginEnabled" meta:resourcekey="cbAutoLoginEnabled"/></td>
+	</tr>
+	<tr>
 		<td class="SubHead">
 		    <asp:Label ID="lblDefaultDomainHostName" runat="server" meta:resourcekey="lblDefaultDomainHostName" Text="Default Domain Hostname:"></asp:Label>
 		</td>
