@@ -163,9 +163,9 @@
     <value>Benutzername</value>
   </data>
   <data name="cmdAutoLogin.Text" xml:space="preserve">
-    <value>Mailbox</value>
+    <value>Impersonate Mailbox</value>
   </data>
   <data name="cmdAutoLoginText.Text" xml:space="preserve">
-    <value>Mailbox</value>
+    <value>Impersonate Mailbox</value>
   </data>
 </root>
