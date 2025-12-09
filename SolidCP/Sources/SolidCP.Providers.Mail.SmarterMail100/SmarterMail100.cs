@@ -43,6 +43,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Collections;
+using System.Linq;
 
 namespace SolidCP.Providers.Mail
 {
@@ -214,7 +215,7 @@ namespace SolidCP.Providers.Mail
 			var domainDatajson = JsonConvert.SerializeObject(domainData);
 			var authinput_post = new StringContent(domainDatajson, Encoding.UTF8, "application/json");
 			client.DefaultRequestHeaders.Add("Authorization", "Bearer " + authToken.accessToken);
-			var authurl = ServiceUrl + "/api/v1//settings/sysadmin/manage-domain/" + domain;
+			var authurl = ServiceUrl + "/api/v1/settings/sysadmin/manage-domain/" + domain;
 			var authresponse = await client.PostAsync(authurl, authinput_post);
 			authresponse.EnsureSuccessStatusCode();
 			var authresult = await authresponse.Content.ReadAsStringAsync();
@@ -303,7 +304,29 @@ namespace SolidCP.Providers.Mail
 			return commanddata;
 		}
 
-		private async Task<object> ExecDomainGetCommand(string command, string domain)
+        private async Task<T> ExecPostCommand<T>(string command, object param)
+        {
+            AuthToken authToken = await GetAccessToken();
+
+            var commandurl = ServiceUrl + "/api/v1/" + command;
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
+            HttpClient client = new HttpClient();
+            var commandparamjson = JsonConvert.SerializeObject(param);
+            var commandinput_post = new StringContent(commandparamjson, Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + authToken.accessToken);
+            var commandresponse = await client.PostAsync(commandurl, commandinput_post);
+            var commandresult = await commandresponse.Content.ReadAsStringAsync();
+            T commanddata = JsonConvert.DeserializeObject<T>(commandresult);
+
+            Log.WriteInfo("ExecPostCommand: URL: {0} \n\n returned: {1}", commandurl, commanddata);
+
+            return commanddata;
+        }
+
+        private async Task<object> ExecDomainGetCommand(string command, string domain)
 		{
 			AuthToken auth = await GetDomainAccessToken(domain);
 
@@ -952,27 +975,14 @@ namespace SolidCP.Providers.Mail
 		public virtual bool CanAutoLogin() => AutoLoginEnabled;
         public virtual string AutoLogin(string email, string password)
 		{
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-
-            HttpClient client = new HttpClient();
+            var tokens = email.Split('@');
             var loginData = new
             {
-                username = email,
-                password
+                username = tokens.FirstOrDefault(),
+                domain = tokens.LastOrDefault(),
             };
-            var loginDatajson = JsonConvert.SerializeObject(loginData);
-            var authinput_post = new StringContent(loginDatajson, Encoding.UTF8, "application/json");
-            var authurl = ServiceUrl + "/api/v1/auth/authenticate-user";
 
-			return Task.Run(async () =>
-			{
-				var authresponse = await client.PostAsync(authurl, authinput_post);
-				authresponse.EnsureSuccessStatusCode();
-				var authresult = await authresponse.Content.ReadAsStringAsync();
-				AuthToken authdata = JsonConvert.DeserializeObject<AuthToken>(authresult);
-				return authdata;
-			}).Result?.autoLoginUrl;
+			return ExecPostCommand<AuthToken>("auth/retrieve-login-token", loginData).Result?.autoLoginUrl;
         }
 
         public bool AccountExists(string mailboxName)
