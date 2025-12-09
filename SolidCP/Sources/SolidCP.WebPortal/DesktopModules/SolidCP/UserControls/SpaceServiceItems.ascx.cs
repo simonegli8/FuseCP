@@ -205,15 +205,19 @@ namespace SolidCP.Portal.UserControls
 
                 // refresh the list
                 gvItems.DataBind();
-            } else if (e.CommandName == "AutoLogin")
+            }
+            else if (e.CommandName == "AutoLogin")
             {
                 int itemId = Utils.ParseInt(e.CommandArgument.ToString(), 0);
 
                 var account = ES.Services.MailServers.GetMailAccount(itemId);
                 var url = ES.Services.MailServers.AutoLogin(PanelSecurity.PackageId, account.Name, account.Password);
-                var script = $"window.open('{url}', '_blank');";
-                ClientScriptManager cs = Page.ClientScript;
-                cs.RegisterClientScriptBlock(typeof(SpaceServiceItems), "AutoLogin", script);
+                if (!string.IsNullOrEmpty(url))
+                {
+                    var script = $"window.open('{url}', '_blank');";
+                    ClientScriptManager cs = Page.ClientScript;
+                    cs.RegisterClientScriptBlock(typeof(SpaceServiceItems), "AutoLogin", script);
+                }
             }
         }
 

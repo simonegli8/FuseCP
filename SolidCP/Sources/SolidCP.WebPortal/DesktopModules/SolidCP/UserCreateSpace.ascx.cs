@@ -196,7 +196,6 @@ namespace SolidCP.Portal
                     ShowResultMessage(result.Result);
                     lblMessage.Text = PortalAntiXSS.Encode(GetExceedingQuotasMessage(result.ExceedingQuotas));
                     return;
-
                 }
                 else
                 {
