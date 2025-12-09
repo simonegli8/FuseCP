@@ -109,6 +109,10 @@ namespace SolidCP.Providers.Mail
 		{
 			get { return ProviderSettings["ServiceUrl"]; }
 		}
+        protected string PublicUrl
+        {
+            get { return ProviderSettings["PublicUrl"]; }
+        }
 
         protected string DefaultDomainHostName
         {
@@ -982,8 +986,10 @@ namespace SolidCP.Providers.Mail
                 domain = tokens.LastOrDefault(),
             };
 
-			return ExecPostCommand<AuthToken>("auth/retrieve-login-token", loginData).Result?.autoLoginUrl;
-        }
+			var url = ExecPostCommand<AuthToken>("auth/retrieve-login-token", loginData).Result?.autoLoginUrl;
+			if (!string.IsNullOrEmpty(PublicUrl)) url = url.Replace(ServiceUrl, PublicUrl);
+			return url;
+		}
 
         public bool AccountExists(string mailboxName)
 		{
