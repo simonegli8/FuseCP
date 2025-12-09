@@ -147,6 +147,9 @@
   <data name="lblPublicIP.Text" xml:space="preserve">
     <value>Public IP Address:</value>
   </data>
+  <data name="lblPublicUrl.Text" xml:space="preserve">
+    <value>Public URL:</value>
+  </data>
   <data name="lblServiceUrl.Text" xml:space="preserve">
     <value>SmarterMail Web Services URL:</value>
   </data>

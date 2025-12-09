@@ -93,12 +93,14 @@ namespace SolidCP.Portal.ProviderControls
             cbEnableDomainAdmin.Checked = Utils.ParseBool(settings[Constants.EnableDomainAdministrators], false);
             chkSEEnable.Checked = Utils.ParseBool(settings["EnableMailFilter"], false);
             txtDefaultDomainHostName.Text = settings["DefaultDomainHostName"];
+            txtPublicUrl.Text = settings["PublicUrl"];
             cbAutoLoginEnabled.Checked = Utils.ParseBool(settings[Constants.AutoLoginEnabled], false);
         }
 
         public void SaveSettings(StringDictionary settings)
         {
             settings["ServiceUrl"] = txtServiceUrl.Text.Trim();
+            settings["PublicUrl"] = txtPublicUrl.Text.Trim();
             settings["ServerIPAddress"] = ipAddress.AddressValue;
             settings["DomainsPath"] = txtDomainsFolder.Text.Trim();
             settings["AdminUsername"] = txtUsername.Text.Trim();

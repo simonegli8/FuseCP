@@ -150,4 +150,7 @@
   <data name="lblServiceUrl.Text" xml:space="preserve">
     <value>SmarterMail-Webdienste-URL:</value>
   </data>
+  <data name="lblPublicUrl.Text" xml:space="preserve">
+    <value>Öffentliche URL:</value>
+  </data>
 </root>

@@ -87,17 +87,20 @@ namespace SolidCP.Portal.ProviderControls
             ipAddress.AddressValue = settings["ServerIPAddress"];
             txtDomainsFolder.Text = settings["DomainsPath"];
             txtUsername.Text = settings["AdminUsername"];
+            txtPublicUrl.Text = settings["PublicUrl"];
             ViewState["PWD"] = settings["AdminPassword"];
             rowPassword.Visible = ((string)ViewState["PWD"]) != "";
             cbImportDomainAdmin.Checked = Utils.ParseBool(settings[Constants.ImportDomainAdmin], false);
             cbInheritDefaultLimits.Checked = Utils.ParseBool(settings[Constants.InheritDomainDefaultLimits], false);
             cbEnableDomainAdmin.Checked = Utils.ParseBool(settings[Constants.EnableDomainAdministrators], false);
             chkSEEnable.Checked = Utils.ParseBool(settings["EnableMailFilter"], false);
+            cbAutoLoginEnabled.Checked = Utils.ParseBool(settings[Constants.AutoLoginEnabled], false);
         }
 
         public void SaveSettings(StringDictionary settings)
         {
             settings["ServiceUrl"] = txtServiceUrl.Text.Trim();
+            settings["PublicUrl"] = txtPublicUrl.Text.Trim();
             settings["ServerIPAddress"] = ipAddress.AddressValue;
             settings["DomainsPath"] = txtDomainsFolder.Text.Trim();
             settings["AdminUsername"] = txtUsername.Text.Trim();
@@ -106,6 +109,8 @@ namespace SolidCP.Portal.ProviderControls
             settings[Constants.InheritDomainDefaultLimits] = cbInheritDefaultLimits.Checked.ToString();
             settings[Constants.EnableDomainAdministrators] = cbEnableDomainAdmin.Checked.ToString();
             settings["EnableMailFilter"] = chkSEEnable.Checked.ToString();
+            settings[Constants.AutoLoginEnabled] = cbAutoLoginEnabled.Checked.ToString();
+
         }
 
         protected void gvSEDestinations_RowCommand(object sender, GridViewCommandEventArgs e)
