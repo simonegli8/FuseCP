@@ -134,6 +134,11 @@ namespace SolidCP.EnterpriseServer
 			account.PackageId = item.PackageId;
 			account.ServiceId = item.ServiceId;
 
+			if (account.Password == null)
+			{
+				account.Password = CryptoUtils.Decrypt(item.Password);
+			}
+
 			return account;
 		}
 
