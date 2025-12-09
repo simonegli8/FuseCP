@@ -214,9 +214,13 @@ namespace SolidCP.Portal.UserControls
                 var url = ES.Services.MailServers.AutoLogin(PanelSecurity.PackageId, account.Name, account.Password);
                 if (!string.IsNullOrEmpty(url))
                 {
-                    var script = $"window.open('{url}', '_blank');";
-                    ClientScriptManager cs = Page.ClientScript;
-                    cs.RegisterClientScriptBlock(typeof(SpaceServiceItems), "AutoLogin", script);
+                    ScriptManager.RegisterStartupScript(
+                        Page,
+                        Page.GetType(),
+                        "AutoLogin",
+                        $"window.open('{url}', '_blank');",
+                        true
+                    );
                 }
             }
         }
