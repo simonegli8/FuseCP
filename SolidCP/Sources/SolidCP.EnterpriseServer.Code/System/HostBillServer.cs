@@ -309,7 +309,7 @@ public class HostBillServer {
         var server = GetHostBillIntegration();
         if (!server.Enabled) return;
 
-		if (user.Username.Contains('@') && user.HostBillClientId > 0)
+		if (user != null && user.Username != null && user.Username.Contains('@') && user.HostBillClientId > 0)
 		{
 			HostBillClient hbclient = null;
 
