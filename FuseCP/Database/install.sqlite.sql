@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+﻿CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
     "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
     "ProductVersion" TEXT NOT NULL
 );
@@ -2800,7 +2800,7 @@ SELECT changes();
 
 
 INSERT INTO "Themes" ("ThemeID", "DisplayName", "DisplayOrder", "Enabled", "LTRName", "RTLName")
-VALUES (1, 'SolidCP v1', 1, 1, 'Default', 'Default');
+VALUES (1, 'FuseCP v1', 1, 1, 'Default', 'Default');
 SELECT changes();
 
 
@@ -2854,10 +2854,6 @@ INSERT INTO "Packages" ("PackageID", "BandwidthUpdated", "PackageComments", "Pac
 VALUES (1, NULL, '', 'System', NULL, NULL, NULL, NULL, 1, '2024-10-12 19:29:19.927', 1);
 SELECT changes();
 
-
-INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
-VALUES (1, NULL, 'Windows Server 2003', 'Windows2003', 1, 'Windows2003', 'FuseCP.Providers.OS.Windows2003, FuseCP.Providers.OS.Windows2003');
-SELECT changes();
 
 INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
 VALUES (2, NULL, 'Internet Information Services 6.0', 'IIS60', 2, 'IIS60', 'FuseCP.Providers.Web.IIs60, FuseCP.Providers.Web.IIs60');
@@ -3032,10 +3028,6 @@ VALUES (93, NULL, 'Hosted Microsoft Exchange Server 2019', 'Exchange', 12, 'Exch
 SELECT changes();
 
 INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
-VALUES (100, NULL, 'Windows Server 2008', 'Windows2008', 1, 'Windows2008', 'FuseCP.Providers.OS.Windows2008, FuseCP.Providers.OS.Windows2008');
-SELECT changes();
-
-INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
 VALUES (101, NULL, 'Internet Information Services 7.0', 'IIS70', 2, 'IIS70', 'FuseCP.Providers.Web.IIs70, FuseCP.Providers.Web.IIs70');
 SELECT changes();
 
@@ -3045,10 +3037,6 @@ SELECT changes();
 
 INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
 VALUES (103, NULL, 'Hosted Organizations', 'Organizations', 13, 'Organizations', 'FuseCP.Providers.HostedSolution.OrganizationProvider, FuseCP.Providers.HostedSolution');
-SELECT changes();
-
-INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
-VALUES (104, NULL, 'Windows Server 2012', 'Windows2012', 1, 'Windows2012', 'FuseCP.Providers.OS.Windows2012, FuseCP.Providers.OS.Windows2012');
 SELECT changes();
 
 INSERT INTO "Providers" ("ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType")
@@ -4592,10 +4580,6 @@ INSERT INTO "Quotas" ("QuotaID", "GroupID", "HideQuota", "ItemTypeID", "PerOrgan
 VALUES (766, 76, NULL, NULL, NULL, 'Max Log Size', 'MsSQL2025.MaxLogSize', 4.0, 3, 0);
 SELECT changes();
 
-INSERT INTO "Quotas" ("QuotaID", "GroupID", "HideQuota", "ItemTypeID", "PerOrganization", "QuotaDescription", "QuotaName", "QuotaOrder", "QuotaTypeID", "ServiceQuota")
-VALUES (771, 4, NULL, NULL, NULL, 'Mail Accounts per Domain', 'Mail.Accounts.per.Domain', 1.2, 2, 1);
-SELECT changes();
-
 
 INSERT INTO "ResourceGroupDnsRecords" ("RecordID", "GroupID", "MXPriority", "RecordData", "RecordName", "RecordOrder", "RecordType")
 VALUES (1, 2, 0, '[IP]', '', 1, 'A');
@@ -5542,6 +5526,18 @@ VALUES ('UserPasswordPolicy', 'FtpPolicy', 1, 'True;5;20;0;1;0;True');
 SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
+VALUES ('DemoMessage', 'FuseCPPolicy', 1, ((('When user account is in demo mode the majority of operations are' || (CHAR(13) || CHAR(10))) || ('disabled, especially those ones that modify or delete records.' || (CHAR(13) || CHAR(10)))) || (('You are welcome to ask your questions or place comments about' || (CHAR(13) || CHAR(10))) || (('this demo on  <a href="http://forum.fusecp.com"' || CHAR(13)) || (CHAR(10) || 'target="_blank">FuseCP  Support Forum</a>')))));
+SELECT changes();
+
+INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
+VALUES ('ForbiddenIP', 'FuseCPPolicy', 1, '');
+SELECT changes();
+
+INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
+VALUES ('PasswordPolicy', 'FuseCPPolicy', 1, 'True;6;20;0;1;0;True;;0;;;False;False;0;');
+SELECT changes();
+
+INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
 VALUES ('AccountNamePolicy', 'MailPolicy', 1, 'True;;1;50;;;');
 SELECT changes();
 
@@ -5699,18 +5695,6 @@ SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
 VALUES ('UserPasswordPolicy', 'SharePointPolicy', 1, 'True;5;20;0;1;0;True;;0;;;False;False;0;');
-SELECT changes();
-
-INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
-VALUES ('DemoMessage', 'FuseCPPolicy', 1, ((('When user account is in demo mode the majority of operations are' || (CHAR(13) || CHAR(10))) || ('disabled, especially those ones that modify or delete records.' || (CHAR(13) || CHAR(10)))) || (('You are welcome to ask your questions or place comments about' || (CHAR(13) || CHAR(10))) || (('this demo on  <a href="http://forum.fusecp.com"' || CHAR(13)) || (CHAR(10) || 'target="_blank">FuseCP  Support Forum</a>')))));
-SELECT changes();
-
-INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
-VALUES ('ForbiddenIP', 'FuseCPPolicy', 1, '');
-SELECT changes();
-
-INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
-VALUES ('PasswordPolicy', 'FuseCPPolicy', 1, 'True;6;20;0;1;0;True;;0;;;False;False;0;');
 SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
@@ -6131,10 +6115,6 @@ INSERT INTO "Quotas" ("QuotaID", "GroupID", "HideQuota", "ItemTypeID", "PerOrgan
 VALUES (761, 76, NULL, 80, NULL, 'Users', 'MsSQL2025.Users', 2.0, 2, 0);
 SELECT changes();
 
-INSERT INTO "Quotas" ("QuotaID", "GroupID", "HideQuota", "ItemTypeID", "PerOrganization", "QuotaDescription", "QuotaName", "QuotaOrder", "QuotaTypeID", "ServiceQuota")
-VALUES (770, 4, NULL, 11, NULL, 'Mail Domains', 'Mail.Domains', 1.1000000000000001, 2, 1);
-SELECT changes();
-
 
 INSERT INTO "Schedule" ("ScheduleID", "Enabled", "FromTime", "HistoriesNumber", "Interval", "LastRun", "MaxExecutionTime", "NextRun", "PackageID", "PriorityID", "ScheduleName", "ScheduleTypeID", "StartTime", "TaskID", "ToTime", "WeekMonthDay")
 VALUES (1, 1, '2000-01-01 12:00:00', 7, 0, NULL, 3600, '2010-07-16 14:53:02.47', 1, 'Normal', 'Calculate Disk Space', 'Daily', '2000-01-01 12:30:00', 'SCHEDULE_TASK_CALCULATE_PACKAGES_DISKSPACE', '2000-01-01 12:00:00', 1);
@@ -6144,10 +6124,6 @@ INSERT INTO "Schedule" ("ScheduleID", "Enabled", "FromTime", "HistoriesNumber", 
 VALUES (2, 1, '2000-01-01 12:00:00', 7, 0, NULL, 3600, '2010-07-16 14:53:02.477', 1, 'Normal', 'Calculate Bandwidth', 'Daily', '2000-01-01 12:00:00', 'SCHEDULE_TASK_CALCULATE_PACKAGES_BANDWIDTH', '2000-01-01 12:00:00', 1);
 SELECT changes();
 
-
-INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
-VALUES ('UsersHome', 1, '%SYSTEMDRIVE%\HostingSpaces');
-SELECT changes();
 
 INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
 VALUES ('AspNet11Path', 2, '%SYSTEMROOT%\Microsoft.NET\Framework\v1.1.4322\aspnet_isapi.dll');
@@ -6958,10 +6934,6 @@ VALUES ('ServiceUrl', 67, 'http://localhost:9998');
 SELECT changes();
 
 INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
-VALUES ('UsersHome', 100, '%SYSTEMDRIVE%\HostingSpaces');
-SELECT changes();
-
-INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
 VALUES ('AspNet11Pool', 101, 'ASP.NET 1.1');
 SELECT changes();
 
@@ -7055,10 +7027,6 @@ SELECT changes();
 
 INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
 VALUES ('SiteId', 102, 'Default FTP Site');
-SELECT changes();
-
-INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
-VALUES ('UsersHome', 104, '%SYSTEMDRIVE%\HostingSpaces');
 SELECT changes();
 
 INSERT INTO "ServiceDefaultProperties" ("PropertyName", "ProviderID", "PropertyValue")
@@ -8252,50 +8220,7 @@ CREATE INDEX "WebDavAccessTokensIdx_AccountID" ON "WebDavAccessTokens" ("Account
 CREATE INDEX "WebDavPortalUsersSettingsIdx_AccountId" ON "WebDavPortalUsersSettings" ("AccountId");
 
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20251105040648_v2.0.0', '9.0.9');
-
-DELETE FROM "Quotas"
-WHERE "QuotaID" = 770;
-SELECT changes();
-
-
-DELETE FROM "Quotas"
-WHERE "QuotaID" = 771;
-SELECT changes();
-
-
-DELETE FROM "ServiceDefaultProperties"
-WHERE "PropertyName" = 'UsersHome' AND "ProviderID" = 1;
-SELECT changes();
-
-
-DELETE FROM "ServiceDefaultProperties"
-WHERE "PropertyName" = 'UsersHome' AND "ProviderID" = 100;
-SELECT changes();
-
-
-DELETE FROM "ServiceDefaultProperties"
-WHERE "PropertyName" = 'UsersHome' AND "ProviderID" = 104;
-SELECT changes();
-
-
-DELETE FROM "Providers"
-WHERE "ProviderID" = 1;
-SELECT changes();
-
-
-DELETE FROM "Providers"
-WHERE "ProviderID" = 100;
-SELECT changes();
-
-
-DELETE FROM "Providers"
-WHERE "ProviderID" = 104;
-SELECT changes();
-
-
-INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20251113211755_RemovedOldWindowsProviders', '9.0.9');
+VALUES ('20260106203957_v2.0.0', '9.0.9');
 
 COMMIT;
 

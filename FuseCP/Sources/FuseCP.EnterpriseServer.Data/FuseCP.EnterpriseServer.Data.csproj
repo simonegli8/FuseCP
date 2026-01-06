@@ -177,6 +177,7 @@
         <Compile Remove="Migrations\Sqlite\v2.0.0\SqliteDbContextModelSnapshot_v2.0.0.cs" />
         <Compile Remove="Migrations\SqlServer\InitialCreate.StoredProcedures.cs" />
         <Compile Remove="Migrations\SqlServer\v1.5.1\SqlServerDbContextModelSnapshot_v1.5.1.cs" />
+        <Compile Remove="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_RenameToFuseCP.cs" />
         <Compile Remove="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_Run_Migrate_msSQL_Script - Copy.cs" />
         <Compile Remove="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_Run_Migrate_msSQL_Script.cs" />
         <Compile Remove="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_v2.0.0.cs" />
@@ -187,6 +188,7 @@
         <None Include="Migrations\PostgreSql\v2.0.0\PostgreSqlDbContextModelSnapshot_v2.0.0.cs" />
         <None Include="Migrations\Sqlite\v2.0.0\SqliteDbContextModelSnapshot_v2.0.0.cs" />
         <None Include="Migrations\SqlServer\v1.5.1\SqlServerDbContextModelSnapshot_v1.5.1.cs" />
+        <None Include="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_RenameToFuseCP.cs" />
         <None Include="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_Run_Migrate_msSQL_Script.cs" />
         <None Include="Migrations\SqlServer\v2.0.0\SqlServerDbContextModelSnapshot_v2.0.0.cs" />
         <Compile Remove="DbContextBase.Source.cs" />
