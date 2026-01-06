@@ -2777,7 +2777,7 @@ BEGIN
     IF NOT EXISTS(SELECT 1 FROM `__EFMigrationsHistory` WHERE `MigrationId` = '20251105040706_v2.0.0') THEN
 
     INSERT INTO `Themes` (`ThemeID`, `DisplayName`, `DisplayOrder`, `Enabled`, `LTRName`, `RTLName`)
-    VALUES (1, 'FuseCP v1', 1, 1, 'Default', 'Default');
+    VALUES (1, 'SolidCP v1', 1, 1, 'Default', 'Default');
 
     END IF;
 END //
@@ -3872,7 +3872,7 @@ BEGIN
     ('GroupNamePolicy', 'SharePointPolicy', 1, 'True;-;1;20;;;'),
     ('UserNamePolicy', 'SharePointPolicy', 1, 'True;-;1;20;;;'),
     ('UserPasswordPolicy', 'SharePointPolicy', 1, 'True;5;20;0;1;0;True;;0;;;False;False;0;'),
-    ('DemoMessage', 'FuseCPPolicy', 1, CONCAT('When user account is in demo mode the majority of operations are', CHAR(13, 10), 'disabled, especially those ones that modify or delete records.', CHAR(13, 10), 'You are welcome to ask your questions or place comments about', CHAR(13, 10), 'this demo on  <a href="http://forum.FuseCP.net"', CHAR(13, 10), 'target="_blank">FuseCP  Support Forum</a>')),
+    ('DemoMessage', 'FuseCPPolicy', 1, CONCAT('When user account is in demo mode the majority of operations are', CHAR(13, 10), 'disabled, especially those ones that modify or delete records.', CHAR(13, 10), 'You are welcome to ask your questions or place comments about', CHAR(13, 10), 'this demo on  <a href="http://forum.fusecp.com"', CHAR(13, 10), 'target="_blank">FuseCP  Support Forum</a>')),
     ('ForbiddenIP', 'FuseCPPolicy', 1, ''),
     ('PasswordPolicy', 'FuseCPPolicy', 1, 'True;6;20;0;1;0;True;;0;;;False;False;0;'),
     ('From', 'UserPasswordExpirationLetter', 1, 'support@HostingCompany.com'),
@@ -3919,7 +3919,7 @@ BEGIN
     ('EnableWritePermissions', 'WebPolicy', 1, 'False'),
     ('FrontPageAccountPolicy', 'WebPolicy', 1, 'True;;1;20;;;'),
     ('FrontPagePasswordPolicy', 'WebPolicy', 1, 'True;5;20;0;1;0;False;;0;0;0;False;False;0;'),
-    ('ParkingPageContent', 'WebPolicy', 1, CONCAT('<html xmlns="http://www.w3.org/1999/xhtml">', CHAR(13, 10), '<head>', CHAR(13, 10), '    <title>The web site is under construction</title>', CHAR(13, 10), '<style type="text/css">', CHAR(13, 10), '	H1 { font-size: 16pt; margin-bottom: 4px; }', CHAR(13, 10), '	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }', CHAR(13, 10), '</style>', CHAR(13, 10), '</head>', CHAR(13, 10), '<body>', CHAR(13, 10), '<div id="PageOutline">', CHAR(13, 10), '	<h1>This web site has just been created from <a href="https://www.FuseCP.com">FuseCP </a> and it is still under construction.</h1>', CHAR(13, 10), '	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>', CHAR(13, 10), '</div>', CHAR(13, 10), '</body>', CHAR(13, 10), '</html>')),
+    ('ParkingPageContent', 'WebPolicy', 1, CONCAT('<html xmlns="http://www.w3.org/1999/xhtml">', CHAR(13, 10), '<head>', CHAR(13, 10), '    <title>The web site is under construction</title>', CHAR(13, 10), '<style type="text/css">', CHAR(13, 10), '	H1 { font-size: 16pt; margin-bottom: 4px; }', CHAR(13, 10), '	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }', CHAR(13, 10), '</style>', CHAR(13, 10), '</head>', CHAR(13, 10), '<body>', CHAR(13, 10), '<div id="PageOutline">', CHAR(13, 10), '	<h1>This web site has just been created from <a href="https://www.fusecp.com">FuseCP </a> and it is still under construction.</h1>', CHAR(13, 10), '	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>', CHAR(13, 10), '</div>', CHAR(13, 10), '</body>', CHAR(13, 10), '</html>')),
     ('ParkingPageName', 'WebPolicy', 1, 'default.aspx'),
     ('PerlInstalled', 'WebPolicy', 1, 'False'),
     ('PhpInstalled', 'WebPolicy', 1, '');

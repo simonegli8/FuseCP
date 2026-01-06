@@ -7799,7 +7799,7 @@ INSERT [dbo].[SystemSettings] ([SettingsName], [PropertyName], [PropertyValue]) 
 GO
 INSERT [dbo].[SystemSettings] ([SettingsName], [PropertyName], [PropertyValue]) VALUES (N'SmtpSettings', N'SmtpUsername', N'postmaster')
 GO
-INSERT [dbo].[Themes] ([ThemeID], [DisplayName], [LTRName], [RTLName], [Enabled], [DisplayOrder]) VALUES (1, N'FuseCP v1', N'Default', N'Default', 1, 1)
+INSERT [dbo].[Themes] ([ThemeID], [DisplayName], [LTRName], [RTLName], [Enabled], [DisplayOrder]) VALUES (1, N'SolidCP v1', N'Default', N'Default', 1, 1)
 GO
 INSERT [dbo].[ThemeSettings] ([ThemeID], [SettingsName], [PropertyName], [PropertyValue]) VALUES (1, N'Style', N'Light', N'light-theme')
 GO
@@ -9006,7 +9006,7 @@ GO
 INSERT [dbo].[UserSettings] ([UserID], [SettingsName], [PropertyName], [PropertyValue]) VALUES (1, N'FuseCPPolicy', N'DemoMessage', N'When user account is in demo mode the majority of operations are
 disabled, especially those ones that modify or delete records.
 You are welcome to ask your questions or place comments about
-this demo on  <a href="http://forum.FuseCP.net"
+this demo on  <a href="http://forum.fusecp.com"
 target="_blank">FuseCP  Support Forum</a>')
 GO
 INSERT [dbo].[UserSettings] ([UserID], [SettingsName], [PropertyName], [PropertyValue]) VALUES (1, N'FuseCPPolicy', N'ForbiddenIP', N'')
@@ -9359,7 +9359,7 @@ INSERT [dbo].[UserSettings] ([UserID], [SettingsName], [PropertyName], [Property
 </head>
 <body>
 <div id="PageOutline">
-	<h1>This web site has just been created from <a href="https://www.FuseCP.com">FuseCP </a> and it is still under construction.</h1>
+	<h1>This web site has just been created from <a href="https://www.fusecp.com">FuseCP </a> and it is still under construction.</h1>
 	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>
 </div>
 </body>

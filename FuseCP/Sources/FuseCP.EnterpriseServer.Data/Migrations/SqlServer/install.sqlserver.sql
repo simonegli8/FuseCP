@@ -1,4 +1,4 @@
-IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+﻿IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
 BEGIN
     CREATE TABLE [__EFMigrationsHistory] (
         [MigrationId] nvarchar(150) NOT NULL,
@@ -2183,7 +2183,7 @@ BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ThemeID', N'DisplayName', N'DisplayOrder', N'Enabled', N'LTRName', N'RTLName') AND [object_id] = OBJECT_ID(N'[Themes]'))
         SET IDENTITY_INSERT [Themes] ON;
     EXEC(N'INSERT INTO [Themes] ([ThemeID], [DisplayName], [DisplayOrder], [Enabled], [LTRName], [RTLName])
-    VALUES (1, N''FuseCP v1'', 1, 1, N''Default'', N''Default'')');
+    VALUES (1, N''SolidCP v1'', 1, 1, N''Default'', N''Default'')');
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'ThemeID', N'DisplayName', N'DisplayOrder', N'Enabled', N'LTRName', N'RTLName') AND [object_id] = OBJECT_ID(N'[Themes]'))
         SET IDENTITY_INSERT [Themes] OFF;
 END;
@@ -3174,7 +3174,7 @@ BEGIN
     (N''GroupNamePolicy'', N''SharePointPolicy'', 1, N''True;-;1;20;;;''),
     (N''UserNamePolicy'', N''SharePointPolicy'', 1, N''True;-;1;20;;;''),
     (N''UserPasswordPolicy'', N''SharePointPolicy'', 1, N''True;5;20;0;1;0;True;;0;;;False;False;0;''),
-    (N''DemoMessage'', N''FuseCPPolicy'', 1, CONCAT(CAST(N''When user account is in demo mode the majority of operations are'' AS nvarchar(max)), nchar(13), nchar(10), N''disabled, especially those ones that modify or delete records.'', nchar(13), nchar(10), N''You are welcome to ask your questions or place comments about'', nchar(13), nchar(10), N''this demo on  <a href="http://forum.FuseCP.net"'', nchar(13), nchar(10), N''target="_blank">FuseCP  Support Forum</a>'')),
+    (N''DemoMessage'', N''FuseCPPolicy'', 1, CONCAT(CAST(N''When user account is in demo mode the majority of operations are'' AS nvarchar(max)), nchar(13), nchar(10), N''disabled, especially those ones that modify or delete records.'', nchar(13), nchar(10), N''You are welcome to ask your questions or place comments about'', nchar(13), nchar(10), N''this demo on  <a href="http://forum.fusecp.com"'', nchar(13), nchar(10), N''target="_blank">FuseCP  Support Forum</a>'')),
     (N''ForbiddenIP'', N''FuseCPPolicy'', 1, N''''),
     (N''PasswordPolicy'', N''FuseCPPolicy'', 1, N''True;6;20;0;1;0;True;;0;;;False;False;0;''),
     (N''From'', N''UserPasswordExpirationLetter'', 1, N''support@HostingCompany.com''),
@@ -3221,7 +3221,7 @@ BEGIN
     (N''EnableWritePermissions'', N''WebPolicy'', 1, N''False''),
     (N''FrontPageAccountPolicy'', N''WebPolicy'', 1, N''True;;1;20;;;''),
     (N''FrontPagePasswordPolicy'', N''WebPolicy'', 1, N''True;5;20;0;1;0;False;;0;0;0;False;False;0;''),
-    (N''ParkingPageContent'', N''WebPolicy'', 1, CONCAT(CAST(N''<html xmlns="http://www.w3.org/1999/xhtml">'' AS nvarchar(max)), nchar(13), nchar(10), N''<head>'', nchar(13), nchar(10), N''    <title>The web site is under construction</title>'', nchar(13), nchar(10), N''<style type="text/css">'', nchar(13), nchar(10), N''	H1 { font-size: 16pt; margin-bottom: 4px; }'', nchar(13), nchar(10), N''	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }'', nchar(13), nchar(10), N''</style>'', nchar(13), nchar(10), N''</head>'', nchar(13), nchar(10), N''<body>'', nchar(13), nchar(10), N''<div id="PageOutline">'', nchar(13), nchar(10), N''	<h1>This web site has just been created from <a href="https://www.FuseCP.com">FuseCP </a> and it is still under construction.</h1>'', nchar(13), nchar(10), N''	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>'', nchar(13), nchar(10), N''</div>'', nchar(13), nchar(10), N''</body>'', nchar(13), nchar(10), N''</html>'')),
+    (N''ParkingPageContent'', N''WebPolicy'', 1, CONCAT(CAST(N''<html xmlns="http://www.w3.org/1999/xhtml">'' AS nvarchar(max)), nchar(13), nchar(10), N''<head>'', nchar(13), nchar(10), N''    <title>The web site is under construction</title>'', nchar(13), nchar(10), N''<style type="text/css">'', nchar(13), nchar(10), N''	H1 { font-size: 16pt; margin-bottom: 4px; }'', nchar(13), nchar(10), N''	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }'', nchar(13), nchar(10), N''</style>'', nchar(13), nchar(10), N''</head>'', nchar(13), nchar(10), N''<body>'', nchar(13), nchar(10), N''<div id="PageOutline">'', nchar(13), nchar(10), N''	<h1>This web site has just been created from <a href="https://www.fusecp.com">FuseCP </a> and it is still under construction.</h1>'', nchar(13), nchar(10), N''	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>'', nchar(13), nchar(10), N''</div>'', nchar(13), nchar(10), N''</body>'', nchar(13), nchar(10), N''</html>'')),
     (N''ParkingPageName'', N''WebPolicy'', 1, N''default.aspx''),
     (N''PerlInstalled'', N''WebPolicy'', 1, N''False''),
     (N''PhpInstalled'', N''WebPolicy'', 1, N'''');
@@ -76561,6 +76561,15 @@ IF NOT EXISTS (
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
     VALUES (N'20251113211343_Run_Migrate_msSQL_Script', N'9.0.9');
+END;
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260106210201_RenameToFuseCP'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20260106210201_RenameToFuseCP', N'9.0.9');
 END;
 
 COMMIT;

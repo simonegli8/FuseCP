@@ -1,27 +1,11 @@
-// Copyright (C) 2025 FuseCP
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
+namespace FuseCP.EnterpriseServer.Data.Migrations.Sqlite
 {
     /// <inheritdoc />
     public partial class v200 : Migration
@@ -29,603 +13,488 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateTable(
                 name: "AdditionalGroups",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    GroupName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AdditionalGroup", x => x.ID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "AuditLog",
                 columns: table => new
                 {
-                    RecordID = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    Username = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ItemID = table.Column<int>(type: "int", nullable: true),
-                    SeverityID = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    FinishDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    SourceName = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TaskName = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ItemName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ExecutionLog = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PackageID = table.Column<int>(type: "int", nullable: true)
+                    RecordID = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 32, nullable: false),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: true),
+                    Username = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: true),
+                    SeverityID = table.Column<int>(type: "INTEGER", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FinishDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SourceName = table.Column<string>(type: "TEXT", unicode: false, maxLength: 50, nullable: false),
+                    TaskName = table.Column<string>(type: "TEXT", unicode: false, maxLength: 50, nullable: false),
+                    ItemName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ExecutionLog = table.Column<string>(type: "TEXT", nullable: true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Log", x => x.RecordID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "AuditLogSources",
                 columns: table => new
                 {
-                    SourceName = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    SourceName = table.Column<string>(type: "TEXT", unicode: false, maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AuditLogSources", x => x.SourceName);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "AuditLogTasks",
                 columns: table => new
                 {
-                    SourceName = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TaskName = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TaskDescription = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    SourceName = table.Column<string>(type: "TEXT", unicode: false, maxLength: 100, nullable: false),
+                    TaskName = table.Column<string>(type: "TEXT", unicode: false, maxLength: 100, nullable: false),
+                    TaskDescription = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LogActions", x => new { x.SourceName, x.TaskName });
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "BackgroundTasks",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    TaskID = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ScheduleID = table.Column<int>(type: "int", nullable: false),
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    EffectiveUserID = table.Column<int>(type: "int", nullable: false),
-                    TaskName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ItemID = table.Column<int>(type: "int", nullable: true),
-                    ItemName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    FinishDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IndicatorCurrent = table.Column<int>(type: "int", nullable: false),
-                    IndicatorMaximum = table.Column<int>(type: "int", nullable: false),
-                    MaximumExecutionTime = table.Column<int>(type: "int", nullable: false),
-                    Source = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Severity = table.Column<int>(type: "int", nullable: false),
-                    Completed = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    NotifyOnComplete = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Guid = table.Column<Guid>(type: "TEXT", nullable: false),
+                    TaskID = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    ScheduleID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    EffectiveUserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    TaskName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ItemName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FinishDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    IndicatorCurrent = table.Column<int>(type: "INTEGER", nullable: false),
+                    IndicatorMaximum = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaximumExecutionTime = table.Column<int>(type: "INTEGER", nullable: false),
+                    Source = table.Column<string>(type: "TEXT", nullable: true),
+                    Severity = table.Column<int>(type: "INTEGER", nullable: false),
+                    Completed = table.Column<bool>(type: "INTEGER", nullable: true),
+                    NotifyOnComplete = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Status = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BackgroundTask", x => x.ID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Clusters",
                 columns: table => new
                 {
-                    ClusterID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClusterName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ClusterID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ClusterName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clusters", x => x.ClusterID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeDeletedAccounts",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    OriginAT = table.Column<int>(type: "int", nullable: false),
-                    StoragePath = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FolderName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FileName = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    OriginAT = table.Column<int>(type: "INTEGER", nullable: false),
+                    StoragePath = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    FolderName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    FileName = table.Column<string>(type: "TEXT", maxLength: 128, nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExchangeDeletedAccount", x => x.ID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeDisclaimers",
                 columns: table => new
                 {
-                    ExchangeDisclaimerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    DisclaimerName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisclaimerText = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ExchangeDisclaimerId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    DisclaimerName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: false),
+                    DisclaimerText = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExchangeDisclaimers", x => x.ExchangeDisclaimerId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeMailboxPlanRetentionPolicyTags",
                 columns: table => new
                 {
-                    PlanTagID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TagID = table.Column<int>(type: "int", nullable: false),
-                    MailboxPlanId = table.Column<int>(type: "int", nullable: false)
+                    PlanTagID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TagID = table.Column<int>(type: "INTEGER", nullable: false),
+                    MailboxPlanId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExchangeMailboxPlanRetentionPolicyTag", x => x.PlanTagID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeRetentionPolicyTags",
                 columns: table => new
                 {
-                    TagID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    TagName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TagType = table.Column<int>(type: "int", nullable: false),
-                    AgeLimitForRetention = table.Column<int>(type: "int", nullable: false),
-                    RetentionAction = table.Column<int>(type: "int", nullable: false)
+                    TagID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    TagName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: true),
+                    TagType = table.Column<int>(type: "INTEGER", nullable: false),
+                    AgeLimitForRetention = table.Column<int>(type: "INTEGER", nullable: false),
+                    RetentionAction = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ExchangeRetentionPolicyTag", x => x.TagID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "OCSUsers",
                 columns: table => new
                 {
-                    OCSUserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    InstanceID = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    OCSUserID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    InstanceID = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OCSUsers", x => x.OCSUserID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageSettings",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    SettingsName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SettingsName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
                     PropertyValue = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PackageSettings", x => new { x.PackageID, x.SettingsName, x.PropertyName });
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSCertificates",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "TEXT", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Hash = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FileName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ValidFrom = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ServiceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Content = table.Column<string>(type: "TEXT", nullable: false),
+                    Hash = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    FileName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    ValidFrom = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExpiryDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RDSCertificates", x => x.ID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSCollections",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisplayName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RdsCollection", x => x.ID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSServerSettings",
                 columns: table => new
                 {
-                    RdsServerId = table.Column<int>(type: "int", nullable: false),
-                    SettingsName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyValue = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ApplyUsers = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ApplyAdministrators = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    RdsServerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SettingsName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyValue = table.Column<string>(type: "TEXT", nullable: true),
+                    ApplyUsers = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ApplyAdministrators = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RDSServerSettings", x => new { x.RdsServerId, x.SettingsName, x.PropertyName });
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ResourceGroups",
                 columns: table => new
                 {
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    GroupName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    GroupOrder = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    GroupController = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ShowGroup = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 100, nullable: false),
+                    GroupOrder = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
+                    GroupController = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    ShowGroup = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ResourceGroups", x => x.GroupID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ScheduleTasks",
                 columns: table => new
                 {
-                    TaskID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TaskType = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RoleID = table.Column<int>(type: "int", nullable: false)
+                    TaskID = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    TaskType = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
+                    RoleID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ScheduleTasks", x => x.TaskID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "SfBUserPlans",
                 columns: table => new
                 {
-                    SfBUserPlanId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    SfBUserPlanName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SfBUserPlanType = table.Column<int>(type: "int", nullable: true),
-                    IM = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Mobility = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    MobilityEnableOutsideVoice = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Federation = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Conferencing = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    EnterpriseVoice = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    VoicePolicy = table.Column<int>(type: "int", nullable: false),
-                    IsDefault = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RemoteUserAccess = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    PublicIMConnectivity = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    AllowOrganizeMeetingsWithExternalAnonymous = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    Telephony = table.Column<int>(type: "int", nullable: true),
-                    ServerURI = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ArchivePolicy = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TelephonyDialPlanPolicy = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TelephonyVoicePolicy = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    SfBUserPlanId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SfBUserPlanName = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
+                    SfBUserPlanType = table.Column<int>(type: "INTEGER", nullable: true),
+                    IM = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Mobility = table.Column<bool>(type: "INTEGER", nullable: false),
+                    MobilityEnableOutsideVoice = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Federation = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Conferencing = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EnterpriseVoice = table.Column<bool>(type: "INTEGER", nullable: false),
+                    VoicePolicy = table.Column<int>(type: "TEXT COLLATE NOCASE", nullable: false),
+                    IsDefault = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RemoteUserAccess = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    PublicIMConnectivity = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    AllowOrganizeMeetingsWithExternalAnonymous = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    Telephony = table.Column<int>(type: "INTEGER", nullable: true),
+                    ServerURI = table.Column<string>(type: "TEXT", maxLength: 300, nullable: true),
+                    ArchivePolicy = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true),
+                    TelephonyDialPlanPolicy = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true),
+                    TelephonyVoicePolicy = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SfBUserPlans", x => x.SfBUserPlanId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "SfBUsers",
                 columns: table => new
                 {
-                    SfBUserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    SfBUserPlanID = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    SipAddress = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    SfBUserID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SfBUserPlanID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SipAddress = table.Column<string>(type: "TEXT", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SfBUsers", x => x.SfBUserID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "SSLCertificates",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    SiteID = table.Column<int>(type: "int", nullable: false),
-                    FriendlyName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Hostname = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DistinguishedName = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CSR = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CSRLength = table.Column<int>(type: "int", nullable: true),
-                    Certificate = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Hash = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Installed = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    IsRenewal = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    ValidFrom = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    SerialNumber = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Pfx = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PreviousId = table.Column<int>(type: "int", nullable: true)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SiteID = table.Column<int>(type: "INTEGER", nullable: false),
+                    FriendlyName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Hostname = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    DistinguishedName = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    CSR = table.Column<string>(type: "TEXT", nullable: true),
+                    CSRLength = table.Column<int>(type: "INTEGER", nullable: true),
+                    Certificate = table.Column<string>(type: "TEXT", nullable: true),
+                    Hash = table.Column<string>(type: "TEXT", nullable: true),
+                    Installed = table.Column<bool>(type: "INTEGER", nullable: true),
+                    IsRenewal = table.Column<bool>(type: "INTEGER", nullable: true),
+                    ValidFrom = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExpiryDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    SerialNumber = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                    Pfx = table.Column<string>(type: "TEXT", nullable: true),
+                    PreviousId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SSLCertificates", x => x.ID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "StorageSpaceLevels",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StorageSpaceLevel", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "SupportServiceLevels",
                 columns: table => new
                 {
-                    LevelID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    LevelName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LevelDescription = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    LevelID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    LevelName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    LevelDescription = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SupportServiceLevel", x => x.LevelID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "SystemSettings",
                 columns: table => new
                 {
-                    SettingsName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SettingsName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
                     PropertyValue = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SystemSettings", x => new { x.SettingsName, x.PropertyName });
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "TempIds",
                 columns: table => new
                 {
-                    Key = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Scope = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Level = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    Key = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Scope = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Level = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TempIds", x => x.Key);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Themes",
                 columns: table => new
                 {
-                    ThemeID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DisplayName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LTRName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RTLName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Enabled = table.Column<int>(type: "int", nullable: false),
-                    DisplayOrder = table.Column<int>(type: "int", nullable: false)
+                    ThemeID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    LTRName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    RTLName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Enabled = table.Column<int>(type: "INTEGER", nullable: false),
+                    DisplayOrder = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Themes", x => x.ThemeID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ThemeSettings",
                 columns: table => new
                 {
-                    ThemeSettingID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ThemeID = table.Column<int>(type: "int", nullable: false),
-                    SettingsName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyValue = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ThemeSettingID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ThemeID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SettingsName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: false),
+                    PropertyValue = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ThemeSettings", x => x.ThemeSettingID);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    OwnerID = table.Column<int>(type: "int", nullable: true),
-                    RoleID = table.Column<int>(type: "int", nullable: false),
-                    StatusID = table.Column<int>(type: "int", nullable: false),
-                    IsDemo = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    IsPeer = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    Username = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FirstName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Created = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Changed = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Comments = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SecondaryEmail = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Address = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    City = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    State = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Country = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Zip = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PrimaryPhone = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SecondaryPhone = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Fax = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    InstantMessenger = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HtmlMail = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValue: true),
-                    CompanyName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    EcommerceEnabled = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    AdditionalParams = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LoginStatusId = table.Column<int>(type: "int", nullable: true),
-                    FailedLogins = table.Column<int>(type: "int", nullable: true),
-                    SubscriberNumber = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OneTimePasswordState = table.Column<int>(type: "int", nullable: true),
-                    MfaMode = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    PinSecret = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OwnerID = table.Column<int>(type: "INTEGER", nullable: true),
+                    RoleID = table.Column<int>(type: "INTEGER", nullable: false),
+                    StatusID = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsDemo = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    IsPeer = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    Username = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Changed = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Comments = table.Column<string>(type: "TEXT", nullable: true),
+                    SecondaryEmail = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Address = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    City = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    State = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Country = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    Zip = table.Column<string>(type: "TEXT", unicode: false, maxLength: 20, nullable: true),
+                    PrimaryPhone = table.Column<string>(type: "TEXT", unicode: false, maxLength: 30, nullable: true),
+                    SecondaryPhone = table.Column<string>(type: "TEXT", unicode: false, maxLength: 30, nullable: true),
+                    Fax = table.Column<string>(type: "TEXT", unicode: false, maxLength: 30, nullable: true),
+                    InstantMessenger = table.Column<string>(type: "TEXT", unicode: false, maxLength: 100, nullable: true),
+                    HtmlMail = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: true),
+                    CompanyName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    EcommerceEnabled = table.Column<bool>(type: "INTEGER", nullable: true),
+                    AdditionalParams = table.Column<string>(type: "TEXT", nullable: true),
+                    LoginStatusId = table.Column<int>(type: "INTEGER", nullable: true),
+                    FailedLogins = table.Column<int>(type: "INTEGER", nullable: true),
+                    SubscriberNumber = table.Column<string>(type: "TEXT", maxLength: 32, nullable: true),
+                    OneTimePasswordState = table.Column<int>(type: "INTEGER", nullable: true),
+                    MfaMode = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    PinSecret = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -635,40 +504,34 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.OwnerID,
                         principalTable: "Users",
                         principalColumn: "UserID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Versions",
                 columns: table => new
                 {
-                    DatabaseVersion = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    BuildDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    DatabaseVersion = table.Column<string>(type: "TEXT", unicode: false, maxLength: 50, nullable: false),
+                    BuildDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Versions", x => x.DatabaseVersion);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "BackgroundTaskLogs",
                 columns: table => new
                 {
-                    LogID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TaskID = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    ExceptionStackTrace = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    InnerTaskStart = table.Column<int>(type: "int", nullable: true),
-                    Severity = table.Column<int>(type: "int", nullable: true),
-                    Text = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TextIdent = table.Column<int>(type: "int", nullable: true),
+                    LogID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExceptionStackTrace = table.Column<string>(type: "TEXT", nullable: true),
+                    InnerTaskStart = table.Column<int>(type: "INTEGER", nullable: true),
+                    Severity = table.Column<int>(type: "INTEGER", nullable: true),
+                    Text = table.Column<string>(type: "TEXT", nullable: true),
+                    TextIdent = table.Column<int>(type: "INTEGER", nullable: true),
                     XmlParameters = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -678,22 +541,18 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.TaskID,
                         principalTable: "BackgroundTasks",
                         principalColumn: "ID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "BackgroundTaskParameters",
                 columns: table => new
                 {
-                    ParameterID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TaskID = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SerializerValue = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TypeName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ParameterID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: true),
+                    SerializerValue = table.Column<string>(type: "TEXT", nullable: true),
+                    TypeName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -703,16 +562,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.TaskID,
                         principalTable: "BackgroundTasks",
                         principalColumn: "ID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "BackgroundTaskStack",
                 columns: table => new
                 {
-                    TaskStackID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TaskID = table.Column<int>(type: "int", nullable: false)
+                    TaskStackID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -722,35 +580,30 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.TaskID,
                         principalTable: "BackgroundTasks",
                         principalColumn: "ID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSCollectionSettings",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RDSCollectionId = table.Column<int>(type: "int", nullable: false),
-                    DisconnectedSessionLimitMin = table.Column<int>(type: "int", nullable: true),
-                    ActiveSessionLimitMin = table.Column<int>(type: "int", nullable: true),
-                    IdleSessionLimitMin = table.Column<int>(type: "int", nullable: true),
-                    BrokenConnectionAction = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AutomaticReconnectionEnabled = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    TemporaryFoldersDeletedOnExit = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    TemporaryFoldersPerSession = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    ClientDeviceRedirectionOptions = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClientPrinterRedirected = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    ClientPrinterAsDefault = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    RDEasyPrintDriverEnabled = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    MaxRedirectedMonitors = table.Column<int>(type: "int", nullable: true),
-                    SecurityLayer = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    EncryptionLevel = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AuthenticateUsingNLA = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RDSCollectionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DisconnectedSessionLimitMin = table.Column<int>(type: "INTEGER", nullable: true),
+                    ActiveSessionLimitMin = table.Column<int>(type: "INTEGER", nullable: true),
+                    IdleSessionLimitMin = table.Column<int>(type: "INTEGER", nullable: true),
+                    BrokenConnectionAction = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    AutomaticReconnectionEnabled = table.Column<bool>(type: "INTEGER", nullable: true),
+                    TemporaryFoldersDeletedOnExit = table.Column<bool>(type: "INTEGER", nullable: true),
+                    TemporaryFoldersPerSession = table.Column<bool>(type: "INTEGER", nullable: true),
+                    ClientDeviceRedirectionOptions = table.Column<string>(type: "TEXT", maxLength: 250, nullable: true),
+                    ClientPrinterRedirected = table.Column<bool>(type: "INTEGER", nullable: true),
+                    ClientPrinterAsDefault = table.Column<bool>(type: "INTEGER", nullable: true),
+                    RDEasyPrintDriverEnabled = table.Column<bool>(type: "INTEGER", nullable: true),
+                    MaxRedirectedMonitors = table.Column<int>(type: "INTEGER", nullable: true),
+                    SecurityLayer = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    EncryptionLevel = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
+                    AuthenticateUsingNLA = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -761,21 +614,18 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "RDSCollections",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSMessages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RDSCollectionId = table.Column<int>(type: "int", nullable: false),
-                    MessageText = table.Column<string>(type: "TEXT", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserName = table.Column<string>(type: "char(250)", fixedLength: true, maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RDSCollectionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MessageText = table.Column<string>(type: "TEXT", nullable: false),
+                    UserName = table.Column<string>(type: "TEXT", fixedLength: true, maxLength: 250, nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -786,25 +636,21 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "RDSCollections",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSServers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FqdName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RDSCollectionId = table.Column<int>(type: "int", nullable: true),
-                    ConnectionEnabled = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
-                    Controller = table.Column<int>(type: "int", nullable: true)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    FqdName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    RDSCollectionId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ConnectionEnabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true),
+                    Controller = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -814,24 +660,19 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.RDSCollectionId,
                         principalTable: "RDSCollections",
                         principalColumn: "ID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Providers",
                 columns: table => new
                 {
-                    ProviderID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    ProviderName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisplayName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProviderType = table.Column<string>(type: "varchar(400)", maxLength: 400, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    EditorControl = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisableAutoDiscovery = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    ProviderID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProviderName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    ProviderType = table.Column<string>(type: "TEXT", maxLength: 400, nullable: true),
+                    EditorControl = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    DisableAutoDiscovery = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -841,24 +682,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.GroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ResourceGroupDnsRecords",
                 columns: table => new
                 {
-                    RecordID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RecordOrder = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    RecordType = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RecordName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RecordData = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MXPriority = table.Column<int>(type: "int", nullable: true)
+                    RecordID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RecordOrder = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    RecordType = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 50, nullable: false),
+                    RecordName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    RecordData = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    MXPriority = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -869,43 +706,31 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Servers",
                 columns: table => new
                 {
-                    ServerID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServerName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ServerUrl = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true, defaultValue: "")
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Comments = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    VirtualServer = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    InstantDomainAlias = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PrimaryGroupID = table.Column<int>(type: "int", nullable: true),
-                    ADRootDomain = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ADUsername = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ADPassword = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ADAuthenticationType = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ADEnabled = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValue: false),
-                    ADParentDomain = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ADParentDomainController = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    OSPlatform = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    IsCore = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    PasswordIsSHA256 = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ServerName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    ServerUrl = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true, defaultValue: ""),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    Comments = table.Column<string>(type: "TEXT", nullable: true),
+                    VirtualServer = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    InstantDomainAlias = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    PrimaryGroupID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ADRootDomain = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    ADUsername = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ADPassword = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ADAuthenticationType = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 50, nullable: true),
+                    ADEnabled = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: false),
+                    ADParentDomain = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    ADParentDomainController = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    OSPlatform = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    IsCore = table.Column<bool>(type: "INTEGER", nullable: true),
+                    PasswordIsSHA256 = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -915,27 +740,24 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.PrimaryGroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ServiceItemTypes",
                 columns: table => new
                 {
-                    ItemTypeID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: true),
-                    DisplayName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TypeName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TypeOrder = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    CalculateDiskspace = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    CalculateBandwidth = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    Suspendable = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    Disposable = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    Searchable = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    Importable = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
-                    Backupable = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true)
+                    ItemTypeID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    TypeName = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    TypeOrder = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
+                    CalculateDiskspace = table.Column<bool>(type: "INTEGER", nullable: true),
+                    CalculateBandwidth = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Suspendable = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Disposable = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Searchable = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Importable = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true),
+                    Backupable = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -945,22 +767,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.GroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ScheduleTaskParameters",
                 columns: table => new
                 {
-                    TaskID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ParameterID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DataTypeID = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DefaultValue = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ParameterOrder = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
+                    TaskID = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    ParameterID = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 100, nullable: false),
+                    DataTypeID = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    DefaultValue = table.Column<string>(type: "TEXT", nullable: true),
+                    ParameterOrder = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
@@ -970,21 +787,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.TaskID,
                         principalTable: "ScheduleTasks",
                         principalColumn: "TaskID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ScheduleTaskViewConfiguration",
                 columns: table => new
                 {
-                    TaskID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ConfigurationID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Environment = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    TaskID = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    ConfigurationID = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 100, nullable: false),
+                    Environment = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -994,17 +806,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.TaskID,
                         principalTable: "ScheduleTasks",
                         principalColumn: "TaskID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "StorageSpaceLevelResourceGroups",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    LevelId = table.Column<int>(type: "int", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    LevelId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1021,23 +832,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "StorageSpaceLevels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
-                    CommentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemTypeID = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CommentText = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SeverityID = table.Column<int>(type: "int", nullable: true)
+                    CommentID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemTypeID = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 50, nullable: false),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CommentText = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true),
+                    SeverityID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1048,20 +856,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "UserSettings",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    SettingsName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    SettingsName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
                     PropertyValue = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -1072,18 +876,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ServiceDefaultProperties",
                 columns: table => new
                 {
-                    ProviderID = table.Column<int>(type: "int", nullable: false),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyValue = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ProviderID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyValue = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1093,28 +894,25 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ProviderID,
                         principalTable: "Providers",
                         principalColumn: "ProviderID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "HostingPlans",
                 columns: table => new
                 {
-                    PlanID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserID = table.Column<int>(type: "int", nullable: true),
-                    PackageID = table.Column<int>(type: "int", nullable: true),
-                    ServerID = table.Column<int>(type: "int", nullable: true),
-                    PlanName = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PlanDescription = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Available = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    SetupPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    RecurringPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    RecurrenceUnit = table.Column<int>(type: "int", nullable: true),
-                    RecurrenceLength = table.Column<int>(type: "int", nullable: true),
-                    IsAddon = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    PlanID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: true),
+                    PlanName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 200, nullable: false),
+                    PlanDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    Available = table.Column<bool>(type: "INTEGER", nullable: false),
+                    SetupPrice = table.Column<decimal>(type: "TEXT", nullable: true),
+                    RecurringPrice = table.Column<decimal>(type: "TEXT", nullable: true),
+                    RecurrenceUnit = table.Column<int>(type: "INTEGER", nullable: true),
+                    RecurrenceLength = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsAddon = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1129,28 +927,22 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "IPAddresses",
                 columns: table => new
                 {
-                    AddressID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ExternalIP = table.Column<string>(type: "varchar(24)", unicode: false, maxLength: 24, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    InternalIP = table.Column<string>(type: "varchar(24)", unicode: false, maxLength: 24, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ServerID = table.Column<int>(type: "int", nullable: true),
-                    Comments = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SubnetMask = table.Column<string>(type: "varchar(15)", unicode: false, maxLength: 15, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DefaultGateway = table.Column<string>(type: "varchar(15)", unicode: false, maxLength: 15, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PoolID = table.Column<int>(type: "int", nullable: true),
-                    VLAN = table.Column<int>(type: "int", nullable: true)
+                    AddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ExternalIP = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 24, nullable: false),
+                    InternalIP = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 24, nullable: true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: true),
+                    Comments = table.Column<string>(type: "TEXT", nullable: true),
+                    SubnetMask = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 15, nullable: true),
+                    DefaultGateway = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 15, nullable: true),
+                    PoolID = table.Column<int>(type: "INTEGER", nullable: true),
+                    VLAN = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1161,19 +953,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Servers",
                         principalColumn: "ServerID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PrivateNetworkVLANs",
                 columns: table => new
                 {
-                    VlanID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Vlan = table.Column<int>(type: "int", nullable: false),
-                    ServerID = table.Column<int>(type: "int", nullable: true),
+                    VlanID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Vlan = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: true),
                     Comments = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -1184,23 +974,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Servers",
                         principalColumn: "ServerID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Services",
                 columns: table => new
                 {
-                    ServiceID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServerID = table.Column<int>(type: "int", nullable: false),
-                    ProviderID = table.Column<int>(type: "int", nullable: false),
-                    ServiceName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Comments = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ServiceQuotaValue = table.Column<int>(type: "int", nullable: true),
-                    ClusterID = table.Column<int>(type: "int", nullable: true)
+                    ServiceID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProviderID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServiceName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Comments = table.Column<string>(type: "TEXT", nullable: true),
+                    ServiceQuotaValue = table.Column<int>(type: "INTEGER", nullable: true),
+                    ClusterID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1220,19 +1007,18 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ServerID,
                         principalTable: "Servers",
                         principalColumn: "ServerID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "VirtualGroups",
                 columns: table => new
                 {
-                    VirtualGroupID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServerID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    DistributionType = table.Column<int>(type: "int", nullable: true),
-                    BindDistributionToPrimary = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    VirtualGroupID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    DistributionType = table.Column<int>(type: "INTEGER", nullable: true),
+                    BindDistributionToPrimary = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1248,25 +1034,22 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Servers",
                         principalColumn: "ServerID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Quotas",
                 columns: table => new
                 {
-                    QuotaID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    QuotaOrder = table.Column<double>(type: "double", nullable: false, defaultValue: 1.0),
-                    QuotaName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    QuotaDescription = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    QuotaTypeID = table.Column<int>(type: "int", nullable: false, defaultValue: 2),
-                    ServiceQuota = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValue: false),
-                    ItemTypeID = table.Column<int>(type: "int", nullable: true),
-                    HideQuota = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    PerOrganization = table.Column<int>(type: "int", nullable: true)
+                    QuotaID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    QuotaOrder = table.Column<double>(type: "REAL", nullable: false, defaultValue: 1.0),
+                    QuotaName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    QuotaDescription = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    QuotaTypeID = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 2),
+                    ServiceQuota = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: false),
+                    ItemTypeID = table.Column<int>(type: "INTEGER", nullable: true),
+                    HideQuota = table.Column<bool>(type: "INTEGER", nullable: true),
+                    PerOrganization = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1282,17 +1065,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ItemTypeID,
                         principalTable: "ServiceItemTypes",
                         principalColumn: "ItemTypeID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "HostingPlanResources",
                 columns: table => new
                 {
-                    PlanID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    CalculateDiskSpace = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    CalculateBandwidth = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    PlanID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CalculateDiskSpace = table.Column<bool>(type: "INTEGER", nullable: true),
+                    CalculateBandwidth = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1308,29 +1090,26 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.GroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Packages",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ParentPackageID = table.Column<int>(type: "int", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    PackageName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PackageComments = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ServerID = table.Column<int>(type: "int", nullable: true),
-                    StatusID = table.Column<int>(type: "int", nullable: false),
-                    PlanID = table.Column<int>(type: "int", nullable: true),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    OverrideQuotas = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    BandwidthUpdated = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DefaultTopPackage = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    StatusIDchangeDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ParentPackageID = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PackageName = table.Column<string>(type: "TEXT", maxLength: 300, nullable: true),
+                    PackageComments = table.Column<string>(type: "TEXT", nullable: true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: true),
+                    StatusID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PlanID = table.Column<int>(type: "INTEGER", nullable: true),
+                    PurchaseDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    OverrideQuotas = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    BandwidthUpdated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DefaultTopPackage = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    StatusIDchangeDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1356,18 +1135,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ServiceProperties",
                 columns: table => new
                 {
-                    ServiceID = table.Column<int>(type: "int", nullable: false),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyValue = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ServiceID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyValue = table.Column<string>(type: "TEXT COLLATE NOCASE", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1378,28 +1154,24 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Services",
                         principalColumn: "ServiceID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "StorageSpaces",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(300)", unicode: false, maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    ServerId = table.Column<int>(type: "int", nullable: false),
-                    LevelId = table.Column<int>(type: "int", nullable: false),
-                    Path = table.Column<string>(type: "longtext", unicode: false, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsShared = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    UncPath = table.Column<string>(type: "longtext", unicode: false, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FsrmQuotaType = table.Column<int>(type: "int", nullable: false),
-                    FsrmQuotaSizeBytes = table.Column<long>(type: "bigint", nullable: false),
-                    IsDisabled = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", unicode: false, maxLength: 300, nullable: false),
+                    ServiceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LevelId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Path = table.Column<string>(type: "TEXT", unicode: false, nullable: false),
+                    IsShared = table.Column<bool>(type: "INTEGER", nullable: false),
+                    UncPath = table.Column<string>(type: "TEXT", unicode: false, nullable: true),
+                    FsrmQuotaType = table.Column<int>(type: "INTEGER", nullable: false),
+                    FsrmQuotaSizeBytes = table.Column<long>(type: "INTEGER", nullable: false),
+                    IsDisabled = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -1416,17 +1188,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Services",
                         principalColumn: "ServiceID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "VirtualServices",
                 columns: table => new
                 {
-                    VirtualServiceID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ServerID = table.Column<int>(type: "int", nullable: false),
-                    ServiceID = table.Column<int>(type: "int", nullable: false)
+                    VirtualServiceID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServiceID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1442,16 +1213,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ServiceID,
                         principalTable: "Services",
                         principalColumn: "ServiceID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "HostingPlanQuotas",
                 columns: table => new
                 {
-                    PlanID = table.Column<int>(type: "int", nullable: false),
-                    QuotaID = table.Column<int>(type: "int", nullable: false),
-                    QuotaValue = table.Column<int>(type: "int", nullable: false)
+                    PlanID = table.Column<int>(type: "INTEGER", nullable: false),
+                    QuotaID = table.Column<int>(type: "INTEGER", nullable: false),
+                    QuotaValue = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1467,29 +1237,25 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.QuotaID,
                         principalTable: "Quotas",
                         principalColumn: "QuotaID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "GlobalDnsRecords",
                 columns: table => new
                 {
-                    RecordID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RecordType = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RecordName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RecordData = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MXPriority = table.Column<int>(type: "int", nullable: false),
-                    ServiceID = table.Column<int>(type: "int", nullable: true),
-                    ServerID = table.Column<int>(type: "int", nullable: true),
-                    PackageID = table.Column<int>(type: "int", nullable: true),
-                    IPAddressID = table.Column<int>(type: "int", nullable: true),
-                    SrvPriority = table.Column<int>(type: "int", nullable: true),
-                    SrvWeight = table.Column<int>(type: "int", nullable: true),
-                    SrvPort = table.Column<int>(type: "int", nullable: true)
+                    RecordID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RecordType = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 10, nullable: false),
+                    RecordName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    RecordData = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
+                    MXPriority = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServiceID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ServerID = table.Column<int>(type: "INTEGER", nullable: true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: true),
+                    IPAddressID = table.Column<int>(type: "INTEGER", nullable: true),
+                    SrvPriority = table.Column<int>(type: "INTEGER", nullable: true),
+                    SrvWeight = table.Column<int>(type: "INTEGER", nullable: true),
+                    SrvPort = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1516,22 +1282,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Services",
                         principalColumn: "ServiceID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageAddons",
                 columns: table => new
                 {
-                    PackageAddonID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PackageID = table.Column<int>(type: "int", nullable: true),
-                    PlanID = table.Column<int>(type: "int", nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: true),
-                    PurchaseDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Comments = table.Column<string>(type: "TEXT", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StatusID = table.Column<int>(type: "int", nullable: true)
+                    PackageAddonID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: true),
+                    PlanID = table.Column<int>(type: "INTEGER", nullable: true),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: true),
+                    PurchaseDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Comments = table.Column<string>(type: "TEXT", nullable: true),
+                    StatusID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1547,16 +1311,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Packages",
                         principalColumn: "PackageID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageQuotas",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    QuotaID = table.Column<int>(type: "int", nullable: false),
-                    QuotaValue = table.Column<int>(type: "int", nullable: false)
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    QuotaID = table.Column<int>(type: "INTEGER", nullable: false),
+                    QuotaValue = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1571,17 +1334,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.QuotaID,
                         principalTable: "Quotas",
                         principalColumn: "QuotaID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageResources",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    CalculateDiskspace = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CalculateBandwidth = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CalculateDiskspace = table.Column<bool>(type: "INTEGER", nullable: false),
+                    CalculateBandwidth = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1596,18 +1358,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.GroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackagesBandwidth",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    LogDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    BytesSent = table.Column<long>(type: "bigint", nullable: false),
-                    BytesReceived = table.Column<long>(type: "bigint", nullable: false)
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    LogDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    BytesSent = table.Column<long>(type: "INTEGER", nullable: false),
+                    BytesReceived = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1622,16 +1383,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.GroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackagesDiskspace",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    GroupID = table.Column<int>(type: "int", nullable: false),
-                    DiskSpace = table.Column<long>(type: "bigint", nullable: false)
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroupID = table.Column<int>(type: "INTEGER", nullable: false),
+                    DiskSpace = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1646,15 +1406,14 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.GroupID,
                         principalTable: "ResourceGroups",
                         principalColumn: "GroupID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageServices",
                 columns: table => new
                 {
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    ServiceID = table.Column<int>(type: "int", nullable: false)
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ServiceID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1669,15 +1428,14 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ServiceID,
                         principalTable: "Services",
                         principalColumn: "ServiceID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackagesTreeCache",
                 columns: table => new
                 {
-                    ParentPackageID = table.Column<int>(type: "int", nullable: false),
-                    PackageID = table.Column<int>(type: "int", nullable: false)
+                    ParentPackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1692,18 +1450,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.PackageID,
                         principalTable: "Packages",
                         principalColumn: "PackageID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageVLANs",
                 columns: table => new
                 {
-                    PackageVlanID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    VlanID = table.Column<int>(type: "int", nullable: false),
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    IsDmz = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
+                    PackageVlanID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    VlanID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsDmz = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -1720,34 +1477,29 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "PrivateNetworkVLANs",
                         principalColumn: "VlanID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Schedule",
                 columns: table => new
                 {
-                    ScheduleID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TaskID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PackageID = table.Column<int>(type: "int", nullable: true),
-                    ScheduleName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ScheduleTypeID = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Interval = table.Column<int>(type: "int", nullable: true),
-                    FromTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    ToTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastRun = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    NextRun = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    PriorityID = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HistoriesNumber = table.Column<int>(type: "int", nullable: true),
-                    MaxExecutionTime = table.Column<int>(type: "int", nullable: true),
-                    WeekMonthDay = table.Column<int>(type: "int", nullable: true)
+                    ScheduleID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    TaskID = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ScheduleName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ScheduleTypeID = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: true),
+                    Interval = table.Column<int>(type: "INTEGER", nullable: true),
+                    FromTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ToTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastRun = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    NextRun = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PriorityID = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
+                    HistoriesNumber = table.Column<int>(type: "INTEGER", nullable: true),
+                    MaxExecutionTime = table.Column<int>(type: "INTEGER", nullable: true),
+                    WeekMonthDay = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1763,21 +1515,19 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.TaskID,
                         principalTable: "ScheduleTasks",
                         principalColumn: "TaskID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ServiceItems",
                 columns: table => new
                 {
-                    ItemID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PackageID = table.Column<int>(type: "int", nullable: true),
-                    ItemTypeID = table.Column<int>(type: "int", nullable: true),
-                    ServiceID = table.Column<int>(type: "int", nullable: true),
-                    ItemName = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ItemTypeID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ServiceID = table.Column<int>(type: "INTEGER", nullable: true),
+                    ItemName = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1797,25 +1547,21 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ServiceID,
                         principalTable: "Services",
                         principalColumn: "ServiceID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "StorageSpaceFolders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(300)", unicode: false, maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StorageSpaceId = table.Column<int>(type: "int", nullable: false),
-                    Path = table.Column<string>(type: "longtext", unicode: false, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UncPath = table.Column<string>(type: "longtext", unicode: false, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsShared = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    FsrmQuotaType = table.Column<int>(type: "int", nullable: false),
-                    FsrmQuotaSizeBytes = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", unicode: false, maxLength: 300, nullable: false),
+                    StorageSpaceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Path = table.Column<string>(type: "TEXT", unicode: false, nullable: false),
+                    UncPath = table.Column<string>(type: "TEXT", unicode: false, nullable: true),
+                    IsShared = table.Column<bool>(type: "INTEGER", nullable: false),
+                    FsrmQuotaType = table.Column<int>(type: "INTEGER", nullable: false),
+                    FsrmQuotaSizeBytes = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1826,18 +1572,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "StorageSpaces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ScheduleParameters",
                 columns: table => new
                 {
-                    ScheduleID = table.Column<int>(type: "int", nullable: false),
-                    ParameterID = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ParameterValue = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ScheduleID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ParameterID = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 100, nullable: false),
+                    ParameterValue = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1848,19 +1591,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Schedule",
                         principalColumn: "ScheduleID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "DmzIPAddresses",
                 columns: table => new
                 {
-                    DmzAddressID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    IPAddress = table.Column<string>(type: "varchar(15)", unicode: false, maxLength: 15, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsPrimary = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    DmzAddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    IPAddress = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 15, nullable: false),
+                    IsPrimary = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1871,31 +1612,28 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "Domains",
                 columns: table => new
                 {
-                    DomainID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    ZoneItemID = table.Column<int>(type: "int", nullable: true),
-                    DomainName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HostingAllowed = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    WebSiteID = table.Column<int>(type: "int", nullable: true),
-                    MailDomainID = table.Column<int>(type: "int", nullable: true),
-                    IsSubDomain = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    IsPreviewDomain = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    IsDomainPointer = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    DomainItemId = table.Column<int>(type: "int", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastUpdateDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    RegistrarName = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    DomainID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ZoneItemID = table.Column<int>(type: "INTEGER", nullable: true),
+                    DomainName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 100, nullable: false),
+                    HostingAllowed = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    WebSiteID = table.Column<int>(type: "INTEGER", nullable: true),
+                    MailDomainID = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsSubDomain = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    IsPreviewDomain = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    IsDomainPointer = table.Column<bool>(type: "INTEGER", nullable: false),
+                    DomainItemId = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    RegistrarName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1921,19 +1659,18 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ZoneItemID,
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeOrganizationDomains",
                 columns: table => new
                 {
-                    OrganizationDomainID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    DomainID = table.Column<int>(type: "int", nullable: true),
-                    IsHost = table.Column<bool>(type: "tinyint(1)", nullable: true, defaultValue: false),
-                    DomainTypeID = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
+                    OrganizationDomainID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    DomainID = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsHost = table.Column<bool>(type: "INTEGER", nullable: true, defaultValue: false),
+                    DomainTypeID = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0)
                 },
                 constraints: table =>
                 {
@@ -1944,19 +1681,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeOrganizations",
                 columns: table => new
                 {
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    OrganizationID = table.Column<string>(type: "varchar(128)", maxLength: 128, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ExchangeMailboxPlanID = table.Column<int>(type: "int", nullable: true),
-                    LyncUserPlanID = table.Column<int>(type: "int", nullable: true),
-                    SfBUserPlanID = table.Column<int>(type: "int", nullable: true)
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrganizationID = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 128, nullable: false),
+                    ExchangeMailboxPlanID = table.Column<int>(type: "INTEGER", nullable: true),
+                    LyncUserPlanID = table.Column<int>(type: "INTEGER", nullable: true),
+                    SfBUserPlanID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1967,20 +1702,19 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PackageIPAddresses",
                 columns: table => new
                 {
-                    PackageAddressID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PackageID = table.Column<int>(type: "int", nullable: false),
-                    AddressID = table.Column<int>(type: "int", nullable: false),
-                    ItemID = table.Column<int>(type: "int", nullable: true),
-                    IsPrimary = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    OrgID = table.Column<int>(type: "int", nullable: true)
+                    PackageAddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PackageID = table.Column<int>(type: "INTEGER", nullable: false),
+                    AddressID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsPrimary = table.Column<bool>(type: "INTEGER", nullable: true),
+                    OrgID = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2001,19 +1735,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.ItemID,
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "PrivateIPAddresses",
                 columns: table => new
                 {
-                    PrivateAddressID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    IPAddress = table.Column<string>(type: "varchar(15)", unicode: false, maxLength: 15, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsPrimary = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    PrivateAddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    IPAddress = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 15, nullable: false),
+                    IsPrimary = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2024,18 +1756,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ServiceItemProperties",
                 columns: table => new
                 {
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    PropertyName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PropertyValue = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    PropertyName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 50, nullable: false),
+                    PropertyValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2046,26 +1775,21 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "EnterpriseFolders",
                 columns: table => new
                 {
-                    EnterpriseFolderID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    FolderName = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FolderQuota = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    LocationDrive = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    HomeFolder = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Domain = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StorageSpaceFolderId = table.Column<int>(type: "int", nullable: true)
+                    EnterpriseFolderID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    FolderName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    FolderQuota = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    LocationDrive = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    HomeFolder = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Domain = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 255, nullable: true),
+                    StorageSpaceFolderId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2076,22 +1800,19 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "StorageSpaceFolders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "DomainDnsRecords",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DomainId = table.Column<int>(type: "int", nullable: false),
-                    RecordType = table.Column<int>(type: "int", nullable: false),
-                    DnsServer = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Value = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DomainId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RecordType = table.Column<int>(type: "INTEGER", nullable: false),
+                    DnsServer = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Value = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2102,48 +1823,44 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "Domains",
                         principalColumn: "DomainID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeMailboxPlans",
                 columns: table => new
                 {
-                    MailboxPlanId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    MailboxPlan = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MailboxPlanType = table.Column<int>(type: "int", nullable: true),
-                    EnableActiveSync = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    EnableIMAP = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    EnableMAPI = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    EnableOWA = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    EnablePOP = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IsDefault = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IssueWarningPct = table.Column<int>(type: "int", nullable: false),
-                    KeepDeletedItemsDays = table.Column<int>(type: "int", nullable: false),
-                    MailboxSizeMB = table.Column<int>(type: "int", nullable: false),
-                    MaxReceiveMessageSizeKB = table.Column<int>(type: "int", nullable: false),
-                    MaxRecipients = table.Column<int>(type: "int", nullable: false),
-                    MaxSendMessageSizeKB = table.Column<int>(type: "int", nullable: false),
-                    ProhibitSendPct = table.Column<int>(type: "int", nullable: false),
-                    ProhibitSendReceivePct = table.Column<int>(type: "int", nullable: false),
-                    HideFromAddressBook = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    AllowLitigationHold = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    RecoverableItemsWarningPct = table.Column<int>(type: "int", nullable: true),
-                    RecoverableItemsSpace = table.Column<int>(type: "int", nullable: true),
-                    LitigationHoldUrl = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LitigationHoldMsg = table.Column<string>(type: "varchar(512)", maxLength: 512, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Archiving = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    EnableArchiving = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    ArchiveSizeMB = table.Column<int>(type: "int", nullable: true),
-                    ArchiveWarningPct = table.Column<int>(type: "int", nullable: true),
-                    EnableAutoReply = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    IsForJournaling = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    EnableForceArchiveDeletion = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                    MailboxPlanId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    MailboxPlan = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: false),
+                    MailboxPlanType = table.Column<int>(type: "INTEGER", nullable: true),
+                    EnableActiveSync = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EnableIMAP = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EnableMAPI = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EnableOWA = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EnablePOP = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsDefault = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IssueWarningPct = table.Column<int>(type: "INTEGER", nullable: false),
+                    KeepDeletedItemsDays = table.Column<int>(type: "INTEGER", nullable: false),
+                    MailboxSizeMB = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaxReceiveMessageSizeKB = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaxRecipients = table.Column<int>(type: "INTEGER", nullable: false),
+                    MaxSendMessageSizeKB = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProhibitSendPct = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProhibitSendReceivePct = table.Column<int>(type: "INTEGER", nullable: false),
+                    HideFromAddressBook = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowLitigationHold = table.Column<bool>(type: "INTEGER", nullable: true),
+                    RecoverableItemsWarningPct = table.Column<int>(type: "INTEGER", nullable: true),
+                    RecoverableItemsSpace = table.Column<int>(type: "INTEGER", nullable: true),
+                    LitigationHoldUrl = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    LitigationHoldMsg = table.Column<string>(type: "TEXT", maxLength: 512, nullable: true),
+                    Archiving = table.Column<bool>(type: "INTEGER", nullable: true),
+                    EnableArchiving = table.Column<bool>(type: "INTEGER", nullable: true),
+                    ArchiveSizeMB = table.Column<int>(type: "INTEGER", nullable: true),
+                    ArchiveWarningPct = table.Column<int>(type: "INTEGER", nullable: true),
+                    EnableAutoReply = table.Column<bool>(type: "INTEGER", nullable: true),
+                    IsForJournaling = table.Column<bool>(type: "INTEGER", nullable: true),
+                    EnableForceArchiveDeletion = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2154,18 +1871,15 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeOrganizations",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeOrganizationSettings",
                 columns: table => new
                 {
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    SettingsName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Xml = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ItemId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SettingsName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 100, nullable: false),
+                    Xml = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2176,19 +1890,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeOrganizations",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeOrganizationSsFolders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StorageSpaceFolderId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Type = table.Column<string>(type: "TEXT COLLATE NOCASE", unicode: false, maxLength: 100, nullable: false),
+                    StorageSpaceFolderId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2205,39 +1917,33 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "StorageSpaceFolders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "LyncUserPlans",
                 columns: table => new
                 {
-                    LyncUserPlanId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    LyncUserPlanName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LyncUserPlanType = table.Column<int>(type: "int", nullable: true),
-                    IM = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Mobility = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    MobilityEnableOutsideVoice = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Federation = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Conferencing = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    EnterpriseVoice = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    VoicePolicy = table.Column<int>(type: "int", nullable: false),
-                    IsDefault = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RemoteUserAccess = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    PublicIMConnectivity = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    AllowOrganizeMeetingsWithExternalAnonymous = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
-                    Telephony = table.Column<int>(type: "int", nullable: true),
-                    ServerURI = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ArchivePolicy = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TelephonyDialPlanPolicy = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TelephonyVoicePolicy = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    LyncUserPlanId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    LyncUserPlanName = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: false),
+                    LyncUserPlanType = table.Column<int>(type: "INTEGER", nullable: true),
+                    IM = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Mobility = table.Column<bool>(type: "INTEGER", nullable: false),
+                    MobilityEnableOutsideVoice = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Federation = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Conferencing = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EnterpriseVoice = table.Column<bool>(type: "INTEGER", nullable: false),
+                    VoicePolicy = table.Column<int>(type: "TEXT COLLATE NOCASE", nullable: false),
+                    IsDefault = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RemoteUserAccess = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    PublicIMConnectivity = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    AllowOrganizeMeetingsWithExternalAnonymous = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false),
+                    Telephony = table.Column<int>(type: "INTEGER", nullable: true),
+                    ServerURI = table.Column<string>(type: "TEXT", maxLength: 300, nullable: true),
+                    ArchivePolicy = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true),
+                    TelephonyDialPlanPolicy = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true),
+                    TelephonyVoicePolicy = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2248,39 +1954,31 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeOrganizations",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeAccounts",
                 columns: table => new
                 {
-                    AccountID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    AccountType = table.Column<int>(type: "int", nullable: false),
-                    AccountName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DisplayName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PrimaryEmailAddress = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    MailEnabledPublicFolder = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    MailboxManagerActions = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    SamAccountName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    MailboxPlanId = table.Column<int>(type: "int", nullable: true),
-                    SubscriberNumber = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserPrincipalName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ExchangeDisclaimerId = table.Column<int>(type: "int", nullable: true),
-                    ArchivingMailboxPlanId = table.Column<int>(type: "int", nullable: true),
-                    EnableArchiving = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    LevelID = table.Column<int>(type: "int", nullable: true),
-                    IsVIP = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountType = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountName = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false),
+                    PrimaryEmailAddress = table.Column<string>(type: "TEXT", maxLength: 300, nullable: true),
+                    MailEnabledPublicFolder = table.Column<bool>(type: "INTEGER", nullable: true),
+                    MailboxManagerActions = table.Column<string>(type: "TEXT", unicode: false, maxLength: 200, nullable: true),
+                    SamAccountName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    MailboxPlanId = table.Column<int>(type: "INTEGER", nullable: true),
+                    SubscriberNumber = table.Column<string>(type: "TEXT", maxLength: 32, nullable: true),
+                    UserPrincipalName = table.Column<string>(type: "TEXT", maxLength: 300, nullable: true),
+                    ExchangeDisclaimerId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ArchivingMailboxPlanId = table.Column<int>(type: "INTEGER", nullable: true),
+                    EnableArchiving = table.Column<bool>(type: "INTEGER", nullable: true),
+                    LevelID = table.Column<int>(type: "INTEGER", nullable: true),
+                    IsVIP = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -2296,21 +1994,19 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ServiceItems",
                         principalColumn: "ItemID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "LyncUsers",
                 columns: table => new
                 {
-                    LyncUserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    LyncUserPlanID = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    SipAddress = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    LyncUserID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    LyncUserPlanID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    SipAddress = table.Column<string>(type: "TEXT COLLATE NOCASE", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2320,22 +2016,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.LyncUserPlanID,
                         principalTable: "LyncUserPlans",
                         principalColumn: "LyncUserPlanId");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "AccessTokens",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccessTokenGuid = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
-                    TokenType = table.Column<int>(type: "int", nullable: false),
-                    SmsResponse = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccessTokenGuid = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ItemId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TokenType = table.Column<int>(type: "INTEGER", nullable: false),
+                    SmsResponse = table.Column<string>(type: "TEXT", unicode: false, maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2346,18 +2040,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "BlackBerryUsers",
                 columns: table => new
                 {
-                    BlackBerryUserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    BlackBerryUserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2367,21 +2060,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.AccountId,
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "CRMUsers",
                 columns: table => new
                 {
-                    CRMUserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    ChangedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CRMUserGuid = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    BusinessUnitID = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    CALType = table.Column<int>(type: "int", nullable: true)
+                    CRMUserID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ChangedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CRMUserGuid = table.Column<Guid>(type: "TEXT", nullable: true),
+                    BusinessUnitID = table.Column<Guid>(type: "TEXT", nullable: true),
+                    CALType = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2391,18 +2083,17 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         column: x => x.AccountID,
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "EnterpriseFoldersOwaPermissions",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(type: "int", nullable: false),
-                    FolderID = table.Column<int>(type: "int", nullable: false),
-                    AccountID = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ItemID = table.Column<int>(type: "INTEGER", nullable: false),
+                    FolderID = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2419,18 +2110,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "EnterpriseFolders",
                         principalColumn: "EnterpriseFolderID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "ExchangeAccountEmailAddresses",
                 columns: table => new
                 {
-                    AddressID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    EmailAddress = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    AddressID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    EmailAddress = table.Column<string>(type: "TEXT", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2441,17 +2130,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "RDSCollectionUsers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RDSCollectionId = table.Column<int>(type: "int", nullable: false),
-                    AccountID = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RDSCollectionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2468,23 +2156,20 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "WebDavAccessTokens",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FilePath = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AuthData = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AccessToken = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FilePath = table.Column<string>(type: "TEXT", nullable: false),
+                    AuthData = table.Column<string>(type: "TEXT", nullable: false),
+                    AccessToken = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AccountID = table.Column<int>(type: "INTEGER", nullable: false),
+                    ItemId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -2495,18 +2180,16 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "WebDavPortalUsersSettings",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AccountId = table.Column<int>(type: "int", nullable: false),
-                    Settings = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    ID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Settings = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2517,8 +2200,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                         principalTable: "ExchangeAccounts",
                         principalColumn: "AccountID",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.InsertData(
                 table: "AuditLogSources",
@@ -3034,7 +2716,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                 columns: new[] { "ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType" },
                 values: new object[,]
                 {
-                    { 1, null, "Windows Server 2003", "Windows2003", 1, "Windows2003", "FuseCP.Providers.OS.Windows2003, FuseCP.Providers.OS.Windows2003" },
                     { 2, null, "Internet Information Services 6.0", "IIS60", 2, "IIS60", "FuseCP.Providers.Web.IIs60, FuseCP.Providers.Web.IIs60" },
                     { 3, null, "Microsoft FTP Server 6.0", "MSFTP60", 3, "MSFTP60", "FuseCP.Providers.FTP.MsFTP, FuseCP.Providers.FTP.IIs60" },
                     { 4, null, "MailEnable Server 1.x - 7.x", "MailEnable", 4, "MailEnable", "FuseCP.Providers.Mail.MailEnable, FuseCP.Providers.Mail.MailEnable" },
@@ -3078,11 +2759,9 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { 91, null, "Hosted Microsoft Exchange Server 2013", "Exchange", 12, "Exchange2013", "FuseCP.Providers.HostedSolution.Exchange2013, FuseCP.Providers.HostedSolution.Exchange2013" },
                     { 92, null, "Hosted Microsoft Exchange Server 2016", "Exchange", 12, "Exchange2016", "FuseCP.Providers.HostedSolution.Exchange2016, FuseCP.Providers.HostedSolution.Exchange2016" },
                     { 93, null, "Hosted Microsoft Exchange Server 2019", "Exchange", 12, "Exchange2016", "FuseCP.Providers.HostedSolution.Exchange2019, FuseCP.Providers.HostedSolution.Exchange2019" },
-                    { 100, null, "Windows Server 2008", "Windows2008", 1, "Windows2008", "FuseCP.Providers.OS.Windows2008, FuseCP.Providers.OS.Windows2008" },
                     { 101, null, "Internet Information Services 7.0", "IIS70", 2, "IIS70", "FuseCP.Providers.Web.IIs70, FuseCP.Providers.Web.IIs70" },
                     { 102, null, "Microsoft FTP Server 7.0", "MSFTP70", 3, "MSFTP70", "FuseCP.Providers.FTP.MsFTP, FuseCP.Providers.FTP.IIs70" },
                     { 103, null, "Hosted Organizations", "Organizations", 13, "Organizations", "FuseCP.Providers.HostedSolution.OrganizationProvider, FuseCP.Providers.HostedSolution" },
-                    { 104, null, "Windows Server 2012", "Windows2012", 1, "Windows2012", "FuseCP.Providers.OS.Windows2012, FuseCP.Providers.OS.Windows2012" },
                     { 105, null, "Internet Information Services 8.0", "IIS70", 2, "IIS80", "FuseCP.Providers.Web.IIs80, FuseCP.Providers.Web.IIs80" },
                     { 106, null, "Microsoft FTP Server 8.0", "MSFTP70", 3, "MSFTP80", "FuseCP.Providers.FTP.MsFTP80, FuseCP.Providers.FTP.IIs80" },
                     { 110, null, "Cerberus FTP Server 6.x", "CerberusFTP6", 3, "CerberusFTP6", "FuseCP.Providers.FTP.CerberusFTP6, FuseCP.Providers.FTP.CerberusFTP6" },
@@ -3474,8 +3153,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { 763, 76, null, null, null, "Database Backups", "MsSQL2025.Backup", 5.0, 1, false },
                     { 764, 76, null, null, null, "Database Restores", "MsSQL2025.Restore", 6.0, 1, false },
                     { 765, 76, null, null, null, "Database Truncate", "MsSQL2025.Truncate", 7.0, 1, false },
-                    { 766, 76, null, null, null, "Max Log Size", "MsSQL2025.MaxLogSize", 4.0, 3, false },
-                    { 771, 4, null, null, null, "Mail Accounts per Domain", "Mail.Accounts.per.Domain", 1.2, 2, true }
+                    { 766, 76, null, null, null, "Max Log Size", "MsSQL2025.MaxLogSize", 4.0, 3, false }
                 });
 
             migrationBuilder.InsertData(
@@ -3836,6 +3514,9 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { "MailboxPasswordPolicy", "ExchangePolicy", 1, "True;8;20;0;2;0;True" },
                     { "UserNamePolicy", "FtpPolicy", 1, "True;-;1;20;;;" },
                     { "UserPasswordPolicy", "FtpPolicy", 1, "True;5;20;0;1;0;True" },
+                    { "DemoMessage", "FuseCPPolicy", 1, "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.fusecp.com\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>" },
+                    { "ForbiddenIP", "FuseCPPolicy", 1, "" },
+                    { "PasswordPolicy", "FuseCPPolicy", 1, "True;6;20;0;1;0;True;;0;;;False;False;0;" },
                     { "AccountNamePolicy", "MailPolicy", 1, "True;;1;50;;;" },
                     { "AccountPasswordPolicy", "MailPolicy", 1, "True;5;20;0;1;0;False;;0;;;False;False;0;" },
                     { "CatchAllName", "MailPolicy", 1, "mail" },
@@ -3876,9 +3557,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { "GroupNamePolicy", "SharePointPolicy", 1, "True;-;1;20;;;" },
                     { "UserNamePolicy", "SharePointPolicy", 1, "True;-;1;20;;;" },
                     { "UserPasswordPolicy", "SharePointPolicy", 1, "True;5;20;0;1;0;True;;0;;;False;False;0;" },
-                    { "DemoMessage", "FuseCPPolicy", 1, "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.FuseCP.net\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>" },
-                    { "ForbiddenIP", "FuseCPPolicy", 1, "" },
-                    { "PasswordPolicy", "FuseCPPolicy", 1, "True;6;20;0;1;0;True;;0;;;False;False;0;" },
                     { "From", "UserPasswordExpirationLetter", 1, "support@HostingCompany.com" },
                     { "HtmlBody", "UserPasswordExpirationLetter", 1, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>Password expiration notification</title>\r\n    <style type=\"text/css\">\r\n		.Summary { background-color: ##ffffff; padding: 5px; }\r\n		.Summary .Header { padding: 10px 0px 10px 10px; font-size: 16pt; background-color: ##E5F2FF; color: ##1F4978; border-bottom: solid 2px ##86B9F7; }\r\n        .Summary A { color: ##0153A4; }\r\n        .Summary { font-family: Tahoma; font-size: 9pt; }\r\n        .Summary H1 { font-size: 1.7em; color: ##1F4978; border-bottom: dotted 3px ##efefef; }\r\n        .Summary H2 { font-size: 1.3em; color: ##1F4978; } \r\n        .Summary TABLE { border: solid 1px ##e5e5e5; }\r\n        .Summary TH,\r\n        .Summary TD.Label { padding: 5px; font-size: 8pt; font-weight: bold; background-color: ##f5f5f5; }\r\n        .Summary TD { padding: 8px; font-size: 9pt; }\r\n        .Summary UL LI { font-size: 1.1em; font-weight: bold; }\r\n        .Summary UL UL LI { font-size: 0.9em; font-weight: normal; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"Summary\">\r\n<div class=\"Header\">\r\n<img src=\"#logoUrl#\">\r\n</div>\r\n<h1>Password expiration notification</h1>\r\n\r\n<ad:if test=\"#user#\">\r\n<p>\r\nHello #user.FirstName#,\r\n</p>\r\n</ad:if>\r\n\r\n<p>\r\nYour password expiration date is #user.PasswordExpirationDateTime#. You can reset your own password by visiting the following page:\r\n</p>\r\n\r\n<a href=\"#passwordResetLink#\" target=\"_blank\">#passwordResetLink#</a>\r\n\r\n\r\n<p>\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n</p>\r\n\r\n<p>\r\nBest regards\r\n</p>\r\n</div>\r\n</body>" },
                     { "LogoUrl", "UserPasswordExpirationLetter", 1, "" },
@@ -3922,7 +3600,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { "EnableWritePermissions", "WebPolicy", 1, "False" },
                     { "FrontPageAccountPolicy", "WebPolicy", 1, "True;;1;20;;;" },
                     { "FrontPagePasswordPolicy", "WebPolicy", 1, "True;5;20;0;1;0;False;;0;0;0;False;False;0;" },
-                    { "ParkingPageContent", "WebPolicy", 1, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.FuseCP.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>" },
+                    { "ParkingPageContent", "WebPolicy", 1, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.fusecp.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>" },
                     { "ParkingPageName", "WebPolicy", 1, "default.aspx" },
                     { "PerlInstalled", "WebPolicy", 1, "False" },
                     { "PhpInstalled", "WebPolicy", 1, "" },
@@ -3993,8 +3671,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { 732, 75, null, 79, null, "Databases", "MsSQL2022.Databases", 1.0, 2, false },
                     { 733, 75, null, 80, null, "Users", "MsSQL2022.Users", 2.0, 2, false },
                     { 760, 76, null, 79, null, "Databases", "MsSQL2025.Databases", 1.0, 2, false },
-                    { 761, 76, null, 80, null, "Users", "MsSQL2025.Users", 2.0, 2, false },
-                    { 770, 4, null, 11, null, "Mail Domains", "Mail.Domains", 1.1000000000000001, 2, true }
+                    { 761, 76, null, 80, null, "Users", "MsSQL2025.Users", 2.0, 2, false }
                 });
 
             migrationBuilder.InsertData(
@@ -4011,7 +3688,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                 columns: new[] { "PropertyName", "ProviderID", "PropertyValue" },
                 values: new object[,]
                 {
-                    { "UsersHome", 1, "%SYSTEMDRIVE%\\HostingSpaces" },
                     { "AspNet11Path", 2, "%SYSTEMROOT%\\Microsoft.NET\\Framework\\v1.1.4322\\aspnet_isapi.dll" },
                     { "AspNet11Pool", 2, "ASP.NET V1.1" },
                     { "AspNet20Path", 2, "%SYSTEMROOT%\\Microsoft.NET\\Framework\\v2.0.50727\\aspnet_isapi.dll" },
@@ -4214,7 +3890,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { "DomainsPath", 67, "%SYSTEMDRIVE%\\SmarterMail\\Domains" },
                     { "ServerIPAddress", 67, "127.0.0.1;127.0.0.1" },
                     { "ServiceUrl", 67, "http://localhost:9998" },
-                    { "UsersHome", 100, "%SYSTEMDRIVE%\\HostingSpaces" },
                     { "AspNet11Pool", 101, "ASP.NET 1.1" },
                     { "AspNet40Path", 101, "%WINDIR%\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_isapi.dll" },
                     { "AspNet40x64Path", 101, "%WINDIR%\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_isapi.dll" },
@@ -4239,7 +3914,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.MySql
                     { "WmSvc.Port", 101, "8172" },
                     { "FtpGroupName", 102, "FCPFtpUsers" },
                     { "SiteId", 102, "Default FTP Site" },
-                    { "UsersHome", 104, "%SYSTEMDRIVE%\\HostingSpaces" },
                     { "AspNet11Pool", 105, "ASP.NET 1.1" },
                     { "AspNet40Path", 105, "%WINDIR%\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_isapi.dll" },
                     { "AspNet40x64Path", 105, "%WINDIR%\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_isapi.dll" },

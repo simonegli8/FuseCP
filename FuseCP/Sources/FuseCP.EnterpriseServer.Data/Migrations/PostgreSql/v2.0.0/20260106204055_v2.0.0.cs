@@ -1,19 +1,4 @@
-// Copyright (C) 2025 FuseCP
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -2939,7 +2924,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                 columns: new[] { "ProviderID", "DisableAutoDiscovery", "DisplayName", "EditorControl", "GroupID", "ProviderName", "ProviderType" },
                 values: new object[,]
                 {
-                    { 1, null, "Windows Server 2003", "Windows2003", 1, "Windows2003", "FuseCP.Providers.OS.Windows2003, FuseCP.Providers.OS.Windows2003" },
                     { 2, null, "Internet Information Services 6.0", "IIS60", 2, "IIS60", "FuseCP.Providers.Web.IIs60, FuseCP.Providers.Web.IIs60" },
                     { 3, null, "Microsoft FTP Server 6.0", "MSFTP60", 3, "MSFTP60", "FuseCP.Providers.FTP.MsFTP, FuseCP.Providers.FTP.IIs60" },
                     { 4, null, "MailEnable Server 1.x - 7.x", "MailEnable", 4, "MailEnable", "FuseCP.Providers.Mail.MailEnable, FuseCP.Providers.Mail.MailEnable" },
@@ -2983,11 +2967,9 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { 91, null, "Hosted Microsoft Exchange Server 2013", "Exchange", 12, "Exchange2013", "FuseCP.Providers.HostedSolution.Exchange2013, FuseCP.Providers.HostedSolution.Exchange2013" },
                     { 92, null, "Hosted Microsoft Exchange Server 2016", "Exchange", 12, "Exchange2016", "FuseCP.Providers.HostedSolution.Exchange2016, FuseCP.Providers.HostedSolution.Exchange2016" },
                     { 93, null, "Hosted Microsoft Exchange Server 2019", "Exchange", 12, "Exchange2016", "FuseCP.Providers.HostedSolution.Exchange2019, FuseCP.Providers.HostedSolution.Exchange2019" },
-                    { 100, null, "Windows Server 2008", "Windows2008", 1, "Windows2008", "FuseCP.Providers.OS.Windows2008, FuseCP.Providers.OS.Windows2008" },
                     { 101, null, "Internet Information Services 7.0", "IIS70", 2, "IIS70", "FuseCP.Providers.Web.IIs70, FuseCP.Providers.Web.IIs70" },
                     { 102, null, "Microsoft FTP Server 7.0", "MSFTP70", 3, "MSFTP70", "FuseCP.Providers.FTP.MsFTP, FuseCP.Providers.FTP.IIs70" },
                     { 103, null, "Hosted Organizations", "Organizations", 13, "Organizations", "FuseCP.Providers.HostedSolution.OrganizationProvider, FuseCP.Providers.HostedSolution" },
-                    { 104, null, "Windows Server 2012", "Windows2012", 1, "Windows2012", "FuseCP.Providers.OS.Windows2012, FuseCP.Providers.OS.Windows2012" },
                     { 105, null, "Internet Information Services 8.0", "IIS70", 2, "IIS80", "FuseCP.Providers.Web.IIs80, FuseCP.Providers.Web.IIs80" },
                     { 106, null, "Microsoft FTP Server 8.0", "MSFTP70", 3, "MSFTP80", "FuseCP.Providers.FTP.MsFTP80, FuseCP.Providers.FTP.IIs80" },
                     { 110, null, "Cerberus FTP Server 6.x", "CerberusFTP6", 3, "CerberusFTP6", "FuseCP.Providers.FTP.CerberusFTP6, FuseCP.Providers.FTP.CerberusFTP6" },
@@ -3380,8 +3362,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { 763, 76, null, null, null, "Database Backups", "MsSQL2025.Backup", 5.0, 1, false },
                     { 764, 76, null, null, null, "Database Restores", "MsSQL2025.Restore", 6.0, 1, false },
                     { 765, 76, null, null, null, "Database Truncate", "MsSQL2025.Truncate", 7.0, 1, false },
-                    { 766, 76, null, null, null, "Max Log Size", "MsSQL2025.MaxLogSize", 4.0, 3, false },
-                    { 771, 4, null, null, null, "Mail Accounts per Domain", "Mail.Accounts.per.Domain", 1.2, 2, true }
+                    { 766, 76, null, null, null, "Max Log Size", "MsSQL2025.MaxLogSize", 4.0, 3, false }
                 });
 
             migrationBuilder.InsertData(
@@ -3763,6 +3744,9 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { "MailboxPasswordPolicy", "ExchangePolicy", 1, "True;8;20;0;2;0;True" },
                     { "UserNamePolicy", "FtpPolicy", 1, "True;-;1;20;;;" },
                     { "UserPasswordPolicy", "FtpPolicy", 1, "True;5;20;0;1;0;True" },
+                    { "DemoMessage", "FuseCPPolicy", 1, "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.fusecp.com\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>" },
+                    { "ForbiddenIP", "FuseCPPolicy", 1, "" },
+                    { "PasswordPolicy", "FuseCPPolicy", 1, "True;6;20;0;1;0;True;;0;;;False;False;0;" },
                     { "AccountNamePolicy", "MailPolicy", 1, "True;;1;50;;;" },
                     { "AccountPasswordPolicy", "MailPolicy", 1, "True;5;20;0;1;0;False;;0;;;False;False;0;" },
                     { "CatchAllName", "MailPolicy", 1, "mail" },
@@ -3803,9 +3787,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { "GroupNamePolicy", "SharePointPolicy", 1, "True;-;1;20;;;" },
                     { "UserNamePolicy", "SharePointPolicy", 1, "True;-;1;20;;;" },
                     { "UserPasswordPolicy", "SharePointPolicy", 1, "True;5;20;0;1;0;True;;0;;;False;False;0;" },
-                    { "DemoMessage", "FuseCPPolicy", 1, "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.FuseCP.net\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>" },
-                    { "ForbiddenIP", "FuseCPPolicy", 1, "" },
-                    { "PasswordPolicy", "FuseCPPolicy", 1, "True;6;20;0;1;0;True;;0;;;False;False;0;" },
                     { "From", "UserPasswordExpirationLetter", 1, "support@HostingCompany.com" },
                     { "HtmlBody", "UserPasswordExpirationLetter", 1, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>Password expiration notification</title>\r\n    <style type=\"text/css\">\r\n		.Summary { background-color: ##ffffff; padding: 5px; }\r\n		.Summary .Header { padding: 10px 0px 10px 10px; font-size: 16pt; background-color: ##E5F2FF; color: ##1F4978; border-bottom: solid 2px ##86B9F7; }\r\n        .Summary A { color: ##0153A4; }\r\n        .Summary { font-family: Tahoma; font-size: 9pt; }\r\n        .Summary H1 { font-size: 1.7em; color: ##1F4978; border-bottom: dotted 3px ##efefef; }\r\n        .Summary H2 { font-size: 1.3em; color: ##1F4978; } \r\n        .Summary TABLE { border: solid 1px ##e5e5e5; }\r\n        .Summary TH,\r\n        .Summary TD.Label { padding: 5px; font-size: 8pt; font-weight: bold; background-color: ##f5f5f5; }\r\n        .Summary TD { padding: 8px; font-size: 9pt; }\r\n        .Summary UL LI { font-size: 1.1em; font-weight: bold; }\r\n        .Summary UL UL LI { font-size: 0.9em; font-weight: normal; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"Summary\">\r\n<div class=\"Header\">\r\n<img src=\"#logoUrl#\">\r\n</div>\r\n<h1>Password expiration notification</h1>\r\n\r\n<ad:if test=\"#user#\">\r\n<p>\r\nHello #user.FirstName#,\r\n</p>\r\n</ad:if>\r\n\r\n<p>\r\nYour password expiration date is #user.PasswordExpirationDateTime#. You can reset your own password by visiting the following page:\r\n</p>\r\n\r\n<a href=\"#passwordResetLink#\" target=\"_blank\">#passwordResetLink#</a>\r\n\r\n\r\n<p>\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n</p>\r\n\r\n<p>\r\nBest regards\r\n</p>\r\n</div>\r\n</body>" },
                     { "LogoUrl", "UserPasswordExpirationLetter", 1, "" },
@@ -3849,7 +3830,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { "EnableWritePermissions", "WebPolicy", 1, "False" },
                     { "FrontPageAccountPolicy", "WebPolicy", 1, "True;;1;20;;;" },
                     { "FrontPagePasswordPolicy", "WebPolicy", 1, "True;5;20;0;1;0;False;;0;0;0;False;False;0;" },
-                    { "ParkingPageContent", "WebPolicy", 1, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.FuseCP.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>" },
+                    { "ParkingPageContent", "WebPolicy", 1, "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.fusecp.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>" },
                     { "ParkingPageName", "WebPolicy", 1, "default.aspx" },
                     { "PerlInstalled", "WebPolicy", 1, "False" },
                     { "PhpInstalled", "WebPolicy", 1, "" },
@@ -3922,8 +3903,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { 732, 75, null, 79, null, "Databases", "MsSQL2022.Databases", 1.0, 2, false },
                     { 733, 75, null, 80, null, "Users", "MsSQL2022.Users", 2.0, 2, false },
                     { 760, 76, null, 79, null, "Databases", "MsSQL2025.Databases", 1.0, 2, false },
-                    { 761, 76, null, 80, null, "Users", "MsSQL2025.Users", 2.0, 2, false },
-                    { 770, 4, null, 11, null, "Mail Domains", "Mail.Domains", 1.1000000000000001, 2, true }
+                    { 761, 76, null, 80, null, "Users", "MsSQL2025.Users", 2.0, 2, false }
                 });
 
             migrationBuilder.InsertData(
@@ -3942,7 +3922,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                 columns: new[] { "PropertyName", "ProviderID", "PropertyValue" },
                 values: new object[,]
                 {
-                    { "UsersHome", 1, "%SYSTEMDRIVE%\\HostingSpaces" },
                     { "AspNet11Path", 2, "%SYSTEMROOT%\\Microsoft.NET\\Framework\\v1.1.4322\\aspnet_isapi.dll" },
                     { "AspNet11Pool", 2, "ASP.NET V1.1" },
                     { "AspNet20Path", 2, "%SYSTEMROOT%\\Microsoft.NET\\Framework\\v2.0.50727\\aspnet_isapi.dll" },
@@ -4145,7 +4124,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { "DomainsPath", 67, "%SYSTEMDRIVE%\\SmarterMail\\Domains" },
                     { "ServerIPAddress", 67, "127.0.0.1;127.0.0.1" },
                     { "ServiceUrl", 67, "http://localhost:9998" },
-                    { "UsersHome", 100, "%SYSTEMDRIVE%\\HostingSpaces" },
                     { "AspNet11Pool", 101, "ASP.NET 1.1" },
                     { "AspNet40Path", 101, "%WINDIR%\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_isapi.dll" },
                     { "AspNet40x64Path", 101, "%WINDIR%\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_isapi.dll" },
@@ -4170,7 +4148,6 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.PostgreSql
                     { "WmSvc.Port", 101, "8172" },
                     { "FtpGroupName", 102, "FCPFtpUsers" },
                     { "SiteId", 102, "Default FTP Site" },
-                    { "UsersHome", 104, "%SYSTEMDRIVE%\\HostingSpaces" },
                     { "AspNet11Pool", 105, "ASP.NET 1.1" },
                     { "AspNet40Path", 105, "%WINDIR%\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_isapi.dll" },
                     { "AspNet40x64Path", 105, "%WINDIR%\\Microsoft.NET\\Framework64\\v4.0.30319\\aspnet_isapi.dll" },

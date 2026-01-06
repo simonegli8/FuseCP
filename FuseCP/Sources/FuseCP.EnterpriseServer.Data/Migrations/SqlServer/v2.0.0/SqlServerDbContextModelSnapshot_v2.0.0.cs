@@ -4039,7 +4039,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2003",
                             GroupId = 1,
                             ProviderName = "Windows2003",
-                            ProviderType = "FuseCP.Providers.OS.Windows2003, FuseCP.Providers.OS.Windows2003"
+                            ProviderType = "SolidCP.Providers.OS.Windows2003, SolidCP.Providers.OS.Windows2003"
                         },
                         new
                         {
@@ -4048,7 +4048,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "IIS60",
                             GroupId = 2,
                             ProviderName = "IIS60",
-                            ProviderType = "FuseCP.Providers.Web.IIs60, FuseCP.Providers.Web.IIs60"
+                            ProviderType = "SolidCP.Providers.Web.IIs60, SolidCP.Providers.Web.IIs60"
                         },
                         new
                         {
@@ -4057,7 +4057,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSFTP60",
                             GroupId = 3,
                             ProviderName = "MSFTP60",
-                            ProviderType = "FuseCP.Providers.FTP.MsFTP, FuseCP.Providers.FTP.IIs60"
+                            ProviderType = "SolidCP.Providers.FTP.MsFTP, SolidCP.Providers.FTP.IIs60"
                         },
                         new
                         {
@@ -4066,7 +4066,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MailEnable",
                             GroupId = 4,
                             ProviderName = "MailEnable",
-                            ProviderType = "FuseCP.Providers.Mail.MailEnable, FuseCP.Providers.Mail.MailEnable"
+                            ProviderType = "SolidCP.Providers.Mail.MailEnable, SolidCP.Providers.Mail.MailEnable"
                         },
                         new
                         {
@@ -4075,7 +4075,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 5,
                             ProviderName = "MSSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -4084,7 +4084,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 6,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4093,7 +4093,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSDNS",
                             GroupId = 7,
                             ProviderName = "MSDNS",
-                            ProviderType = "FuseCP.Providers.DNS.MsDNS, FuseCP.Providers.DNS.MsDNS"
+                            ProviderType = "SolidCP.Providers.DNS.MsDNS, SolidCP.Providers.DNS.MsDNS"
                         },
                         new
                         {
@@ -4102,7 +4102,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "AWStats",
                             GroupId = 8,
                             ProviderName = "AWStats",
-                            ProviderType = "FuseCP.Providers.Statistics.AWStats, FuseCP.Providers.Statistics.AWStats"
+                            ProviderType = "SolidCP.Providers.Statistics.AWStats, SolidCP.Providers.Statistics.AWStats"
                         },
                         new
                         {
@@ -4111,7 +4111,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SimpleDNS",
                             GroupId = 7,
                             ProviderName = "SimpleDNS",
-                            ProviderType = "FuseCP.Providers.DNS.SimpleDNS, FuseCP.Providers.DNS.SimpleDNS"
+                            ProviderType = "SolidCP.Providers.DNS.SimpleDNS, SolidCP.Providers.DNS.SimpleDNS"
                         },
                         new
                         {
@@ -4120,7 +4120,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterStats",
                             GroupId = 8,
                             ProviderName = "SmarterStats",
-                            ProviderType = "FuseCP.Providers.Statistics.SmarterStats, FuseCP.Providers.Statistics.SmarterStats"
+                            ProviderType = "SolidCP.Providers.Statistics.SmarterStats, SolidCP.Providers.Statistics.SmarterStats"
                         },
                         new
                         {
@@ -4129,7 +4129,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail2, FuseCP.Providers.Mail.SmarterMail2"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail2, SolidCP.Providers.Mail.SmarterMail2"
                         },
                         new
                         {
@@ -4138,7 +4138,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Gene6FTP",
                             GroupId = 3,
                             ProviderName = "Gene6FTP",
-                            ProviderType = "FuseCP.Providers.FTP.Gene6, FuseCP.Providers.FTP.Gene6"
+                            ProviderType = "SolidCP.Providers.FTP.Gene6, SolidCP.Providers.FTP.Gene6"
                         },
                         new
                         {
@@ -4147,7 +4147,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Merak",
                             GroupId = 4,
                             ProviderName = "Merak",
-                            ProviderType = "FuseCP.Providers.Mail.Merak, FuseCP.Providers.Mail.Merak"
+                            ProviderType = "SolidCP.Providers.Mail.Merak, SolidCP.Providers.Mail.Merak"
                         },
                         new
                         {
@@ -4156,7 +4156,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail3, FuseCP.Providers.Mail.SmarterMail3"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail3, SolidCP.Providers.Mail.SmarterMail3"
                         },
                         new
                         {
@@ -4165,7 +4165,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 10,
                             ProviderName = "MSSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2005, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2005, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -4174,7 +4174,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 11,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer50, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer50, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4183,7 +4183,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MDaemon",
                             GroupId = 4,
                             ProviderName = "MDaemon",
-                            ProviderType = "FuseCP.Providers.Mail.MDaemon, FuseCP.Providers.Mail.MDaemon"
+                            ProviderType = "SolidCP.Providers.Mail.MDaemon, SolidCP.Providers.Mail.MDaemon"
                         },
                         new
                         {
@@ -4193,7 +4193,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "ArgoMail",
                             GroupId = 4,
                             ProviderName = "ArgoMail",
-                            ProviderType = "FuseCP.Providers.Mail.ArgoMail, FuseCP.Providers.Mail.ArgoMail"
+                            ProviderType = "SolidCP.Providers.Mail.ArgoMail, SolidCP.Providers.Mail.ArgoMail"
                         },
                         new
                         {
@@ -4202,7 +4202,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "hMailServer",
                             GroupId = 4,
                             ProviderName = "hMailServer",
-                            ProviderType = "FuseCP.Providers.Mail.hMailServer, FuseCP.Providers.Mail.hMailServer"
+                            ProviderType = "SolidCP.Providers.Mail.hMailServer, SolidCP.Providers.Mail.hMailServer"
                         },
                         new
                         {
@@ -4211,7 +4211,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "AbilityMailServer",
                             GroupId = 4,
                             ProviderName = "AbilityMailServer",
-                            ProviderType = "FuseCP.Providers.Mail.AbilityMailServer, FuseCP.Providers.Mail.AbilityMailServer"
+                            ProviderType = "SolidCP.Providers.Mail.AbilityMailServer, SolidCP.Providers.Mail.AbilityMailServer"
                         },
                         new
                         {
@@ -4220,7 +4220,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "hMailServer43",
                             GroupId = 4,
                             ProviderName = "hMailServer43",
-                            ProviderType = "FuseCP.Providers.Mail.hMailServer43, FuseCP.Providers.Mail.hMailServer43"
+                            ProviderType = "SolidCP.Providers.Mail.hMailServer43, SolidCP.Providers.Mail.hMailServer43"
                         },
                         new
                         {
@@ -4229,7 +4229,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Bind",
                             GroupId = 7,
                             ProviderName = "Bind",
-                            ProviderType = "FuseCP.Providers.DNS.IscBind, FuseCP.Providers.DNS.Bind"
+                            ProviderType = "SolidCP.Providers.DNS.IscBind, SolidCP.Providers.DNS.Bind"
                         },
                         new
                         {
@@ -4238,7 +4238,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "ServU",
                             GroupId = 3,
                             ProviderName = "ServU",
-                            ProviderType = "FuseCP.Providers.FTP.ServU, FuseCP.Providers.FTP.ServU"
+                            ProviderType = "SolidCP.Providers.FTP.ServU, SolidCP.Providers.FTP.ServU"
                         },
                         new
                         {
@@ -4247,7 +4247,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "FileZilla",
                             GroupId = 3,
                             ProviderName = "FileZilla",
-                            ProviderType = "FuseCP.Providers.FTP.FileZilla, FuseCP.Providers.FTP.FileZilla"
+                            ProviderType = "SolidCP.Providers.FTP.FileZilla, SolidCP.Providers.FTP.FileZilla"
                         },
                         new
                         {
@@ -4256,7 +4256,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Exchange",
                             GroupId = 12,
                             ProviderName = "Exchange2007",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Exchange2007, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Exchange2007, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4265,7 +4265,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SimpleDNS",
                             GroupId = 7,
                             ProviderName = "SimpleDNS",
-                            ProviderType = "FuseCP.Providers.DNS.SimpleDNS5, FuseCP.Providers.DNS.SimpleDNS50"
+                            ProviderType = "SolidCP.Providers.DNS.SimpleDNS5, SolidCP.Providers.DNS.SimpleDNS50"
                         },
                         new
                         {
@@ -4274,7 +4274,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail50",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail5, FuseCP.Providers.Mail.SmarterMail5"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail5, SolidCP.Providers.Mail.SmarterMail5"
                         },
                         new
                         {
@@ -4283,7 +4283,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 11,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer51, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer51, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4292,7 +4292,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterStats",
                             GroupId = 8,
                             ProviderName = "SmarterStats",
-                            ProviderType = "FuseCP.Providers.Statistics.SmarterStats4, FuseCP.Providers.Statistics.SmarterStats"
+                            ProviderType = "SolidCP.Providers.Statistics.SmarterStats4, SolidCP.Providers.Statistics.SmarterStats"
                         },
                         new
                         {
@@ -4301,7 +4301,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Exchange",
                             GroupId = 12,
                             ProviderName = "Exchange2010",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Exchange2010, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Exchange2010, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4311,7 +4311,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "NetticaDNS",
                             GroupId = 7,
                             ProviderName = "NetticaDNS",
-                            ProviderType = "FuseCP.Providers.DNS.Nettica, FuseCP.Providers.DNS.Nettica"
+                            ProviderType = "SolidCP.Providers.DNS.Nettica, SolidCP.Providers.DNS.Nettica"
                         },
                         new
                         {
@@ -4321,7 +4321,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "PowerDNS",
                             GroupId = 7,
                             ProviderName = "PowerDNS",
-                            ProviderType = "FuseCP.Providers.DNS.PowerDNS, FuseCP.Providers.DNS.PowerDNS"
+                            ProviderType = "SolidCP.Providers.DNS.PowerDNS, SolidCP.Providers.DNS.PowerDNS"
                         },
                         new
                         {
@@ -4330,7 +4330,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail60",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail6, FuseCP.Providers.Mail.SmarterMail6"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail6, SolidCP.Providers.Mail.SmarterMail6"
                         },
                         new
                         {
@@ -4339,7 +4339,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Merak",
                             GroupId = 4,
                             ProviderName = "Merak",
-                            ProviderType = "FuseCP.Providers.Mail.Merak10, FuseCP.Providers.Mail.Merak10"
+                            ProviderType = "SolidCP.Providers.Mail.Merak10, SolidCP.Providers.Mail.Merak10"
                         },
                         new
                         {
@@ -4348,7 +4348,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterStats",
                             GroupId = 8,
                             ProviderName = "SmarterStats",
-                            ProviderType = "FuseCP.Providers.Statistics.SmarterStats5, FuseCP.Providers.Statistics.SmarterStats"
+                            ProviderType = "SolidCP.Providers.Statistics.SmarterStats5, SolidCP.Providers.Statistics.SmarterStats"
                         },
                         new
                         {
@@ -4357,7 +4357,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "hMailServer5",
                             GroupId = 4,
                             ProviderName = "hMailServer5",
-                            ProviderType = "FuseCP.Providers.Mail.hMailServer5, FuseCP.Providers.Mail.hMailServer5"
+                            ProviderType = "SolidCP.Providers.Mail.hMailServer5, SolidCP.Providers.Mail.hMailServer5"
                         },
                         new
                         {
@@ -4366,7 +4366,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail60",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail7, FuseCP.Providers.Mail.SmarterMail7"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail7, SolidCP.Providers.Mail.SmarterMail7"
                         },
                         new
                         {
@@ -4375,7 +4375,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail60",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail9, FuseCP.Providers.Mail.SmarterMail9"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail9, SolidCP.Providers.Mail.SmarterMail9"
                         },
                         new
                         {
@@ -4384,7 +4384,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail100",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail10, FuseCP.Providers.Mail.SmarterMail10"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail10, SolidCP.Providers.Mail.SmarterMail10"
                         },
                         new
                         {
@@ -4393,7 +4393,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SmarterMail100x",
                             GroupId = 4,
                             ProviderName = "SmarterMail",
-                            ProviderType = "FuseCP.Providers.Mail.SmarterMail100, FuseCP.Providers.Mail.SmarterMail100"
+                            ProviderType = "SolidCP.Providers.Mail.SmarterMail100, SolidCP.Providers.Mail.SmarterMail100"
                         },
                         new
                         {
@@ -4402,7 +4402,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Exchange",
                             GroupId = 12,
                             ProviderName = "Exchange2010SP2",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Exchange2010SP2, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Exchange2010SP2, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4411,7 +4411,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Exchange",
                             GroupId = 12,
                             ProviderName = "Exchange2013",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Exchange2013, FuseCP.Providers.HostedSolution.Exchange2013"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Exchange2013, SolidCP.Providers.HostedSolution.Exchange2013"
                         },
                         new
                         {
@@ -4420,7 +4420,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Exchange",
                             GroupId = 12,
                             ProviderName = "Exchange2016",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Exchange2016, FuseCP.Providers.HostedSolution.Exchange2016"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Exchange2016, SolidCP.Providers.HostedSolution.Exchange2016"
                         },
                         new
                         {
@@ -4429,7 +4429,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Exchange",
                             GroupId = 12,
                             ProviderName = "Exchange2016",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Exchange2019, FuseCP.Providers.HostedSolution.Exchange2019"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Exchange2019, SolidCP.Providers.HostedSolution.Exchange2019"
                         },
                         new
                         {
@@ -4438,7 +4438,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2008",
                             GroupId = 1,
                             ProviderName = "Windows2008",
-                            ProviderType = "FuseCP.Providers.OS.Windows2008, FuseCP.Providers.OS.Windows2008"
+                            ProviderType = "SolidCP.Providers.OS.Windows2008, SolidCP.Providers.OS.Windows2008"
                         },
                         new
                         {
@@ -4447,7 +4447,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "IIS70",
                             GroupId = 2,
                             ProviderName = "IIS70",
-                            ProviderType = "FuseCP.Providers.Web.IIs70, FuseCP.Providers.Web.IIs70"
+                            ProviderType = "SolidCP.Providers.Web.IIs70, SolidCP.Providers.Web.IIs70"
                         },
                         new
                         {
@@ -4456,7 +4456,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSFTP70",
                             GroupId = 3,
                             ProviderName = "MSFTP70",
-                            ProviderType = "FuseCP.Providers.FTP.MsFTP, FuseCP.Providers.FTP.IIs70"
+                            ProviderType = "SolidCP.Providers.FTP.MsFTP, SolidCP.Providers.FTP.IIs70"
                         },
                         new
                         {
@@ -4465,7 +4465,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Organizations",
                             GroupId = 13,
                             ProviderName = "Organizations",
-                            ProviderType = "FuseCP.Providers.HostedSolution.OrganizationProvider, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.OrganizationProvider, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4474,7 +4474,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2012",
                             GroupId = 1,
                             ProviderName = "Windows2012",
-                            ProviderType = "FuseCP.Providers.OS.Windows2012, FuseCP.Providers.OS.Windows2012"
+                            ProviderType = "SolidCP.Providers.OS.Windows2012, SolidCP.Providers.OS.Windows2012"
                         },
                         new
                         {
@@ -4483,7 +4483,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "IIS70",
                             GroupId = 2,
                             ProviderName = "IIS80",
-                            ProviderType = "FuseCP.Providers.Web.IIs80, FuseCP.Providers.Web.IIs80"
+                            ProviderType = "SolidCP.Providers.Web.IIs80, SolidCP.Providers.Web.IIs80"
                         },
                         new
                         {
@@ -4492,7 +4492,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSFTP70",
                             GroupId = 3,
                             ProviderName = "MSFTP80",
-                            ProviderType = "FuseCP.Providers.FTP.MsFTP80, FuseCP.Providers.FTP.IIs80"
+                            ProviderType = "SolidCP.Providers.FTP.MsFTP80, SolidCP.Providers.FTP.IIs80"
                         },
                         new
                         {
@@ -4501,7 +4501,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "CerberusFTP6",
                             GroupId = 3,
                             ProviderName = "CerberusFTP6",
-                            ProviderType = "FuseCP.Providers.FTP.CerberusFTP6, FuseCP.Providers.FTP.CerberusFTP6"
+                            ProviderType = "SolidCP.Providers.FTP.CerberusFTP6, SolidCP.Providers.FTP.CerberusFTP6"
                         },
                         new
                         {
@@ -4510,7 +4510,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2008",
                             GroupId = 1,
                             ProviderName = "Windows2016",
-                            ProviderType = "FuseCP.Providers.OS.Windows2016, FuseCP.Providers.OS.Windows2016"
+                            ProviderType = "SolidCP.Providers.OS.Windows2016, SolidCP.Providers.OS.Windows2016"
                         },
                         new
                         {
@@ -4519,7 +4519,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "IIS70",
                             GroupId = 2,
                             ProviderName = "IIS100",
-                            ProviderType = "FuseCP.Providers.Web.IIs100, FuseCP.Providers.Web.IIs100"
+                            ProviderType = "SolidCP.Providers.Web.IIs100, SolidCP.Providers.Web.IIs100"
                         },
                         new
                         {
@@ -4528,7 +4528,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSFTP70",
                             GroupId = 3,
                             ProviderName = "MSFTP100",
-                            ProviderType = "FuseCP.Providers.FTP.MsFTP100, FuseCP.Providers.FTP.IIs100"
+                            ProviderType = "SolidCP.Providers.FTP.MsFTP100, SolidCP.Providers.FTP.IIs100"
                         },
                         new
                         {
@@ -4537,7 +4537,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "IceWarp",
                             GroupId = 4,
                             ProviderName = "IceWarp",
-                            ProviderType = "FuseCP.Providers.Mail.IceWarp, FuseCP.Providers.Mail.IceWarp"
+                            ProviderType = "SolidCP.Providers.Mail.IceWarp, SolidCP.Providers.Mail.IceWarp"
                         },
                         new
                         {
@@ -4546,7 +4546,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 20,
                             ProviderName = "HostedSharePoint30",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4555,7 +4555,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "CRM",
                             GroupId = 21,
                             ProviderName = "CRM",
-                            ProviderType = "FuseCP.Providers.HostedSolution.CRMProvider, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.CRMProvider, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4564,7 +4564,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 22,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2008, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2008, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -4574,7 +4574,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "BlackBerry",
                             GroupId = 31,
                             ProviderName = "BlackBerry 4.1",
-                            ProviderType = "FuseCP.Providers.HostedSolution.BlackBerryProvider, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.BlackBerryProvider, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4584,7 +4584,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "BlackBerry5",
                             GroupId = 31,
                             ProviderName = "BlackBerry 5.0",
-                            ProviderType = "FuseCP.Providers.HostedSolution.BlackBerry5Provider, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.BlackBerry5Provider, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4594,7 +4594,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "OCS",
                             GroupId = 32,
                             ProviderName = "OCS",
-                            ProviderType = "FuseCP.Providers.HostedSolution.OCS2007R2, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.OCS2007R2, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4604,7 +4604,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "OCS_Edge",
                             GroupId = 32,
                             ProviderName = "OCSEdge",
-                            ProviderType = "FuseCP.Providers.HostedSolution.OCSEdge2007R2, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.OCSEdge2007R2, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4613,7 +4613,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 20,
                             ProviderName = "HostedSharePoint2010",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer2010, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer2010, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4622,7 +4622,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 23,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2012, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2012, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -4631,7 +4631,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Lync",
                             GroupId = 41,
                             ProviderName = "Lync2010",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Lync2010, FuseCP.Providers.HostedSolution"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Lync2010, SolidCP.Providers.HostedSolution"
                         },
                         new
                         {
@@ -4641,7 +4641,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperV",
                             GroupId = 30,
                             ProviderName = "HyperV",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperV, FuseCP.Providers.Virtualization.HyperV"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperV, SolidCP.Providers.Virtualization.HyperV"
                         },
                         new
                         {
@@ -4650,7 +4650,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 11,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer55, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer55, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4659,7 +4659,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 11,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer56, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer56, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4668,7 +4668,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 11,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer57, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer57, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4677,7 +4677,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 90,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer80, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer80, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4686,7 +4686,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 90,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer81, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer81, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4695,7 +4695,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 90,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer82, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer82, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4704,7 +4704,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 90,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer83, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer83, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4713,7 +4713,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 90,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer84, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer84, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4722,7 +4722,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MySQL",
                             GroupId = 90,
                             ProviderName = "MySQL",
-                            ProviderType = "FuseCP.Providers.Database.MySqlServer90, FuseCP.Providers.Database.MySQL"
+                            ProviderType = "SolidCP.Providers.Database.MySqlServer90, SolidCP.Providers.Database.MySQL"
                         },
                         new
                         {
@@ -4732,7 +4732,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperV2012R2",
                             GroupId = 33,
                             ProviderName = "HyperV2012R2",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperV2012R2, FuseCP.Providers.Virtualization.HyperV2012R2"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperV2012R2, SolidCP.Providers.Virtualization.HyperV2012R2"
                         },
                         new
                         {
@@ -4742,7 +4742,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperVvmm",
                             GroupId = 33,
                             ProviderName = "HyperVvmm",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperVvmm, FuseCP.Providers.Virtualization.HyperVvmm"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperVvmm, SolidCP.Providers.Virtualization.HyperVvmm"
                         },
                         new
                         {
@@ -4752,7 +4752,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperV2012R2",
                             GroupId = 33,
                             ProviderName = "HyperV2016",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperV2016, FuseCP.Providers.Virtualization.HyperV2016"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperV2016, SolidCP.Providers.Virtualization.HyperV2016"
                         },
                         new
                         {
@@ -4762,7 +4762,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Proxmox",
                             GroupId = 167,
                             ProviderName = "Proxmox (remote)",
-                            ProviderType = "FuseCP.Providers.Virtualization.Proxmoxvps, FuseCP.Providers.Virtualization.Proxmoxvps"
+                            ProviderType = "SolidCP.Providers.Virtualization.Proxmoxvps, SolidCP.Providers.Virtualization.Proxmoxvps"
                         },
                         new
                         {
@@ -4772,7 +4772,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Proxmox",
                             GroupId = 167,
                             ProviderName = "Proxmox",
-                            ProviderType = "FuseCP.Providers.Virtualization.ProxmoxvpsLocal, FuseCP.Providers.Virtualization.Proxmoxvps"
+                            ProviderType = "SolidCP.Providers.Virtualization.ProxmoxvpsLocal, SolidCP.Providers.Virtualization.Proxmoxvps"
                         },
                         new
                         {
@@ -4782,7 +4782,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperVForPrivateCloud",
                             GroupId = 40,
                             ProviderName = "HyperVForPC",
-                            ProviderType = "FuseCP.Providers.VirtualizationForPC.HyperVForPC, FuseCP.Providers.VirtualizationForPC.HyperVForPC"
+                            ProviderType = "SolidCP.Providers.VirtualizationForPC.HyperVForPC, SolidCP.Providers.VirtualizationForPC.HyperVForPC"
                         },
                         new
                         {
@@ -4791,7 +4791,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSDNS",
                             GroupId = 7,
                             ProviderName = "MSDNS.2012",
-                            ProviderType = "FuseCP.Providers.DNS.MsDNS2012, FuseCP.Providers.DNS.MsDNS2012"
+                            ProviderType = "SolidCP.Providers.DNS.MsDNS2012, SolidCP.Providers.DNS.MsDNS2012"
                         },
                         new
                         {
@@ -4800,7 +4800,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Unix",
                             GroupId = 1,
                             ProviderName = "UnixSystem",
-                            ProviderType = "FuseCP.Providers.OS.Unix, FuseCP.Providers.OS.Unix"
+                            ProviderType = "SolidCP.Providers.OS.Unix, SolidCP.Providers.OS.Unix"
                         },
                         new
                         {
@@ -4809,7 +4809,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "EnterpriseStorage",
                             GroupId = 44,
                             ProviderName = "EnterpriseStorage2012",
-                            ProviderType = "FuseCP.Providers.EnterpriseStorage.Windows2012, FuseCP.Providers.EnterpriseStorage.Windows2012"
+                            ProviderType = "SolidCP.Providers.EnterpriseStorage.Windows2012, SolidCP.Providers.EnterpriseStorage.Windows2012"
                         },
                         new
                         {
@@ -4818,7 +4818,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "StorageSpaceServices",
                             GroupId = 49,
                             ProviderName = "StorageSpace2012",
-                            ProviderType = "FuseCP.Providers.StorageSpaces.Windows2012, FuseCP.Providers.StorageSpaces.Windows2012"
+                            ProviderType = "SolidCP.Providers.StorageSpaces.Windows2012, SolidCP.Providers.StorageSpaces.Windows2012"
                         },
                         new
                         {
@@ -4827,7 +4827,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "CRM2011",
                             GroupId = 21,
                             ProviderName = "CRM",
-                            ProviderType = "FuseCP.Providers.HostedSolution.CRMProvider2011, FuseCP.Providers.HostedSolution.CRM2011"
+                            ProviderType = "SolidCP.Providers.HostedSolution.CRMProvider2011, SolidCP.Providers.HostedSolution.CRM2011"
                         },
                         new
                         {
@@ -4836,7 +4836,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "CRM2011",
                             GroupId = 24,
                             ProviderName = "CRM",
-                            ProviderType = "FuseCP.Providers.HostedSolution.CRMProvider2013, FuseCP.Providers.HostedSolution.Crm2013"
+                            ProviderType = "SolidCP.Providers.HostedSolution.CRMProvider2013, SolidCP.Providers.HostedSolution.Crm2013"
                         },
                         new
                         {
@@ -4845,7 +4845,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 46,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2014, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2014, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -4854,7 +4854,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "CRM2011",
                             GroupId = 24,
                             ProviderName = "CRM",
-                            ProviderType = "FuseCP.Providers.HostedSolution.CRMProvider2015, FuseCP.Providers.HostedSolution.Crm2015"
+                            ProviderType = "SolidCP.Providers.HostedSolution.CRMProvider2015, SolidCP.Providers.HostedSolution.Crm2015"
                         },
                         new
                         {
@@ -4863,7 +4863,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "CRM2011",
                             GroupId = 24,
                             ProviderName = "CRM",
-                            ProviderType = "FuseCP.Providers.HostedSolution.CRMProvider2016, FuseCP.Providers.HostedSolution.Crm2016"
+                            ProviderType = "SolidCP.Providers.HostedSolution.CRMProvider2016, SolidCP.Providers.HostedSolution.Crm2016"
                         },
                         new
                         {
@@ -4872,7 +4872,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 20,
                             ProviderName = "HostedSharePoint2013",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer2013, FuseCP.Providers.HostedSolution.SharePoint2013"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer2013, SolidCP.Providers.HostedSolution.SharePoint2013"
                         },
                         new
                         {
@@ -4881,7 +4881,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 20,
                             ProviderName = "HostedSharePoint2016",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer2016, FuseCP.Providers.HostedSolution.SharePoint2016"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer2016, SolidCP.Providers.HostedSolution.SharePoint2016"
                         },
                         new
                         {
@@ -4890,7 +4890,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Lync",
                             GroupId = 41,
                             ProviderName = "Lync2013",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Lync2013, FuseCP.Providers.HostedSolution.Lync2013"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Lync2013, SolidCP.Providers.HostedSolution.Lync2013"
                         },
                         new
                         {
@@ -4899,7 +4899,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Lync",
                             GroupId = 41,
                             ProviderName = "Lync2013HP",
-                            ProviderType = "FuseCP.Providers.HostedSolution.Lync2013HP, FuseCP.Providers.HostedSolution.Lync2013HP"
+                            ProviderType = "SolidCP.Providers.HostedSolution.Lync2013HP, SolidCP.Providers.HostedSolution.Lync2013HP"
                         },
                         new
                         {
@@ -4908,7 +4908,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SfB",
                             GroupId = 52,
                             ProviderName = "SfB2015",
-                            ProviderType = "FuseCP.Providers.HostedSolution.SfB2015, FuseCP.Providers.HostedSolution.SfB2015"
+                            ProviderType = "SolidCP.Providers.HostedSolution.SfB2015, SolidCP.Providers.HostedSolution.SfB2015"
                         },
                         new
                         {
@@ -4917,7 +4917,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SfB",
                             GroupId = 52,
                             ProviderName = "SfB2019",
-                            ProviderType = "FuseCP.Providers.HostedSolution.SfB2019, FuseCP.Providers.HostedSolution.SfB2019"
+                            ProviderType = "SolidCP.Providers.HostedSolution.SfB2019, SolidCP.Providers.HostedSolution.SfB2019"
                         },
                         new
                         {
@@ -4927,7 +4927,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "RDS",
                             GroupId = 45,
                             ProviderName = "RemoteDesktopServices2012",
-                            ProviderType = "FuseCP.Providers.RemoteDesktopServices.Windows2012,FuseCP.Providers.RemoteDesktopServices.Windows2012"
+                            ProviderType = "SolidCP.Providers.RemoteDesktopServices.Windows2012,SolidCP.Providers.RemoteDesktopServices.Windows2012"
                         },
                         new
                         {
@@ -4937,7 +4937,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "RDS",
                             GroupId = 45,
                             ProviderName = "RemoteDesktopServices2012",
-                            ProviderType = "FuseCP.Providers.RemoteDesktopServices.Windows2016,FuseCP.Providers.RemoteDesktopServices.Windows2016"
+                            ProviderType = "SolidCP.Providers.RemoteDesktopServices.Windows2016,SolidCP.Providers.RemoteDesktopServices.Windows2016"
                         },
                         new
                         {
@@ -4947,7 +4947,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "RDS",
                             GroupId = 45,
                             ProviderName = "RemoteDesktopServices2019",
-                            ProviderType = "FuseCP.Providers.RemoteDesktopServices.Windows2019,FuseCP.Providers.RemoteDesktopServices.Windows2019"
+                            ProviderType = "SolidCP.Providers.RemoteDesktopServices.Windows2019,SolidCP.Providers.RemoteDesktopServices.Windows2019"
                         },
                         new
                         {
@@ -4957,7 +4957,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "RDS",
                             GroupId = 45,
                             ProviderName = "RemoteDesktopServices2022",
-                            ProviderType = "FuseCP.Providers.RemoteDesktopServices.Windows2022,FuseCP.Providers.RemoteDesktopServices.Windows2022"
+                            ProviderType = "SolidCP.Providers.RemoteDesktopServices.Windows2022,SolidCP.Providers.RemoteDesktopServices.Windows2022"
                         },
                         new
                         {
@@ -4967,7 +4967,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "RDS",
                             GroupId = 45,
                             ProviderName = "RemoteDesktopServices2025",
-                            ProviderType = "FuseCP.Providers.RemoteDesktopServices.Windows2025,FuseCP.Providers.RemoteDesktopServices.Windows2025"
+                            ProviderType = "SolidCP.Providers.RemoteDesktopServices.Windows2025,SolidCP.Providers.RemoteDesktopServices.Windows2025"
                         },
                         new
                         {
@@ -4976,7 +4976,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB101, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB101, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -4985,7 +4985,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 73,
                             ProviderName = "HostedSharePoint2013Ent",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer2013Ent, FuseCP.Providers.HostedSolution.SharePoint2013Ent"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer2013Ent, SolidCP.Providers.HostedSolution.SharePoint2013Ent"
                         },
                         new
                         {
@@ -4994,7 +4994,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB102, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB102, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5003,7 +5003,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB103, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB103, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5012,7 +5012,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB104, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB104, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5021,7 +5021,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB105, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB105, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5030,7 +5030,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB106, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB106, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5039,7 +5039,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB107, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB107, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5048,7 +5048,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB108, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB108, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5057,7 +5057,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB109, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB109, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5066,7 +5066,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB1010, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB1010, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5075,7 +5075,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB1011, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB1011, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5084,7 +5084,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB110, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB110, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5093,7 +5093,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB111, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB111, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5102,7 +5102,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB112, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB112, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5111,7 +5111,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB113, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB113, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5120,7 +5120,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB114, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB114, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5129,7 +5129,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB115, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB115, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5138,7 +5138,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB116, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB116, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5147,7 +5147,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MariaDB",
                             GroupId = 50,
                             ProviderName = "MariaDB",
-                            ProviderType = "FuseCP.Providers.Database.MariaDB117, FuseCP.Providers.Database.MariaDB"
+                            ProviderType = "SolidCP.Providers.Database.MariaDB117, SolidCP.Providers.Database.MariaDB"
                         },
                         new
                         {
@@ -5157,7 +5157,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MailCleaner",
                             GroupId = 61,
                             ProviderName = "MailCleaner",
-                            ProviderType = "FuseCP.Providers.Filters.MailCleaner, FuseCP.Providers.Filters.MailCleaner"
+                            ProviderType = "SolidCP.Providers.Filters.MailCleaner, SolidCP.Providers.Filters.MailCleaner"
                         },
                         new
                         {
@@ -5167,7 +5167,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SpamExperts",
                             GroupId = 61,
                             ProviderName = "SpamExperts",
-                            ProviderType = "FuseCP.Providers.Filters.SpamExperts, FuseCP.Providers.Filters.SpamExperts"
+                            ProviderType = "SolidCP.Providers.Filters.SpamExperts, SolidCP.Providers.Filters.SpamExperts"
                         },
                         new
                         {
@@ -5176,7 +5176,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 71,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2016, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2016, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -5185,7 +5185,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 73,
                             ProviderName = "HostedSharePoint2016Ent",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer2016Ent, FuseCP.Providers.HostedSolution.SharePoint2016Ent"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer2016Ent, SolidCP.Providers.HostedSolution.SharePoint2016Ent"
                         },
                         new
                         {
@@ -5194,7 +5194,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SimpleDNS",
                             GroupId = 7,
                             ProviderName = "SimpleDNS",
-                            ProviderType = "FuseCP.Providers.DNS.SimpleDNS6, FuseCP.Providers.DNS.SimpleDNS60"
+                            ProviderType = "SolidCP.Providers.DNS.SimpleDNS6, SolidCP.Providers.DNS.SimpleDNS60"
                         },
                         new
                         {
@@ -5203,7 +5203,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 72,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2017, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2017, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -5212,7 +5212,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 74,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2019, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2019, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -5221,7 +5221,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 75,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2022, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2022, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -5230,7 +5230,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSSQL",
                             GroupId = 76,
                             ProviderName = "MsSQL",
-                            ProviderType = "FuseCP.Providers.Database.MsSqlServer2025, FuseCP.Providers.Database.SqlServer"
+                            ProviderType = "SolidCP.Providers.Database.MsSqlServer2025, SolidCP.Providers.Database.SqlServer"
                         },
                         new
                         {
@@ -5239,7 +5239,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HostedSharePoint30",
                             GroupId = 73,
                             ProviderName = "HostedSharePoint2019",
-                            ProviderType = "FuseCP.Providers.HostedSolution.HostedSharePointServer2019, FuseCP.Providers.HostedSolution.SharePoint2019"
+                            ProviderType = "SolidCP.Providers.HostedSolution.HostedSharePointServer2019, SolidCP.Providers.HostedSolution.SharePoint2019"
                         },
                         new
                         {
@@ -5248,7 +5248,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2012",
                             GroupId = 1,
                             ProviderName = "Windows2019",
-                            ProviderType = "FuseCP.Providers.OS.Windows2019, FuseCP.Providers.OS.Windows2019"
+                            ProviderType = "SolidCP.Providers.OS.Windows2019, SolidCP.Providers.OS.Windows2019"
                         },
                         new
                         {
@@ -5258,7 +5258,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperV2012R2",
                             GroupId = 33,
                             ProviderName = "HyperV2019",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperV2019, FuseCP.Providers.Virtualization.HyperV2019"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperV2019, SolidCP.Providers.Virtualization.HyperV2019"
                         },
                         new
                         {
@@ -5267,7 +5267,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2012",
                             GroupId = 1,
                             ProviderName = "Windows2022",
-                            ProviderType = "FuseCP.Providers.OS.Windows2022, FuseCP.Providers.OS.Windows2022"
+                            ProviderType = "SolidCP.Providers.OS.Windows2022, SolidCP.Providers.OS.Windows2022"
                         },
                         new
                         {
@@ -5277,7 +5277,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperV2012R2",
                             GroupId = 33,
                             ProviderName = "HyperV2022",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperV2022, FuseCP.Providers.Virtualization.HyperV2022"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperV2022, SolidCP.Providers.Virtualization.HyperV2022"
                         },
                         new
                         {
@@ -5286,7 +5286,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Windows2012",
                             GroupId = 1,
                             ProviderName = "Windows2025",
-                            ProviderType = "FuseCP.Providers.OS.Windows2025, FuseCP.Providers.OS.Windows2025"
+                            ProviderType = "SolidCP.Providers.OS.Windows2025, SolidCP.Providers.OS.Windows2025"
                         },
                         new
                         {
@@ -5296,7 +5296,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "HyperV2012R2",
                             GroupId = 33,
                             ProviderName = "HyperV2025",
-                            ProviderType = "FuseCP.Providers.Virtualization.HyperV2025, FuseCP.Providers.Virtualization.HyperV2025"
+                            ProviderType = "SolidCP.Providers.Virtualization.HyperV2025, SolidCP.Providers.Virtualization.HyperV2025"
                         },
                         new
                         {
@@ -5305,7 +5305,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SimpleDNS",
                             GroupId = 7,
                             ProviderName = "SimpleDNS",
-                            ProviderType = "FuseCP.Providers.DNS.SimpleDNS8, FuseCP.Providers.DNS.SimpleDNS80"
+                            ProviderType = "SolidCP.Providers.DNS.SimpleDNS8, SolidCP.Providers.DNS.SimpleDNS80"
                         },
                         new
                         {
@@ -5314,7 +5314,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "MSDNS",
                             GroupId = 7,
                             ProviderName = "MSDNS.2016",
-                            ProviderType = "FuseCP.Providers.DNS.MsDNS2016, FuseCP.Providers.DNS.MsDNS2016"
+                            ProviderType = "SolidCP.Providers.DNS.MsDNS2016, SolidCP.Providers.DNS.MsDNS2016"
                         },
                         new
                         {
@@ -5323,7 +5323,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "SimpleDNS",
                             GroupId = 7,
                             ProviderName = "SimpleDNS",
-                            ProviderType = "FuseCP.Providers.DNS.SimpleDNS9, FuseCP.Providers.DNS.SimpleDNS90"
+                            ProviderType = "SolidCP.Providers.DNS.SimpleDNS9, SolidCP.Providers.DNS.SimpleDNS90"
                         },
                         new
                         {
@@ -5332,7 +5332,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "vsftpd",
                             GroupId = 3,
                             ProviderName = "vsftpd",
-                            ProviderType = "FuseCP.Providers.FTP.VsFtp3, FuseCP.Providers.FTP.VsFtp"
+                            ProviderType = "SolidCP.Providers.FTP.VsFtp3, SolidCP.Providers.FTP.VsFtp"
                         },
                         new
                         {
@@ -5341,7 +5341,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             EditorControl = "Apache",
                             GroupId = 2,
                             ProviderName = "Apache",
-                            ProviderType = "FuseCP.Providers.Web.Apache24, FuseCP.Providers.Web.Apache"
+                            ProviderType = "SolidCP.Providers.Web.Apache24, SolidCP.Providers.Web.Apache"
                         });
                 });
 
@@ -8627,7 +8627,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             QuotaId = 729,
                             GroupId = 12,
-                            QuotaDescription = "Automatic Replies via FuseCP Allowed",
+                            QuotaDescription = "Automatic Replies via SolidCP Allowed",
                             QuotaName = "Exchange2013.AutoReply",
                             QuotaOrder = 32.0,
                             QuotaTypeId = 1,
@@ -9155,7 +9155,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 1,
-                            GroupController = "FuseCP.EnterpriseServer.OperatingSystemController",
+                            GroupController = "SolidCP.EnterpriseServer.OperatingSystemController",
                             GroupName = "OS",
                             GroupOrder = 1,
                             ShowGroup = true
@@ -9163,7 +9163,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 2,
-                            GroupController = "FuseCP.EnterpriseServer.WebServerController",
+                            GroupController = "SolidCP.EnterpriseServer.WebServerController",
                             GroupName = "Web",
                             GroupOrder = 2,
                             ShowGroup = true
@@ -9171,7 +9171,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 3,
-                            GroupController = "FuseCP.EnterpriseServer.FtpServerController",
+                            GroupController = "SolidCP.EnterpriseServer.FtpServerController",
                             GroupName = "FTP",
                             GroupOrder = 3,
                             ShowGroup = true
@@ -9179,7 +9179,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 4,
-                            GroupController = "FuseCP.EnterpriseServer.MailServerController",
+                            GroupController = "SolidCP.EnterpriseServer.MailServerController",
                             GroupName = "Mail",
                             GroupOrder = 4,
                             ShowGroup = true
@@ -9187,7 +9187,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 5,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2000",
                             GroupOrder = 7,
                             ShowGroup = true
@@ -9195,7 +9195,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 6,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MySQL4",
                             GroupOrder = 11,
                             ShowGroup = true
@@ -9203,7 +9203,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 7,
-                            GroupController = "FuseCP.EnterpriseServer.DnsServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DnsServerController",
                             GroupName = "DNS",
                             GroupOrder = 17,
                             ShowGroup = true
@@ -9211,7 +9211,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 8,
-                            GroupController = "FuseCP.EnterpriseServer.StatisticsServerController",
+                            GroupController = "SolidCP.EnterpriseServer.StatisticsServerController",
                             GroupName = "Statistics",
                             GroupOrder = 18,
                             ShowGroup = true
@@ -9219,7 +9219,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 10,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2005",
                             GroupOrder = 8,
                             ShowGroup = true
@@ -9227,7 +9227,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 11,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MySQL5",
                             GroupOrder = 12,
                             ShowGroup = true
@@ -9249,7 +9249,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 20,
-                            GroupController = "FuseCP.EnterpriseServer.HostedSharePointServerController",
+                            GroupController = "SolidCP.EnterpriseServer.HostedSharePointServerController",
                             GroupName = "Sharepoint Foundation Server",
                             GroupOrder = 14,
                             ShowGroup = true
@@ -9264,7 +9264,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 22,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2008",
                             GroupOrder = 9,
                             ShowGroup = true
@@ -9272,7 +9272,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 23,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2012",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9329,7 +9329,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 44,
-                            GroupController = "FuseCP.EnterpriseServer.EnterpriseStorageController",
+                            GroupController = "SolidCP.EnterpriseServer.EnterpriseStorageController",
                             GroupName = "EnterpriseStorage",
                             GroupOrder = 26,
                             ShowGroup = true
@@ -9344,7 +9344,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 46,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2014",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9359,7 +9359,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 49,
-                            GroupController = "FuseCP.EnterpriseServer.StorageSpacesController",
+                            GroupController = "SolidCP.EnterpriseServer.StorageSpacesController",
                             GroupName = "StorageSpaceServices",
                             GroupOrder = 26,
                             ShowGroup = true
@@ -9367,7 +9367,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 50,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MariaDB",
                             GroupOrder = 11,
                             ShowGroup = true
@@ -9389,7 +9389,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 71,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2016",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9397,7 +9397,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 72,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2017",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9405,7 +9405,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 73,
-                            GroupController = "FuseCP.EnterpriseServer.HostedSharePointServerEntController",
+                            GroupController = "SolidCP.EnterpriseServer.HostedSharePointServerEntController",
                             GroupName = "Sharepoint Enterprise Server",
                             GroupOrder = 15,
                             ShowGroup = true
@@ -9413,7 +9413,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 74,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2019",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9421,7 +9421,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 75,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2022",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9429,7 +9429,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 76,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MsSQL2025",
                             GroupOrder = 10,
                             ShowGroup = true
@@ -9437,7 +9437,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 90,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MySQL8",
                             GroupOrder = 12,
                             ShowGroup = true
@@ -9445,7 +9445,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             GroupId = 91,
-                            GroupController = "FuseCP.EnterpriseServer.DatabaseServerController",
+                            GroupController = "SolidCP.EnterpriseServer.DatabaseServerController",
                             GroupName = "MySQL9",
                             GroupOrder = 12,
                             ShowGroup = true
@@ -9837,145 +9837,145 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             TaskId = "SCHEDULE_TASK_ACTIVATE_PAID_INVOICES",
                             RoleId = 0,
-                            TaskType = "FuseCP.Ecommerce.EnterpriseServer.ActivatePaidInvoicesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.Ecommerce.EnterpriseServer.ActivatePaidInvoicesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_AUDIT_LOG_REPORT",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.AuditLogReportTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.AuditLogReportTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_BACKUP",
                             RoleId = 1,
-                            TaskType = "FuseCP.EnterpriseServer.BackupTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.BackupTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_BACKUP_DATABASE",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.BackupDatabaseTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.BackupDatabaseTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_CALCULATE_EXCHANGE_DISKSPACE",
                             RoleId = 2,
-                            TaskType = "FuseCP.EnterpriseServer.CalculateExchangeDiskspaceTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.CalculateExchangeDiskspaceTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_CALCULATE_PACKAGES_BANDWIDTH",
                             RoleId = 1,
-                            TaskType = "FuseCP.EnterpriseServer.CalculatePackagesBandwidthTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.CalculatePackagesBandwidthTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_CALCULATE_PACKAGES_DISKSPACE",
                             RoleId = 1,
-                            TaskType = "FuseCP.EnterpriseServer.CalculatePackagesDiskspaceTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.CalculatePackagesDiskspaceTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_CANCEL_OVERDUE_INVOICES",
                             RoleId = 0,
-                            TaskType = "FuseCP.Ecommerce.EnterpriseServer.CancelOverdueInvoicesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.Ecommerce.EnterpriseServer.CancelOverdueInvoicesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_CHECK_WEBSITE",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.CheckWebSiteTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.CheckWebSiteTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_DELETE_EXCHANGE_ACCOUNTS",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.DeleteExchangeAccountsTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.DeleteExchangeAccountsTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_DOMAIN_EXPIRATION",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.DomainExpirationTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.DomainExpirationTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_DOMAIN_LOOKUP",
                             RoleId = 1,
-                            TaskType = "FuseCP.EnterpriseServer.DomainLookupViewTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.DomainLookupViewTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_FTP_FILES",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.FTPFilesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.FTPFilesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_GENERATE_INVOICES",
                             RoleId = 0,
-                            TaskType = "FuseCP.Ecommerce.EnterpriseServer.GenerateInvoicesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.Ecommerce.EnterpriseServer.GenerateInvoicesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_HOSTED_SOLUTION_REPORT",
                             RoleId = 2,
-                            TaskType = "FuseCP.EnterpriseServer.HostedSolutionReportTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.HostedSolutionReportTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_NOTIFY_OVERUSED_DATABASES",
                             RoleId = 2,
-                            TaskType = "FuseCP.EnterpriseServer.NotifyOverusedDatabasesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.NotifyOverusedDatabasesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_RUN_PAYMENT_QUEUE",
                             RoleId = 0,
-                            TaskType = "FuseCP.Ecommerce.EnterpriseServer.RunPaymentQueueTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.Ecommerce.EnterpriseServer.RunPaymentQueueTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_RUN_SYSTEM_COMMAND",
                             RoleId = 1,
-                            TaskType = "FuseCP.EnterpriseServer.RunSystemCommandTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.RunSystemCommandTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_SEND_MAIL",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.SendMailNotificationTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.SendMailNotificationTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_SUSPEND_OVERDUE_INVOICES",
                             RoleId = 0,
-                            TaskType = "FuseCP.Ecommerce.EnterpriseServer.SuspendOverdueInvoicesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.Ecommerce.EnterpriseServer.SuspendOverdueInvoicesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_SUSPEND_PACKAGES",
                             RoleId = 2,
-                            TaskType = "FuseCP.EnterpriseServer.SuspendOverusedPackagesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.SuspendOverusedPackagesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_USER_PASSWORD_EXPIRATION_NOTIFICATION",
                             RoleId = 1,
-                            TaskType = "FuseCP.EnterpriseServer.UserPasswordExpirationNotificationTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.UserPasswordExpirationNotificationTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_ZIP_FILES",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.ZipFilesTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.ZipFilesTask, SolidCP.EnterpriseServer.Code"
                         },
                         new
                         {
                             TaskId = "SCHEDULE_TASK_CHECK_WEBSITES_SSL",
                             RoleId = 3,
-                            TaskType = "FuseCP.EnterpriseServer.CheckWebsitesSslTask, FuseCP.EnterpriseServer.Code"
+                            TaskType = "SolidCP.EnterpriseServer.CheckWebsitesSslTask, SolidCP.EnterpriseServer.Code"
                         });
                 });
 
@@ -10821,161 +10821,161 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_ACTIVATE_PAID_INVOICES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_AUDIT_LOG_REPORT",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/AuditLogReportView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/AuditLogReportView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_BACKUP",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/Backup.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/Backup.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_BACKUP_DATABASE",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/BackupDatabase.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/BackupDatabase.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_CALCULATE_EXCHANGE_DISKSPACE",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_CALCULATE_PACKAGES_BANDWIDTH",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_CALCULATE_PACKAGES_DISKSPACE",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_CANCEL_OVERDUE_INVOICES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_CHECK_WEBSITE",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/CheckWebsite.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/CheckWebsite.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_DOMAIN_EXPIRATION",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/DomainExpirationView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/DomainExpirationView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_DOMAIN_LOOKUP",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/DomainLookupView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/DomainLookupView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_FTP_FILES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/SendFilesViaFtp.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/SendFilesViaFtp.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_GENERATE_INVOICES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_HOSTED_SOLUTION_REPORT",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/HostedSolutionReport.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/HostedSolutionReport.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_NOTIFY_OVERUSED_DATABASES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/NotifyOverusedDatabases.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/NotifyOverusedDatabases.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_RUN_PAYMENT_QUEUE",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_RUN_SYSTEM_COMMAND",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/ExecuteSystemCommand.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/ExecuteSystemCommand.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_SEND_MAIL",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/SendEmailNotification.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/SendEmailNotification.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_SUSPEND_OVERDUE_INVOICES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/EmptyView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/EmptyView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_SUSPEND_PACKAGES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/SuspendOverusedSpaces.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/SuspendOverusedSpaces.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_USER_PASSWORD_EXPIRATION_NOTIFICATION",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/UserPasswordExpirationNotificationView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/UserPasswordExpirationNotificationView.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_ZIP_FILES",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/ZipFiles.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/ZipFiles.ascx",
                             Environment = "ASP.NET"
                         },
                         new
                         {
                             ConfigurationId = "ASP_NET",
                             TaskId = "SCHEDULE_TASK_CHECK_WEBSITES_SSL",
-                            Description = "~/DesktopModules/FuseCP/ScheduleTaskControls/CheckWebsitesSslView.ascx",
+                            Description = "~/DesktopModules/SolidCP/ScheduleTaskControls/CheckWebsitesSslView.ascx",
                             Environment = "ASP.NET"
                         });
                 });
@@ -12478,7 +12478,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             ProviderId = 101,
                             PropertyName = "SecureFoldersModuleAssembly",
-                            PropertyValue = "FuseCP.IIsModules.SecureFolders, FuseCP.IIsModules, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=37f9c58a0aa32ff0"
+                            PropertyValue = "SolidCP.IIsModules.SecureFolders, SolidCP.IIsModules, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=37f9c58a0aa32ff0"
                         },
                         new
                         {
@@ -12628,7 +12628,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             ProviderId = 105,
                             PropertyName = "SecureFoldersModuleAssembly",
-                            PropertyValue = "FuseCP.IIsModules.SecureFolders, FuseCP.IIsModules, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=37f9c58a0aa32ff0"
+                            PropertyValue = "SolidCP.IIsModules.SecureFolders, SolidCP.IIsModules, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=37f9c58a0aa32ff0"
                         },
                         new
                         {
@@ -12790,7 +12790,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             ProviderId = 112,
                             PropertyName = "SecureFoldersModuleAssembly",
-                            PropertyValue = "FuseCP.IIsModules.SecureFolders, FuseCP.IIsModules, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=37f9c58a0aa32ff0"
+                            PropertyValue = "SolidCP.IIsModules.SecureFolders, SolidCP.IIsModules, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=37f9c58a0aa32ff0"
                         },
                         new
                         {
@@ -14126,7 +14126,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = false,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.OS.HomeFolder, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.OS.HomeFolder, SolidCP.Providers.Base",
                             TypeOrder = 15
                         },
                         new
@@ -14141,7 +14141,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 9
                         },
                         new
@@ -14156,7 +14156,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 10
                         },
                         new
@@ -14171,7 +14171,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 13
                         },
                         new
@@ -14186,7 +14186,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 14
                         },
                         new
@@ -14201,7 +14201,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.FTP.FtpAccount, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.FTP.FtpAccount, SolidCP.Providers.Base",
                             TypeOrder = 3
                         },
                         new
@@ -14216,7 +14216,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Web.WebSite, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Web.WebSite, SolidCP.Providers.Base",
                             TypeOrder = 2
                         },
                         new
@@ -14231,7 +14231,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Mail.MailDomain, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Mail.MailDomain, SolidCP.Providers.Base",
                             TypeOrder = 8
                         },
                         new
@@ -14246,7 +14246,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = false,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.DNS.DnsZone, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.DNS.DnsZone, SolidCP.Providers.Base",
                             TypeOrder = 0
                         },
                         new
@@ -14261,7 +14261,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.OS.Domain, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.OS.Domain, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14276,7 +14276,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Statistics.StatsSite, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Statistics.StatsSite, SolidCP.Providers.Base",
                             TypeOrder = 17
                         },
                         new
@@ -14291,7 +14291,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Mail.MailAccount, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Mail.MailAccount, SolidCP.Providers.Base",
                             TypeOrder = 4
                         },
                         new
@@ -14306,7 +14306,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Mail.MailAlias, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Mail.MailAlias, SolidCP.Providers.Base",
                             TypeOrder = 5
                         },
                         new
@@ -14321,7 +14321,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Mail.MailList, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Mail.MailList, SolidCP.Providers.Base",
                             TypeOrder = 7
                         },
                         new
@@ -14336,7 +14336,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Mail.MailGroup, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Mail.MailGroup, SolidCP.Providers.Base",
                             TypeOrder = 6
                         },
                         new
@@ -14351,7 +14351,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.OS.SystemDSN, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.OS.SystemDSN, SolidCP.Providers.Base",
                             TypeOrder = 22
                         },
                         new
@@ -14366,7 +14366,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 11
                         },
                         new
@@ -14381,7 +14381,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 12
                         },
                         new
@@ -14396,7 +14396,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 15
                         },
                         new
@@ -14411,7 +14411,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 16
                         },
                         new
@@ -14426,7 +14426,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Web.SharedSSLFolder, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Web.SharedSSLFolder, SolidCP.Providers.Base",
                             TypeOrder = 21
                         },
                         new
@@ -14441,7 +14441,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = false,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.DNS.SecondaryDnsZone, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.DNS.SecondaryDnsZone, SolidCP.Providers.Base",
                             TypeOrder = 0
                         },
                         new
@@ -14456,7 +14456,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.HostedSolution.Organization, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.HostedSolution.Organization, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14466,7 +14466,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             DisplayName = "OrganizationDomain",
                             GroupId = 13,
                             Importable = false,
-                            TypeName = "FuseCP.Providers.HostedSolution.OrganizationDomain, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.HostedSolution.OrganizationDomain, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14481,7 +14481,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14496,7 +14496,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14511,7 +14511,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualMachine, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualMachine, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14526,7 +14526,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualSwitch, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualSwitch, SolidCP.Providers.Base",
                             TypeOrder = 2
                         },
                         new
@@ -14541,7 +14541,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VMInfo, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VMInfo, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14556,7 +14556,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualSwitch, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualSwitch, SolidCP.Providers.Base",
                             TypeOrder = 2
                         },
                         new
@@ -14571,7 +14571,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14586,7 +14586,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14601,7 +14601,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14616,7 +14616,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14631,7 +14631,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualMachine, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualMachine, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14646,7 +14646,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualSwitch, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualSwitch, SolidCP.Providers.Base",
                             TypeOrder = 2
                         },
                         new
@@ -14661,7 +14661,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14676,7 +14676,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14691,7 +14691,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14706,7 +14706,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14721,7 +14721,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 18
                         },
                         new
@@ -14736,7 +14736,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 19
                         },
                         new
@@ -14751,7 +14751,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14766,7 +14766,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14781,7 +14781,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14796,7 +14796,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14811,7 +14811,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 20
                         },
                         new
@@ -14826,7 +14826,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 21
                         },
                         new
@@ -14841,7 +14841,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualMachine, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualMachine, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14856,7 +14856,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = false,
                             Searchable = true,
                             Suspendable = true,
-                            TypeName = "FuseCP.Providers.Virtualization.VirtualSwitch, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Virtualization.VirtualSwitch, SolidCP.Providers.Base",
                             TypeOrder = 2
                         },
                         new
@@ -14871,7 +14871,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.SharePoint.SharePointSiteCollection, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.SharePoint.SharePointSiteCollection, SolidCP.Providers.Base",
                             TypeOrder = 25
                         },
                         new
@@ -14886,7 +14886,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14901,7 +14901,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14916,7 +14916,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.SharePoint.SharePointEnterpriseSiteCollection, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.SharePoint.SharePointEnterpriseSiteCollection, SolidCP.Providers.Base",
                             TypeOrder = 100
                         },
                         new
@@ -14931,7 +14931,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlDatabase, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlDatabase, SolidCP.Providers.Base",
                             TypeOrder = 1
                         },
                         new
@@ -14946,7 +14946,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             Importable = true,
                             Searchable = true,
                             Suspendable = false,
-                            TypeName = "FuseCP.Providers.Database.SqlUser, FuseCP.Providers.Base",
+                            TypeName = "SolidCP.Providers.Database.SqlUser, SolidCP.Providers.Base",
                             TypeOrder = 1
                         });
                 });
@@ -15369,7 +15369,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         {
                             SettingsName = "AuthenticationSettings",
                             PropertyName = "MfaTokenAppDisplayName",
-                            PropertyValue = "FuseCP"
+                            PropertyValue = "SolidCP"
                         },
                         new
                         {
@@ -15470,7 +15470,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             ThemeId = 1,
-                            DisplayName = "FuseCP v1",
+                            DisplayName = "SolidCP v1",
                             DisplayOrder = 1,
                             Enabled = 1,
                             LTRName = "Default",
@@ -15910,7 +15910,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "AccountSummaryLetter",
                             PropertyName = "HtmlBody",
-                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>Account Summary Information</title>\r\n    <style type=\"text/css\">\r\n		.Summary { background-color: ##ffffff; padding: 5px; }\r\n		.Summary .Header { padding: 10px 0px 10px 10px; font-size: 16pt; background-color: ##E5F2FF; color: ##1F4978; border-bottom: solid 2px ##86B9F7; }\r\n        .Summary A { color: ##0153A4; }\r\n        .Summary { font-family: Tahoma; font-size: 9pt; }\r\n        .Summary H1 { font-size: 1.7em; color: ##1F4978; border-bottom: dotted 3px ##efefef; }\r\n        .Summary H2 { font-size: 1.3em; color: ##1F4978; }\r\n        .Summary TABLE { border: solid 1px ##e5e5e5; }\r\n        .Summary TH,\r\n        .Summary TD.Label { padding: 5px; font-size: 8pt; font-weight: bold; background-color: ##f5f5f5; }\r\n        .Summary TD { padding: 8px; font-size: 9pt; }\r\n        .Summary UL LI { font-size: 1.1em; font-weight: bold; }\r\n        .Summary UL UL LI { font-size: 0.9em; font-weight: normal; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"Summary\">\r\n\r\n<a name=\"top\"></a>\r\n<div class=\"Header\">\r\n	Hosting Account Information\r\n</div>\r\n\r\n<ad:if test=\"#Signup#\">\r\n<p>\r\nHello #user.FirstName#,\r\n</p>\r\n\r\n<p>\r\nNew user account has been created and below you can find its summary information.\r\n</p>\r\n\r\n<h1>Control Panel URL</h1>\r\n<table>\r\n    <thead>\r\n        <tr>\r\n            <th>Control Panel URL</th>\r\n            <th>Username</th>\r\n            <th>Password</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr>\r\n            <td><a href=\"http://panel.HostingCompany.com\">http://panel.HostingCompany.com</a></td>\r\n            <td>#user.Username#</td>\r\n            <td>#user.Password#</td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n</ad:if>\r\n\r\n<h1>Hosting Spaces</h1>\r\n<p>\r\n    The following hosting spaces have been created under your account:\r\n</p>\r\n<ad:foreach collection=\"#Spaces#\" var=\"Space\" index=\"i\">\r\n<h2>#Space.PackageName#</h2>\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td class=\"Label\">Hosting Plan:</td>\r\n			<td>\r\n				<ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">#Plans[Space.PlanId].PlanName#<ad:else>System</ad:if>\r\n			</td>\r\n		</tr>\r\n		<ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">\r\n		<tr>\r\n			<td class=\"Label\">Purchase Date:</td>\r\n			<td>\r\n# Space.PurchaseDate#\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Disk Space, MB:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Diskspace\" /></td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Bandwidth, MB/Month:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Bandwidth\" /></td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Maximum Number of Domains:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Domains\" /></td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Maximum Number of Sub-Domains:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.SubDomains\" /></td>\r\n		</tr>\r\n		</ad:if>\r\n	</tbody>\r\n</table>\r\n</ad:foreach>\r\n\r\n<ad:if test=\"#Signup#\">\r\n<p>\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n</p>\r\n\r\n<p>\r\nBest regards,<br />\r\nFuseCP.<br />\r\nWeb Site: <a href=\"https://fusecp.com\">https://fusecp.com</a><br />\r\nE-Mail: <a href=\"mailto:support@fusecp.com\">support@fusecp.com</a>\r\n</p>\r\n</ad:if>\r\n\r\n<ad:template name=\"NumericQuota\">\r\n	<ad:if test=\"#space.Quotas.ContainsKey(quota)#\">\r\n		<ad:if test=\"#space.Quotas[quota].QuotaAllocatedValue isnot -1#\">#space.Quotas[quota].QuotaAllocatedValue#<ad:else>Unlimited</ad:if>\r\n	<ad:else>\r\n		0\r\n	</ad:if>\r\n</ad:template>\r\n\r\n</div>\r\n</body>\r\n</html>"
+                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>Account Summary Information</title>\r\n    <style type=\"text/css\">\r\n		.Summary { background-color: ##ffffff; padding: 5px; }\r\n		.Summary .Header { padding: 10px 0px 10px 10px; font-size: 16pt; background-color: ##E5F2FF; color: ##1F4978; border-bottom: solid 2px ##86B9F7; }\r\n        .Summary A { color: ##0153A4; }\r\n        .Summary { font-family: Tahoma; font-size: 9pt; }\r\n        .Summary H1 { font-size: 1.7em; color: ##1F4978; border-bottom: dotted 3px ##efefef; }\r\n        .Summary H2 { font-size: 1.3em; color: ##1F4978; }\r\n        .Summary TABLE { border: solid 1px ##e5e5e5; }\r\n        .Summary TH,\r\n        .Summary TD.Label { padding: 5px; font-size: 8pt; font-weight: bold; background-color: ##f5f5f5; }\r\n        .Summary TD { padding: 8px; font-size: 9pt; }\r\n        .Summary UL LI { font-size: 1.1em; font-weight: bold; }\r\n        .Summary UL UL LI { font-size: 0.9em; font-weight: normal; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"Summary\">\r\n\r\n<a name=\"top\"></a>\r\n<div class=\"Header\">\r\n	Hosting Account Information\r\n</div>\r\n\r\n<ad:if test=\"#Signup#\">\r\n<p>\r\nHello #user.FirstName#,\r\n</p>\r\n\r\n<p>\r\nNew user account has been created and below you can find its summary information.\r\n</p>\r\n\r\n<h1>Control Panel URL</h1>\r\n<table>\r\n    <thead>\r\n        <tr>\r\n            <th>Control Panel URL</th>\r\n            <th>Username</th>\r\n            <th>Password</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr>\r\n            <td><a href=\"http://panel.HostingCompany.com\">http://panel.HostingCompany.com</a></td>\r\n            <td>#user.Username#</td>\r\n            <td>#user.Password#</td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n</ad:if>\r\n\r\n<h1>Hosting Spaces</h1>\r\n<p>\r\n    The following hosting spaces have been created under your account:\r\n</p>\r\n<ad:foreach collection=\"#Spaces#\" var=\"Space\" index=\"i\">\r\n<h2>#Space.PackageName#</h2>\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td class=\"Label\">Hosting Plan:</td>\r\n			<td>\r\n				<ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">#Plans[Space.PlanId].PlanName#<ad:else>System</ad:if>\r\n			</td>\r\n		</tr>\r\n		<ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">\r\n		<tr>\r\n			<td class=\"Label\">Purchase Date:</td>\r\n			<td>\r\n# Space.PurchaseDate#\r\n			</td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Disk Space, MB:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Diskspace\" /></td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Bandwidth, MB/Month:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Bandwidth\" /></td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Maximum Number of Domains:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Domains\" /></td>\r\n		</tr>\r\n		<tr>\r\n			<td class=\"Label\">Maximum Number of Sub-Domains:</td>\r\n			<td><ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.SubDomains\" /></td>\r\n		</tr>\r\n		</ad:if>\r\n	</tbody>\r\n</table>\r\n</ad:foreach>\r\n\r\n<ad:if test=\"#Signup#\">\r\n<p>\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n</p>\r\n\r\n<p>\r\nBest regards,<br />\r\nSolidCP.<br />\r\nWeb Site: <a href=\"https://solidcp.com\">https://solidcp.com</a><br />\r\nE-Mail: <a href=\"mailto:support@solidcp.com\">support@solidcp.com</a>\r\n</p>\r\n</ad:if>\r\n\r\n<ad:template name=\"NumericQuota\">\r\n	<ad:if test=\"#space.Quotas.ContainsKey(quota)#\">\r\n		<ad:if test=\"#space.Quotas[quota].QuotaAllocatedValue isnot -1#\">#space.Quotas[quota].QuotaAllocatedValue#<ad:else>Unlimited</ad:if>\r\n	<ad:else>\r\n		0\r\n	</ad:if>\r\n</ad:template>\r\n\r\n</div>\r\n</body>\r\n</html>"
                         },
                         new
                         {
@@ -15924,14 +15924,14 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "AccountSummaryLetter",
                             PropertyName = "Subject",
-                            PropertyValue = "<ad:if test=\"#Signup#\">FuseCP  account has been created for<ad:else>FuseCP  account summary for</ad:if> #user.FirstName# #user.LastName#"
+                            PropertyValue = "<ad:if test=\"#Signup#\">SolidCP  account has been created for<ad:else>SolidCP  account summary for</ad:if> #user.FirstName# #user.LastName#"
                         },
                         new
                         {
                             UserId = 1,
                             SettingsName = "AccountSummaryLetter",
                             PropertyName = "TextBody",
-                            PropertyValue = "=================================\r\n   Hosting Account Information\r\n=================================\r\n<ad:if test=\"#Signup#\">Hello #user.FirstName#,\r\n\r\nNew user account has been created and below you can find its summary information.\r\n\r\nControl Panel URL: https://panel.fusecp.com\r\nUsername: #user.Username#\r\nPassword: #user.Password#\r\n</ad:if>\r\n\r\nHosting Spaces\r\n==============\r\nThe following hosting spaces have been created under your account:\r\n\r\n<ad:foreach collection=\"#Spaces#\" var=\"Space\" index=\"i\">\r\n=== #Space.PackageName# ===\r\nHosting Plan: <ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">#Plans[Space.PlanId].PlanName#<ad:else>System</ad:if>\r\n<ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">Purchase Date: #Space.PurchaseDate#\r\nDisk Space, MB: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Diskspace\" />\r\nBandwidth, MB/Month: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Bandwidth\" />\r\nMaximum Number of Domains: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Domains\" />\r\nMaximum Number of Sub-Domains: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.SubDomains\" />\r\n</ad:if>\r\n</ad:foreach>\r\n\r\n<ad:if test=\"#Signup#\">If you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n\r\nBest regards,\r\nFuseCP.\r\nWeb Site: https://fusecp.com\">\r\nE-Mail: support@fusecp.com\r\n</ad:if><ad:template name=\"NumericQuota\"><ad:if test=\"#space.Quotas.ContainsKey(quota)#\"><ad:if test=\"#space.Quotas[quota].QuotaAllocatedValue isnot -1#\">#space.Quotas[quota].QuotaAllocatedValue#<ad:else>Unlimited</ad:if><ad:else>0</ad:if></ad:template>"
+                            PropertyValue = "=================================\r\n   Hosting Account Information\r\n=================================\r\n<ad:if test=\"#Signup#\">Hello #user.FirstName#,\r\n\r\nNew user account has been created and below you can find its summary information.\r\n\r\nControl Panel URL: https://panel.solidcp.com\r\nUsername: #user.Username#\r\nPassword: #user.Password#\r\n</ad:if>\r\n\r\nHosting Spaces\r\n==============\r\nThe following hosting spaces have been created under your account:\r\n\r\n<ad:foreach collection=\"#Spaces#\" var=\"Space\" index=\"i\">\r\n=== #Space.PackageName# ===\r\nHosting Plan: <ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">#Plans[Space.PlanId].PlanName#<ad:else>System</ad:if>\r\n<ad:if test=\"#not(isnull(Plans[Space.PlanId]))#\">Purchase Date: #Space.PurchaseDate#\r\nDisk Space, MB: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Diskspace\" />\r\nBandwidth, MB/Month: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Bandwidth\" />\r\nMaximum Number of Domains: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.Domains\" />\r\nMaximum Number of Sub-Domains: <ad:NumericQuota space=\"#SpaceContexts[Space.PackageId]#\" quota=\"OS.SubDomains\" />\r\n</ad:if>\r\n</ad:foreach>\r\n\r\n<ad:if test=\"#Signup#\">If you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n\r\nBest regards,\r\nSolidCP.\r\nWeb Site: https://solidcp.com\">\r\nE-Mail: support@solidcp.com\r\n</ad:if><ad:template name=\"NumericQuota\"><ad:if test=\"#space.Quotas.ContainsKey(quota)#\"><ad:if test=\"#space.Quotas[quota].QuotaAllocatedValue isnot -1#\">#space.Quotas[quota].QuotaAllocatedValue#<ad:else>Unlimited</ad:if><ad:else>0</ad:if></ad:template>"
                         },
                         new
                         {
@@ -16330,7 +16330,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "PasswordReminderLetter",
                             PropertyName = "HtmlBody",
-                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>Account Summary Information</title>\r\n    <style type=\"text/css\">\r\n		.Summary { background-color: ##ffffff; padding: 5px; }\r\n		.Summary .Header { padding: 10px 0px 10px 10px; font-size: 16pt; background-color: ##E5F2FF; color: ##1F4978; border-bottom: solid 2px ##86B9F7; }\r\n        .Summary A { color: ##0153A4; }\r\n        .Summary { font-family: Tahoma; font-size: 9pt; }\r\n        .Summary H1 { font-size: 1.7em; color: ##1F4978; border-bottom: dotted 3px ##efefef; }\r\n        .Summary H2 { font-size: 1.3em; color: ##1F4978; }\r\n        .Summary TABLE { border: solid 1px ##e5e5e5; }\r\n        .Summary TH,\r\n        .Summary TD.Label { padding: 5px; font-size: 8pt; font-weight: bold; background-color: ##f5f5f5; }\r\n        .Summary TD { padding: 8px; font-size: 9pt; }\r\n        .Summary UL LI { font-size: 1.1em; font-weight: bold; }\r\n        .Summary UL UL LI { font-size: 0.9em; font-weight: normal; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"Summary\">\r\n\r\n<a name=\"top\"></a>\r\n<div class=\"Header\">\r\n	Hosting Account Information\r\n</div>\r\n\r\n<p>\r\nHello #user.FirstName#,\r\n</p>\r\n\r\n<p>\r\nPlease, find below details of your control panel account. The one time password was generated for you. You should change the password after login. \r\n</p>\r\n\r\n<h1>Control Panel URL</h1>\r\n<table>\r\n    <thead>\r\n        <tr>\r\n            <th>Control Panel URL</th>\r\n            <th>Username</th>\r\n            <th>One Time Password</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr>\r\n            <td><a href=\"http://panel.HostingCompany.com\">http://panel.HostingCompany.com</a></td>\r\n            <td>#user.Username#</td>\r\n            <td>#user.Password#</td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n\r\n\r\n<p>\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n</p>\r\n\r\n<p>\r\nBest regards,<br />\r\nFuseCP.<br />\r\nWeb Site: <a href=\"https://fusecp.com\">https://fusecp.com</a><br />\r\nE-Mail: <a href=\"mailto:support@fusecp.com\">support@fusecp.com</a>\r\n</p>\r\n\r\n</div>\r\n</body>\r\n</html>"
+                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>Account Summary Information</title>\r\n    <style type=\"text/css\">\r\n		.Summary { background-color: ##ffffff; padding: 5px; }\r\n		.Summary .Header { padding: 10px 0px 10px 10px; font-size: 16pt; background-color: ##E5F2FF; color: ##1F4978; border-bottom: solid 2px ##86B9F7; }\r\n        .Summary A { color: ##0153A4; }\r\n        .Summary { font-family: Tahoma; font-size: 9pt; }\r\n        .Summary H1 { font-size: 1.7em; color: ##1F4978; border-bottom: dotted 3px ##efefef; }\r\n        .Summary H2 { font-size: 1.3em; color: ##1F4978; }\r\n        .Summary TABLE { border: solid 1px ##e5e5e5; }\r\n        .Summary TH,\r\n        .Summary TD.Label { padding: 5px; font-size: 8pt; font-weight: bold; background-color: ##f5f5f5; }\r\n        .Summary TD { padding: 8px; font-size: 9pt; }\r\n        .Summary UL LI { font-size: 1.1em; font-weight: bold; }\r\n        .Summary UL UL LI { font-size: 0.9em; font-weight: normal; }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"Summary\">\r\n\r\n<a name=\"top\"></a>\r\n<div class=\"Header\">\r\n	Hosting Account Information\r\n</div>\r\n\r\n<p>\r\nHello #user.FirstName#,\r\n</p>\r\n\r\n<p>\r\nPlease, find below details of your control panel account. The one time password was generated for you. You should change the password after login. \r\n</p>\r\n\r\n<h1>Control Panel URL</h1>\r\n<table>\r\n    <thead>\r\n        <tr>\r\n            <th>Control Panel URL</th>\r\n            <th>Username</th>\r\n            <th>One Time Password</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr>\r\n            <td><a href=\"http://panel.HostingCompany.com\">http://panel.HostingCompany.com</a></td>\r\n            <td>#user.Username#</td>\r\n            <td>#user.Password#</td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n\r\n\r\n<p>\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n</p>\r\n\r\n<p>\r\nBest regards,<br />\r\nSolidCP.<br />\r\nWeb Site: <a href=\"https://solidcp.com\">https://solidcp.com</a><br />\r\nE-Mail: <a href=\"mailto:support@solidcp.com\">support@solidcp.com</a>\r\n</p>\r\n\r\n</div>\r\n</body>\r\n</html>"
                         },
                         new
                         {
@@ -16351,7 +16351,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "PasswordReminderLetter",
                             PropertyName = "TextBody",
-                            PropertyValue = "=================================\r\n   Hosting Account Information\r\n=================================\r\n\r\nHello #user.FirstName#,\r\n\r\nPlease, find below details of your control panel account. The one time password was generated for you. You should change the password after login.\r\n\r\nControl Panel URL: https://panel.fusecp.com\r\nUsername: #user.Username#\r\nOne Time Password: #user.Password#\r\n\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n\r\nBest regards,\r\nFuseCP.\r\nWeb Site: https://fusecp.com\"\r\nE-Mail: support@fusecp.com"
+                            PropertyValue = "=================================\r\n   Hosting Account Information\r\n=================================\r\n\r\nHello #user.FirstName#,\r\n\r\nPlease, find below details of your control panel account. The one time password was generated for you. You should change the password after login.\r\n\r\nControl Panel URL: https://panel.solidcp.com\r\nUsername: #user.Username#\r\nOne Time Password: #user.Password#\r\n\r\nIf you have any questions regarding your hosting account, feel free to contact our support department at any time.\r\n\r\nBest regards,\r\nSolidCP.\r\nWeb Site: https://solidcp.com\"\r\nE-Mail: support@solidcp.com"
                         },
                         new
                         {
@@ -16419,21 +16419,21 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             UserId = 1,
-                            SettingsName = "FuseCPPolicy",
+                            SettingsName = "SolidCPPolicy",
                             PropertyName = "DemoMessage",
-                            PropertyValue = "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.FuseCP.net\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>"
+                            PropertyValue = "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.solidcp.com\"\r\ntarget=\"_blank\">SolidCP  Support Forum</a>"
                         },
                         new
                         {
                             UserId = 1,
-                            SettingsName = "FuseCPPolicy",
+                            SettingsName = "SolidCPPolicy",
                             PropertyName = "ForbiddenIP",
                             PropertyValue = ""
                         },
                         new
                         {
                             UserId = 1,
-                            SettingsName = "FuseCPPolicy",
+                            SettingsName = "SolidCPPolicy",
                             PropertyName = "PasswordPolicy",
                             PropertyValue = "True;6;20;0;1;0;True;;0;;;False;False;0;"
                         },
@@ -16743,7 +16743,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "WebPolicy",
                             PropertyName = "ParkingPageContent",
-                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.FuseCP.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>"
+                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.solidcp.com\">SolidCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">SolidCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>"
                         },
                         new
                         {
@@ -16771,7 +16771,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "WebPolicy",
                             PropertyName = "PublishingProfile",
-                            PropertyValue = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<publishData>\r\n<ad:if test=\"#WebSite.WebDeploySitePublishingEnabled#\">\r\n	<publishProfile\r\n		profileName=\"#WebSite.Name# - Web Deploy\"\r\n		publishMethod=\"MSDeploy\"\r\n		publishUrl=\"#WebSite[\"WmSvcServiceUrl\"]#:#WebSite[\"WmSvcServicePort\"]#\"\r\n		msdeploySite=\"#WebSite.Name#\"\r\n		userName=\"#WebSite.WebDeployPublishingAccount#\"\r\n		userPWD=\"#WebSite.WebDeployPublishingPassword#\"\r\n		destinationAppUrl=\"http://#WebSite.Name#/\"\r\n		<ad:if test=\"#Not(IsNull(MsSqlDatabase)) and Not(IsNull(MsSqlUser))#\">SQLServerDBConnectionString=\"server=#MsSqlServerExternalAddress#;Initial Catalog=#MsSqlDatabase.Name#;uid=#MsSqlUser.Name#;pwd=#MsSqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MySqlDatabase)) and Not(IsNull(MySqlUser))#\">mySQLDBConnectionString=\"server=#MySqlAddress#;database=#MySqlDatabase.Name#;uid=#MySqlUser.Name#;pwd=#MySqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MariaDBDatabase)) and Not(IsNull(MariaDBUser))#\">MariaDBDBConnectionString=\"server=#MariaDBAddress#;database=#MariaDBDatabase.Name#;uid=#MariaDBUser.Name#;pwd=#MariaDBUser.Password#\"</ad:if>\r\n		hostingProviderForumLink=\"https://fusecp.com/support\"\r\n		controlPanelLink=\"https://panel.fusecp.com/\"\r\n	/>\r\n</ad:if>\r\n<ad:if test=\"#IsDefined(\"FtpAccount\")#\">\r\n	<publishProfile\r\n		profileName=\"#WebSite.Name# - FTP\"\r\n		publishMethod=\"FTP\"\r\n		publishUrl=\"ftp://#FtpServiceAddress#\"\r\n		ftpPassiveMode=\"True\"\r\n		userName=\"#FtpAccount.Name#\"\r\n		userPWD=\"#FtpAccount.Password#\"\r\n		destinationAppUrl=\"http://#WebSite.Name#/\"\r\n		<ad:if test=\"#Not(IsNull(MsSqlDatabase)) and Not(IsNull(MsSqlUser))#\">SQLServerDBConnectionString=\"server=#MsSqlServerExternalAddress#;Initial Catalog=#MsSqlDatabase.Name#;uid=#MsSqlUser.Name#;pwd=#MsSqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MySqlDatabase)) and Not(IsNull(MySqlUser))#\">mySQLDBConnectionString=\"server=#MySqlAddress#;database=#MySqlDatabase.Name#;uid=#MySqlUser.Name#;pwd=#MySqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MariaDBDatabase)) and Not(IsNull(MariaDBUser))#\">MariaDBDBConnectionString=\"server=#MariaDBAddress#;database=#MariaDBDatabase.Name#;uid=#MariaDBUser.Name#;pwd=#MariaDBUser.Password#\"</ad:if>\r\n		hostingProviderForumLink=\"https://fusecp.com/support\"\r\n		controlPanelLink=\"https://panel.fusecp.com/\"\r\n    />\r\n</ad:if>\r\n</publishData>\r\n\r\n<!--\r\nControl Panel:\r\nUsername: #User.Username#\r\nPassword: #User.Password#\r\n\r\nTechnical Contact:\r\nsupport@fusecp.com\r\n-->"
+                            PropertyValue = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<publishData>\r\n<ad:if test=\"#WebSite.WebDeploySitePublishingEnabled#\">\r\n	<publishProfile\r\n		profileName=\"#WebSite.Name# - Web Deploy\"\r\n		publishMethod=\"MSDeploy\"\r\n		publishUrl=\"#WebSite[\"WmSvcServiceUrl\"]#:#WebSite[\"WmSvcServicePort\"]#\"\r\n		msdeploySite=\"#WebSite.Name#\"\r\n		userName=\"#WebSite.WebDeployPublishingAccount#\"\r\n		userPWD=\"#WebSite.WebDeployPublishingPassword#\"\r\n		destinationAppUrl=\"http://#WebSite.Name#/\"\r\n		<ad:if test=\"#Not(IsNull(MsSqlDatabase)) and Not(IsNull(MsSqlUser))#\">SQLServerDBConnectionString=\"server=#MsSqlServerExternalAddress#;Initial Catalog=#MsSqlDatabase.Name#;uid=#MsSqlUser.Name#;pwd=#MsSqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MySqlDatabase)) and Not(IsNull(MySqlUser))#\">mySQLDBConnectionString=\"server=#MySqlAddress#;database=#MySqlDatabase.Name#;uid=#MySqlUser.Name#;pwd=#MySqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MariaDBDatabase)) and Not(IsNull(MariaDBUser))#\">MariaDBDBConnectionString=\"server=#MariaDBAddress#;database=#MariaDBDatabase.Name#;uid=#MariaDBUser.Name#;pwd=#MariaDBUser.Password#\"</ad:if>\r\n		hostingProviderForumLink=\"https://solidcp.com/support\"\r\n		controlPanelLink=\"https://panel.solidcp.com/\"\r\n	/>\r\n</ad:if>\r\n<ad:if test=\"#IsDefined(\"FtpAccount\")#\">\r\n	<publishProfile\r\n		profileName=\"#WebSite.Name# - FTP\"\r\n		publishMethod=\"FTP\"\r\n		publishUrl=\"ftp://#FtpServiceAddress#\"\r\n		ftpPassiveMode=\"True\"\r\n		userName=\"#FtpAccount.Name#\"\r\n		userPWD=\"#FtpAccount.Password#\"\r\n		destinationAppUrl=\"http://#WebSite.Name#/\"\r\n		<ad:if test=\"#Not(IsNull(MsSqlDatabase)) and Not(IsNull(MsSqlUser))#\">SQLServerDBConnectionString=\"server=#MsSqlServerExternalAddress#;Initial Catalog=#MsSqlDatabase.Name#;uid=#MsSqlUser.Name#;pwd=#MsSqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MySqlDatabase)) and Not(IsNull(MySqlUser))#\">mySQLDBConnectionString=\"server=#MySqlAddress#;database=#MySqlDatabase.Name#;uid=#MySqlUser.Name#;pwd=#MySqlUser.Password#\"</ad:if>\r\n		<ad:if test=\"#Not(IsNull(MariaDBDatabase)) and Not(IsNull(MariaDBUser))#\">MariaDBDBConnectionString=\"server=#MariaDBAddress#;database=#MariaDBDatabase.Name#;uid=#MariaDBUser.Name#;pwd=#MariaDBUser.Password#\"</ad:if>\r\n		hostingProviderForumLink=\"https://solidcp.com/support\"\r\n		controlPanelLink=\"https://panel.solidcp.com/\"\r\n    />\r\n</ad:if>\r\n</publishData>\r\n\r\n<!--\r\nControl Panel:\r\nUsername: #User.Username#\r\nPassword: #User.Password#\r\n\r\nTechnical Contact:\r\nsupport@solidcp.com\r\n-->"
                         },
                         new
                         {

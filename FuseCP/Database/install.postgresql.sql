@@ -2497,7 +2497,7 @@ DO $EF$
 BEGIN
     IF NOT EXISTS(SELECT 1 FROM "__EFMigrationsHistory" WHERE "MigrationId" = '20251105040715_v2.0.0') THEN
     INSERT INTO public."Themes" ("ThemeID", "DisplayName", "DisplayOrder", "Enabled", "LTRName", "RTLName")
-    VALUES (1, 'FuseCP v1', 1, 1, 'Default', 'Default');
+    VALUES (1, 'SolidCP v1', 1, 1, 'Default', 'Default');
     END IF;
 END $EF$;
 
@@ -5097,7 +5097,7 @@ BEGIN
     VALUES ('DemoMessage', 'FuseCPPolicy', 1, 'When user account is in demo mode the majority of operations are
     disabled, especially those ones that modify or delete records.
     You are welcome to ask your questions or place comments about
-    this demo on  <a href="http://forum.FuseCP.net"
+    this demo on  <a href="http://forum.fusecp.com"
     target="_blank">FuseCP  Support Forum</a>');
     INSERT INTO public."UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
     VALUES ('ForbiddenIP', 'FuseCPPolicy', 1, '');
@@ -5450,7 +5450,7 @@ BEGIN
     </head>
     <body>
     <div id="PageOutline">
-    	<h1>This web site has just been created from <a href="https://www.FuseCP.com">FuseCP </a> and it is still under construction.</h1>
+    	<h1>This web site has just been created from <a href="https://www.fusecp.com">FuseCP </a> and it is still under construction.</h1>
     	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>
     </div>
     </body>

@@ -2800,7 +2800,7 @@ SELECT changes();
 
 
 INSERT INTO "Themes" ("ThemeID", "DisplayName", "DisplayOrder", "Enabled", "LTRName", "RTLName")
-VALUES (1, 'FuseCP v1', 1, 1, 'Default', 'Default');
+VALUES (1, 'SolidCP v1', 1, 1, 'Default', 'Default');
 SELECT changes();
 
 
@@ -5702,7 +5702,7 @@ VALUES ('UserPasswordPolicy', 'SharePointPolicy', 1, 'True;5;20;0;1;0;True;;0;;;
 SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
-VALUES ('DemoMessage', 'FuseCPPolicy', 1, ((('When user account is in demo mode the majority of operations are' || (CHAR(13) || CHAR(10))) || ('disabled, especially those ones that modify or delete records.' || (CHAR(13) || CHAR(10)))) || (('You are welcome to ask your questions or place comments about' || (CHAR(13) || CHAR(10))) || (('this demo on  <a href="http://forum.FuseCP.net"' || CHAR(13)) || (CHAR(10) || 'target="_blank">FuseCP  Support Forum</a>')))));
+VALUES ('DemoMessage', 'FuseCPPolicy', 1, ((('When user account is in demo mode the majority of operations are' || (CHAR(13) || CHAR(10))) || ('disabled, especially those ones that modify or delete records.' || (CHAR(13) || CHAR(10)))) || (('You are welcome to ask your questions or place comments about' || (CHAR(13) || CHAR(10))) || (('this demo on  <a href="http://forum.fusecp.com"' || CHAR(13)) || (CHAR(10) || 'target="_blank">FuseCP  Support Forum</a>')))));
 SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
@@ -5886,7 +5886,7 @@ VALUES ('FrontPagePasswordPolicy', 'WebPolicy', 1, 'True;5;20;0;1;0;False;;0;0;0
 SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
-VALUES ('ParkingPageContent', 'WebPolicy', 1, ((((('<html xmlns="http://www.w3.org/1999/xhtml">' || CHAR(13)) || (CHAR(10) || ('<head>' || CHAR(13)))) || ((CHAR(10) || '    <title>The web site is under construction</title>') || (CHAR(13) || (CHAR(10) || '<style type="text/css">')))) || (((CHAR(13) || CHAR(10)) || ('	H1 { font-size: 16pt; margin-bottom: 4px; }' || (CHAR(13) || CHAR(10)))) || (('	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }' || (CHAR(13) || CHAR(10))) || ('</style>' || (CHAR(13) || CHAR(10)))))) || (((('</head>' || CHAR(13)) || (CHAR(10) || ('<body>' || CHAR(13)))) || ((CHAR(10) || ('<div id="PageOutline">' || CHAR(13))) || (CHAR(10) || ('	<h1>This web site has just been created from <a href="https://www.FuseCP.com">FuseCP </a> and it is still under construction.</h1>' || CHAR(13))))) || (((CHAR(10) || '	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>') || (CHAR(13) || (CHAR(10) || '</div>'))) || ((CHAR(13) || (CHAR(10) || '</body>')) || (CHAR(13) || (CHAR(10) || '</html>')))))));
+VALUES ('ParkingPageContent', 'WebPolicy', 1, ((((('<html xmlns="http://www.w3.org/1999/xhtml">' || CHAR(13)) || (CHAR(10) || ('<head>' || CHAR(13)))) || ((CHAR(10) || '    <title>The web site is under construction</title>') || (CHAR(13) || (CHAR(10) || '<style type="text/css">')))) || (((CHAR(13) || CHAR(10)) || ('	H1 { font-size: 16pt; margin-bottom: 4px; }' || (CHAR(13) || CHAR(10)))) || (('	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }' || (CHAR(13) || CHAR(10))) || ('</style>' || (CHAR(13) || CHAR(10)))))) || (((('</head>' || CHAR(13)) || (CHAR(10) || ('<body>' || CHAR(13)))) || ((CHAR(10) || ('<div id="PageOutline">' || CHAR(13))) || (CHAR(10) || ('	<h1>This web site has just been created from <a href="https://www.fusecp.com">FuseCP </a> and it is still under construction.</h1>' || CHAR(13))))) || (((CHAR(10) || '	<h2>The web site is hosted by <a href="https://fusecp.com">FuseCP</a>.</h2>') || (CHAR(13) || (CHAR(10) || '</div>'))) || ((CHAR(13) || (CHAR(10) || '</body>')) || (CHAR(13) || (CHAR(10) || '</html>')))))));
 SELECT changes();
 
 INSERT INTO "UserSettings" ("PropertyName", "SettingsName", "UserID", "PropertyValue")
