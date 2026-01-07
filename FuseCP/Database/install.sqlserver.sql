@@ -9999,7 +9999,7 @@ BEGIN
     AND ((@GroupID IS NULL) OR (@GroupID IS NOT NULL AND GroupID = @GroupID))
 
     -- Fix to allow plans assigned to serveradmin
-    IF (@ItemTypeName = ''FuseCP.Providers.HostedSolution.Organization, FuseCP.Providers.Base'')
+    IF (@ItemTypeName = ''SolidCP.Providers.HostedSolution.Organization, SolidCP.Providers.Base'')
     BEGIN
     	IF NOT EXISTS (SELECT * FROM ServiceItems WHERE PackageID = 1)
     	BEGIN
