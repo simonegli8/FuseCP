@@ -242,7 +242,7 @@
             <FilesToMove Include="bin\MsieJavaScriptEngine.*" />
             <FilesToMove Include="bin\Renci.SshNet.*" />
             <FilesToMove Include="bin\FuseCP.EnterpriseServer.Client.*" />
-            <FilesToMove Include="bin\FuseCP.Providers.*" Exclude="bin\FuseCP.Providers.Virtualization.NoVNC.*" />
+            <FilesToMove Include="bin\FuseCP.Providers.*" Exclude="bin\FuseCP.Providers.Virtualization.NoVNC.*;bin\FuseCP.Providers.Base.*" />
             <FilesToMove Include="bin\WebGrease.*" />
             <FilesToMove Include="bin\JavaScriptEngineSwitcher.*" />
             <FilesToMove Include="bin\System.*" />
@@ -261,6 +261,15 @@
         <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
         <Move SourceFiles="@(FilesToMove)" DestinationFolder="bin\Lazy" ContinueOnError="true" />
         <RemoveDir Directories="bin\WebServices;bin\refs;bin_dotnet\WebServices" ContinueOnError="true" />
+    </Target>
+
+    <Target Name="CopyBinDotnetToBin" AfterTargets="Build" Condition="'$(TargetFramework)' != 'net48'">
+      <Message Text="Copying bin_dotnet → bin because TargetFramework is $(TargetFramework)" Importance="high" />
+      <MakeDir Directories="$(ProjectDir)bin" />
+    <ItemGroup>
+        <FilesToCopy Include="bin_dotnet\FuseCP.Providers.Base.*" />
+    </ItemGroup>
+      <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="bin" SkipUnchangedFiles="true" /> 
     </Target>
 
     <!--<Target Name="CopyDepsJson" Condition="$(TargetFramework) != 'net48'" AfterTargets="Build">
