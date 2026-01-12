@@ -75,13 +75,15 @@
         <PackageReference Include="MailKit" Version="4.12.1" />
         <PackageReference Include="MimeKit" Version="4.12.0" />
         <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
-    </ItemGroup>
+		<PackageReference Include="System.Diagnostics.DiagnosticSource" Version="10.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.1" />
+	</ItemGroup>
     <ItemGroup Condition="$(TargetFramework) == 'net48'">
         <PackageReference Include="Microsoft.AspNet.Web.Optimization" Version="1.1.3" />
         <PackageReference Include="Microsoft.Web.Infrastructure" Version="2.0.0" />
         <PackageReference Include="WebGrease" Version="1.6.0" />
         <PackageReference Include="AjaxControlToolkit" Version="20.1" />
-        <Reference Include="System" />
+		<Reference Include="System" />
         <Reference Include="System.Configuration" />
         <Reference Include="System.Drawing" />
         <Reference Include="System.EnterpriseServices" />
@@ -111,15 +113,15 @@
         <PackageReference Include="EstrellasDeEsperanza.WebFormsForCore.AjaxControlToolkit" Version="1.4.2" />
         
         <!-- .NET 10 for FuseCP.EnterpriseServer.Data -->
-        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Primitives" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
-        <PackageReference Include="System.Text.Json" Version="10.0.0" />
-        <PackageReference Include="System.Formats.Asn1" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Primitives" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1" />
+        <PackageReference Include="System.Text.Json" Version="10.0.1" />
+        <PackageReference Include="System.Formats.Asn1" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="10.0.1" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="tinymce\**\*.*" />
@@ -252,8 +254,11 @@
             <FilesToMove Include="bin\Antlr3.*" />
             <FilesToMove Include="bin\AdvancedStringBuilder.*" />
             <FilesToMove Include="bin\AntiXssLibrary.*" />
-            <FilesToMove Include="bin\HtmlSanitizationLibrary.*" />
-            <FilesToDelete Include="bin\WebServices\**\*.*" />
+			<FilesToMove Include="bin\HtmlSanitizationLibrary.*" />
+			<FilesToMove Include="bin\MimeKit.*" />
+			<FilesToMove Include="bin\MailKit.*" />
+			<FilesToMove Include="bin\Nito.*" />
+			<FilesToDelete Include="bin\WebServices\**\*.*" />
             <FilesToDelete Include="bin_dotnet\WebServices\**\*.*" />
             <!--<FilesToDelete Include="bin\refs\**\*.*" />-->
         </ItemGroup>

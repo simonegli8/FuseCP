@@ -312,10 +312,11 @@ namespace FuseCP.Portal.Proxmox
 			optionReinstall.Value = chkReinstall.Checked;
 
 			// external network
-			optionExternalNetwork.Value = (Convert.ToInt32(listVlanLists.SelectedValue) >= 0);
-			SummExternalAddressesNumberRow.Visible = radioExternalRandom.Checked && (Convert.ToInt32(listVlanLists.SelectedValue) >= 0);
+			var hasVlanValue = !string.IsNullOrEmpty(listVlanLists.SelectedValue) && Convert.ToInt32(listVlanLists.SelectedValue) >= 0;
+			optionExternalNetwork.Value = hasVlanValue;
+			SummExternalAddressesNumberRow.Visible = radioExternalRandom.Checked && hasVlanValue;
 			litExternalAddressesNumber.Text = PortalAntiXSS.Encode(txtExternalAddressesNumber.Text.Trim());
-			SummExternalAddressesListRow.Visible = radioExternalSelected.Checked && (Convert.ToInt32(listVlanLists.SelectedValue) >= 0);
+			SummExternalAddressesListRow.Visible = radioExternalSelected.Checked && hasVlanValue;
 
 			// external network
 			//optionExternalNetwork.Value = chkExternalNetworkEnabled.Checked;
@@ -368,22 +369,27 @@ namespace FuseCP.Portal.Proxmox
 				string summaryEmail = chkSendSummary.Checked ? txtSummaryEmail.Text.Trim() : null;
 
 				bool externalenabled = false;
-				if (Convert.ToInt32(listVlanLists.SelectedValue) >= 0)
+				if (!string.IsNullOrEmpty(listVlanLists.SelectedValue) && Convert.ToInt32(listVlanLists.SelectedValue) >= 0)
+				{
 					externalenabled = true;
 
-				// set default selected vlan
-				virtualMachine.defaultaccessvlan = Convert.ToInt32(listVlanLists.SelectedValue);
+					// set default selected vlan
+					virtualMachine.defaultaccessvlan = Convert.ToInt32(listVlanLists.SelectedValue);
+				} else
+				{
+					virtualMachine.defaultaccessvlan = -1;
+				}
 
-				// create virtual machine
-				IntResult res = ES.Services.Proxmox.CreateVirtualMachine(PanelSecurity.PackageId,
-					 hostname, listOperatingSystems.SelectedValue, adminPassword, summaryEmail,
-					 Utils.ParseInt(ddlCpu.SelectedValue), Utils.ParseInt(txtRam.Text.Trim()),
-					 Utils.ParseInt(txtHdd.Text.Trim()), Utils.ParseInt(txtSnapshots.Text.Trim()),
-					 chkDvdInstalled.Checked, chkBootFromCd.Checked, chkNumLock.Checked,
-					 chkStartShutdown.Checked, chkPauseResume.Checked, chkReboot.Checked, chkReset.Checked, chkReinstall.Checked,
-					 externalenabled, Utils.ParseInt(txtExternalAddressesNumber.Text.Trim()), radioExternalRandom.Checked, extIps.ToArray(),
-					 chkPrivateNetworkEnabled.Checked, Utils.ParseInt(txtPrivateAddressesNumber.Text.Trim()), radioPrivateRandom.Checked, privIps,
-					 virtualMachine);
+					// create virtual machine
+					IntResult res = ES.Services.Proxmox.CreateVirtualMachine(PanelSecurity.PackageId,
+						 hostname, listOperatingSystems.SelectedValue, adminPassword, summaryEmail,
+						 Utils.ParseInt(ddlCpu.SelectedValue), Utils.ParseInt(txtRam.Text.Trim()),
+						 Utils.ParseInt(txtHdd.Text.Trim()), Utils.ParseInt(txtSnapshots.Text.Trim()),
+						 chkDvdInstalled.Checked, chkBootFromCd.Checked, chkNumLock.Checked,
+						 chkStartShutdown.Checked, chkPauseResume.Checked, chkReboot.Checked, chkReset.Checked, chkReinstall.Checked,
+						 externalenabled, Utils.ParseInt(txtExternalAddressesNumber.Text.Trim()), radioExternalRandom.Checked, extIps.ToArray(),
+						 chkPrivateNetworkEnabled.Checked, Utils.ParseInt(txtPrivateAddressesNumber.Text.Trim()), radioPrivateRandom.Checked, privIps,
+						 virtualMachine);
 
 				if (res.IsSuccess)
 				{

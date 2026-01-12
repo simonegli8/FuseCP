@@ -4,7 +4,7 @@
 
 if [ -z "$1" ]
   then
-    echo "Must supply your Windows 10 username"
+    echo "Must supply your Windows username"
     exit
 fi
 WIN_USERNAME=$1

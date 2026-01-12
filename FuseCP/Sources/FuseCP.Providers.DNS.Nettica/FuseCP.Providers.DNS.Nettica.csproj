@@ -29,5 +29,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\FuseCP.Providers.Base\FuseCP.Providers.Base.csproj" />
 		<ProjectReference Include="..\FuseCP.Providers.DNS.PowerDNS\FuseCP.Providers.DNS.PowerDNS.csproj" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.1" />
 	</ItemGroup>
 </Project>

@@ -63,11 +63,12 @@
         <ProjectReference Include="..\FuseCP.Server.Utils\FuseCP.Server.Utils.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.0" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    </ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.1" />
+	</ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
-        <PackageReference Include="System.Collections.Immutable" Version="10.0.0" />
+        <PackageReference Include="System.Collections.Immutable" Version="10.0.1" />
         <PackageReference Include="System.Memory" Version="4.6.3" />
         <Reference Include="Microsoft.CSharp" />
         <Reference Include="System" />
@@ -84,13 +85,13 @@
         <Reference Include="SwaggerWcf">
             <HintPath>..\..\Lib\SwaggerWcf.dll</HintPath>
         </Reference>
-    </ItemGroup>
+	</ItemGroup>
     <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
         <PackageReference Include="CoreWCF.Primitives" Version="1.8.0" />
         <PackageReference Include="CoreWCF.WebHttp" Version="1.8.0" />
         <PackageReference Include="System.Net.Primitives" Version="4.3.1" />
-        <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.0" GeneratePathProperty="true" />
-        <!--<PackageReference Include="System.Management" Version="8.0.0" GeneratePathProperty="true"
+        <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.1" GeneratePathProperty="true" />
+		<!--<PackageReference Include="System.Management" Version="8.0.0" GeneratePathProperty="true"
             IncludeAssets="None" ExcludeAssets="All" PrivateAssets="None" />-->
     </ItemGroup>
     <ItemGroup>
@@ -121,7 +122,7 @@
             <FilesToMove Include="bin\FuseCP.Build.*" />
             <FilesToMove Include="bin\Microsoft.Web.Administration.*" />
             <FilesToMove Include="bin\SwaggerWcf.*" />
-            <FilesToMove Include="bin\FuseCP.Providers.*" />
+            <!--<FilesToMove Include="bin\FuseCP.Providers.*" />-->
             <FilesToMove Include="bin\Microsoft.SharePoint.*" />
             <FilesToMove Include="bin\Microsoft.Identity.*" />
             <FilesToMove Include="bin\Microsoft.IdentityModel.*" />
@@ -142,6 +143,7 @@
             <FilesToDelete Include="bin\ProvidersLegacy\AntiXSSLibrary.*" />
             <FilesToDelete Include="bin\ProvidersLegacy\HtmlSanitizationLibrary.*" />
             <FilesToDelete Include="bin\ProvidersLegacy\Mono.Posix.*" />
+			<FilesToDelete Include="bin\netstandard\System.Numerics.Vectors.*" />
         </ItemGroup>
         <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
         <Move SourceFiles="@(FilesToMove)" DestinationFolder="bin\Providers" ContinueOnError="true" />

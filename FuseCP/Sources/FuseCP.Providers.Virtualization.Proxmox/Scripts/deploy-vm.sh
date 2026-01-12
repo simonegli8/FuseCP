@@ -46,7 +46,7 @@ gateway=$6
 netmask=$7
 osflavor=$8
 templateVm=$9
-adminUsername=$10
+adminUsername=${10}
 
 if [[ ! $templateVm =~ ^[0-9]+$ ]]
 then
@@ -61,7 +61,7 @@ fi
 hostname=`echo $fullyQualifiedDomainName | sed 's/\..*//'` 
 
 echo "Usage:
-./deploy-vm.sh [-d] <Guest OS flavor ('Windows', 'Linux' or 'Container')> <ID or name of the template VM> <Adminstrator username> <Fully qualified domain name> <OS Template Name> <OS Template File> <Administrator password> [<IP address>] [<Gateway>] [<Netmask>]" 
+./deploy-vm.sh [-d] <Fully qualified domain name> <OS Template Name> <OS Template File> <Administrator password> <IP address> <Gateway> <Netmask> <Guest OS flavor ('Windows', 'Linux' or 'Container')> <ID or name of the template VM> <Adminstrator username>" 
 echo "With the -d switch the script is running in debug mode without executing any commands"
 echo ""
 echo "OS Template VM: $templateVm"
@@ -173,13 +173,33 @@ else
         qm start $newVm
     fi
 
-    # Change administrator password of the new VM
-    echo "Change administrator password of the new VM"
-    echo "> echo -e \"$adminPassword\\n$adminPassword\\n\" | qm guest passwd $newVm $adminUsername -pass-stdin"
-    if [[ -z $debug && $osflavor != 'Debug' ]]
+    # If guest is Linux
+    if [ $osflavor = 'Linux' ]
     then
-        echo -e "$adminPassword\n$adminPassword\n" | qm guest passwd $newVm $adminUsername -pass-stdin
+        # Change administrator password of the new VM
+        echo "Change administrator password of the new VM"
+        echo "> echo -e \"$adminPassword\\n$adminPassword\\n\" | qm guest passwd $newVm $adminUsername -pass-stdin"
+        if [[ -z $debug && $osflavor != 'Debug' ]]
+        then
+            echo -e "$adminPassword\n$adminPassword\n" > /tmp/input.txt
+            qm guest exec $newVm --input-file /tmp/input.txt -- passwd $adminUsername
+            rm /tmp/input.txt
+        fi
     fi
+
+    # If guest is Windows
+    if [ $osflavor = 'Windows' ]
+    then
+        # Change administrator password of the new VM
+        echo "Change administrator password of the new VM"
+        if [[ -z $debug && $osflavor != 'Debug' ]]
+        then
+            echo -e "$adminPassword\n" > /tmp/input.txt
+            qm guest exec $newVm --input-file /tmp/input.txt -- Set-LocalUser -Name "Administrator" -Password (Read-Host -AsSecureString)
+            rm /tmp/input.txt
+        fi
+    fi
+
 
 fi
 
@@ -192,10 +212,10 @@ then
 
     # set hostname
     echo "Set hostname to $hostname"
-    echo "> qm guest exe $newVm powershell Rename-Computer -NewName $hostname"
+    echo "> qm guest exec $newVm -- powershell Rename-Computer -NewName $hostname"
     if [[ -z $debug ]]
     then
-        qm guest exe $newVm powershell Rename-Computer -NewName $hostname
+        qm guest exec $newVm -- powershell Rename-Computer -NewName $hostname
     fi
 
     # TODO Setup Network
@@ -209,10 +229,10 @@ then
 
     # set hostname
     echo "Set hostname to $hostname"
-    echo "> qm guest exec $newVm hostnamectl set-hostname $hostname"
+    echo "> qm guest exec $newVm -- hostnamectl set-hostname $hostname"
     if [[ -z $debug ]]
     then
-        qm guest exec $newVm hostnamectl set-hostname $hostname
+        qm guest exec $newVm -- hostnamectl set-hostname $hostname
     fi
 
     # TODO Setup Network

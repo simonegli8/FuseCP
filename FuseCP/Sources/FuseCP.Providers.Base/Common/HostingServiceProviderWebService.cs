@@ -31,6 +31,8 @@ namespace FuseCP.Providers
             {
                 if (provider == null)
                 {
+                    if (string.IsNullOrEmpty(ProviderSettings?.ProviderType)) return null;
+
                     // try to create provider class
                     Type providerType = Type.GetType(ProviderSettings.ProviderType);
                     try

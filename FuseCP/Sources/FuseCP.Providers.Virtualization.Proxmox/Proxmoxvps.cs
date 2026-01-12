@@ -59,6 +59,7 @@ using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using System.Net.Http;
 
 
 namespace FuseCP.Providers.Virtualization
@@ -268,13 +269,20 @@ namespace FuseCP.Providers.Virtualization
                 lock (this)
                 {
                     if (api != null) return api;
-                    {
-                        api = new ApiClient(this);
 
-                        //ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                        api.Login(User);
-                    }
+                    var httpClientHandler = new HttpClientHandler()
+                    {
+                        Proxy = null,
+                        UseProxy = false,
+                        ServerCertificateCustomValidationCallback = !ValidateServerCertificate ?
+                            (message, cert, chain, errors) => true : null,
+                        CookieContainer = new CookieContainer()
+                    };
+                    api = new ApiClient(this, httpClientHandler);
+
+                    //ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+                    api.Login(User);
                     return api;
                 }
             }
@@ -289,6 +297,11 @@ namespace FuseCP.Providers.Virtualization
         #region Constructors
         public Proxmoxvps()
         {
+            /*if (OSInfo.IsNetFX) // Hack to load System.Numerics.Vectors in .NET Framework and not .NET Standard version
+            {
+                var binpath = FuseCP.Web.Services.Server.MapPath("~/bin/Providers");
+                var a = Assembly.LoadFrom(Path.Combine(binpath, "System.Numerics.Vectors.dll"));
+            }*/
             OS.SkiaSharp.LoadNativeDlls();
         }
         #endregion
@@ -2597,8 +2610,11 @@ namespace FuseCP.Providers.Virtualization
             if (!isDisposed)
             {
                 isDisposed = true;
-                Api.Dispose();
-                Api = null;
+                lock (this)
+                {
+                    api?.Dispose();
+                    api = null;
+                }
             }
         }
 
