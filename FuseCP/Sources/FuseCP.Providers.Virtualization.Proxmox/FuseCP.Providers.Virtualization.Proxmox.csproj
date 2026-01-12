@@ -12,6 +12,7 @@
 		<LangVersion>14</LangVersion>
 		<Nullable>disable</Nullable>
 		<RestoreSources>$(RestoreSources);C:\GitHub\.nupkgs</RestoreSources>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugType>portable</DebugType>
@@ -28,6 +29,7 @@
 		<!--<PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="3.116.1" GenerateProperty="true" />-->
 		<PackageReference Include="System.Text.Json" Version="10.0.1" />
 		<PackageReference Include="System.Numerics.Vectors" Version="4.6.1" />
+		<PackageReference Include="Nito.AsyncEx" Version="5.1.2"  GeneratePathProperty="true" />
 	</ItemGroup>
 
 	<!--<Import Project="$(PkgSkiaSharp_NativeAssets_Linux_NoDependencies)\build\net462\SkiaSharp.NativeAssets.Linux.NoDependencies.targets" Condition=" '$(UseSkia)' == 'true' " />-->
@@ -87,6 +89,7 @@
 			<CopyToOutputFiles Include="$(PkgSSH_NET)\lib\netstandard2.0\Renci.SshNet.*" />
 			<CopyToOutputFiles Include="$(PkgCorsinvest_ProxmoxVE_Api)\lib\netstandard2.0\Corsinvest.ProxmoxVE.Api.*" />
 			<CopyToOutputFiles Include="$(PkgCorsinvest_ProxmoxVE_Api_Shared)\lib\netstandard2.0\Corsinvest.ProxmoxVE.Api.Shared.*" />
+			<CopyToOutputFiles Include="$(PkgNito_AsyncEx)\lib\netstandard2.0\Corsinvest.ProxmoxVE.Api.Shared.*" />
 			<CopyRuntimeFiles Include="$(PkgSkiaSharp_NativeAssets_Linux)\runtimes\**\*.*" />
 			<CopyRuntimeFiles Include="$(PkgSkiaSharp_NativeAssets_macOS)\runtimes\**\*.*" />
 			<CopyRuntimeFiles Include="$(PkgSkiaSharp_NativeAssets_Win32)\runtimes\**\*.*" />

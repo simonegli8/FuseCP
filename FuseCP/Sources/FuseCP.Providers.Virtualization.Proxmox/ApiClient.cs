@@ -119,6 +119,31 @@ namespace FuseCP.Providers.Virtualization
 			return res;
         }
 
+        public async Task<Result> LoginAsync(User user)
+        {
+            try
+            {
+                if (!await base.LoginAsync($"{user.Username}@{(string.IsNullOrEmpty(user.Realm) ? "pam" : user.Realm)}", user.Password))
+                    throw new Exception($"Proxmox Server API Service at {baseUrl} unavaliable.\n{LastResult.ReasonPhrase}");
+            }
+            catch (Exception ex)
+            {
+                throw new AuthenticationException(ex.Message, ex);
+            }
+            var res = LastResult;
+            var cookies = ClientHandler.CookieContainer;
+            cookies.Add(new Uri(baseUrl), new Cookie("PVEAuthCookie", this.PVEAuthCookie));
+
+            ApiTicket apiTicketdata = new ApiTicket();
+            dynamic data = res.ToData();
+            apiTicketdata.ticket = data.ticket;
+            apiTicketdata.username = data.username;
+            apiTicketdata.CSRFPreventionToken = data.CSRFPreventionToken;
+            apiTicket = apiTicketdata;
+
+            return res;
+        }
+
 
         public dynamic Status(string vmId)
 		{

@@ -41,7 +41,7 @@ namespace FuseCP.Portal.Proxmox
             BindGeneralDetails();
         }
 
-         protected string RdpPageUrl { get; set; }
+        protected string RdpPageUrl { get; set; }
         private void BindGeneralDetails()
         {
             VirtualMachine item = VirtualMachinesProxmoxHelper.GetCachedVirtualMachine(PanelRequest.ItemID);
