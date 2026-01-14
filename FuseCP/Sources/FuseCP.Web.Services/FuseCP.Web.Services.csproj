@@ -19,15 +19,15 @@
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6" />
-		<PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.1" />
-        <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.1" GeneratePathProperty="true" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="10.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.2" />
+        <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.2" GeneratePathProperty="true" />
         <!--
 		<ProjectReference Include="..\..\Lib\CoreWCF\src\CoreWCF.Http\src\CoreWCF.Http.csproj" />
 		<ProjectReference Include="..\..\Lib\CoreWCF\src\CoreWCF.NetTcp\src\CoreWCF.NetTcp.csproj" />
 		<ProjectReference Include="..\..\Lib\CoreWCF\src\CoreWCF.Primitives\src\CoreWCF.Primitives.csproj" />
 		-->
-		<!--<FrameworkReference Include="Microsoft.AspNetCore.App.Ref" Version="10.0.1" />-->
+		<!--<FrameworkReference Include="Microsoft.AspNetCore.App.Ref" Version="10.0.2" />-->
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)'=='net48'">
 		<Reference Include="System.Configuration" />
