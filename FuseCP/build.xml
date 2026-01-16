@@ -144,12 +144,12 @@
 	</Target>
 
 	<Target Name="GenerateBuildVersionFilesInstaller" DependsOnTargets="RestorePackages">
-		<AssemblyInfo CodeLanguage="CS" OutputFile="$(RootFolder)\FuseCP.Installer\Sources\VersionInfo.cs" AssemblyCompany="FuseCP" AssemblyCopyright="Copyright © 2024 FuseCP." AssemblyVersion="$(VersionLabel)" AssemblyFileVersion="$(FileVersion)" AssemblyInformationalVersion="$(Version)" />
+		<AssemblyInfo CodeLanguage="CS" OutputFile="$(RootFolder)\FuseCP.Installer\Sources\VersionInfo.cs" AssemblyCompany="FuseCP" AssemblyCopyright="Copyright Â© 2026 FuseCP." AssemblyVersion="$(VersionLabel)" AssemblyFileVersion="$(FileVersion)" AssemblyInformationalVersion="$(Version)" />
 	</Target>
 
 	<Target Name="GenerateBuildVersionFiles" DependsOnTargets="GenerateBuildVersionFilesInstaller">
-		<AssemblyInfo CodeLanguage="CS" OutputFile="$(TrunkFolder)\Sources\VersionInfo.cs" AssemblyCompany="FuseCP" AssemblyCopyright="Copyright © 2024 FuseCP." AssemblyVersion="$(VersionLabel)" AssemblyFileVersion="$(FileVersion)" AssemblyInformationalVersion="$(Version)" />
-		<AssemblyInfo CodeLanguage="VB" OutputFile="$(TrunkFolder)\Sources\VersionInfo.vb" AssemblyCompany="FuseCP" AssemblyCopyright="Copyright © 2024 FuseCP." AssemblyVersion="$(VersionLabel)" AssemblyFileVersion="$(FileVersion)" AssemblyInformationalVersion="$(Version)" />
+		<AssemblyInfo CodeLanguage="CS" OutputFile="$(TrunkFolder)\Sources\VersionInfo.cs" AssemblyCompany="FuseCP" AssemblyCopyright="Copyright Â© 2026 FuseCP." AssemblyVersion="$(VersionLabel)" AssemblyFileVersion="$(FileVersion)" AssemblyInformationalVersion="$(Version)" />
+		<AssemblyInfo CodeLanguage="VB" OutputFile="$(TrunkFolder)\Sources\VersionInfo.vb" AssemblyCompany="FuseCP" AssemblyCopyright="Copyright Â© 2026 FuseCP." AssemblyVersion="$(VersionLabel)" AssemblyFileVersion="$(FileVersion)" AssemblyInformationalVersion="$(Version)" />
 	</Target>
 
 	<Target Name="BackupModelSnapshots" DependsOnTargets="GenerateBuildVersionFiles">
@@ -184,8 +184,6 @@
 		<!-- FuseCP -->
 		<MSBuild Projects="$(TrunkFolder)\Sources\FuseCP.Server.sln" Properties="Configuration=$(BuildConfiguration);Platform=$(Platform)" />
 		<MSBuild Projects="$(TrunkFolder)\Sources\FuseCP.WebPortalAndEnterpriseServer.sln" Properties="Configuration=$(BuildConfiguration);Platform=$(Platform)" />
-		<Exec Command="&quot;$(MsBuildExe)&quot; &quot;$(TrunkFolder)\Sources\FuseCP.WebDavPortal.sln&quot; &quot;/p:Configuration=$(BuildConfiguration);Platform=$(Platform)&quot; $(MsBuildSwitches)" />
-
 		<!--<MSBuild Projects="$(TrunkFolder)\Sources\FuseCP.WebDavPortal.sln" Properties="Configuration=$(BuildConfiguration);Platform=$(Platform)" />-->
 
 		<!-- Tools -->
@@ -199,7 +197,11 @@
   		<MSBuild Projects="$(TrunkFolder)\Sources\Tools\FuseCP.FixDefaultPublicFolderMailbox.sln" Properties="Configuration=$(BuildConfiguration);Platform=$(Platform)" />
  	</Target>
 
-	<Target Name="PrepareBuilds" DependsOnTargets="CompileSources">
+	<Target Name="CompileWebDavPortal" DependsOnTargets="CompileSources">
+		<Exec Command="&quot;$(MsBuildExe)&quot; &quot;$(TrunkFolder)\Sources\FuseCP.WebDavPortal.sln&quot; &quot;/p:Configuration=$(BuildConfiguration);Platform=$(Platform)&quot; $(MsBuildSwitches)" />
+	</Target>
+
+	<Target Name="PrepareBuilds" DependsOnTargets="CompileWebDavPortal">
 		<!-- Remove build output folders in reversed order (e.q. root folder removed last) -->
 		<RemoveDir Directories="$(ServerBuild)"/>
 		<RemoveDir Directories="$(EnterpriseServerBuild)"/>
