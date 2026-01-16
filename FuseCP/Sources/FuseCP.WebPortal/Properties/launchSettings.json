@@ -6,6 +6,29 @@
     "WSL": {
       "commandName": "WSL2",
       "distributionName": ""
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "iisSettings": {
+        "windowsAuthentication": false,
+        "anonymousAuthentication": true,
+        "iisExpress": {
+          "applicationUrl": "http://localhost:64982/",
+          "sslPort": 44303
+        }
+      }
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:61163/",
+      "sslPort": 44368
     }
   }
 }

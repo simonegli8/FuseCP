@@ -113,6 +113,8 @@ namespace FuseCP.EnterpriseServer.Data
 			if (initAll || dbType == DbType.PostgreSql)
 				SetProvidersPostgreSql();
 		}
+
+		public DbConfiguration(): this(DbSettings.DbType) { }
 	}
 }
 #endif

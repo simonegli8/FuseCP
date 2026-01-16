@@ -6,7 +6,7 @@
         <RestoreSources>$(RestoreSources);../../Lib/WebFormsForCore/nupkg;https://api.nuget.org/v3/index.json</RestoreSources>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <Optimize>true</Optimize>
+        <Optimize>false</Optimize>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugSymbols>true</DebugSymbols>

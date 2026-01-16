@@ -53,13 +53,23 @@ namespace FuseCP.Server
 		}
 		private IOperatingSystem OSProvider
 		{
-			get { return (IOperatingSystem)Provider; }
+			get
+			{
+				IOperatingSystem os = null;
+				try
+				{
+					os = Provider as IOperatingSystem;
+				}
+				catch { }
+				os ??= OSInfo.Current;
+				return os;
+			}
 		}
 		private IWindowsOperatingSystem WinProvider
 		{
 			get
 			{
-				if (Provider is IWindowsOperatingSystem win) return win;
+				if (OSProvider is IWindowsOperatingSystem win) return win;
 				else throw new NotSupportedException("This command is only supported on a Windows Server.");
 			}
 		}
@@ -67,7 +77,7 @@ namespace FuseCP.Server
 		{
 			get
 			{
-				if (Provider is IUnixOperatingSystem unix) return unix;
+				if (OSProvider is IUnixOperatingSystem unix) return unix;
 				else throw new NotSupportedException("This command is only supported on a Unix Server.");
 			}
 		}

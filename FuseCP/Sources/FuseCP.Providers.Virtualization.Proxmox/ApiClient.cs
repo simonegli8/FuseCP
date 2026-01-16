@@ -13,21 +13,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+using Corsinvest.ProxmoxVE.Api;
+using Corsinvest.ProxmoxVE.Api.Shared;
+using FuseCP.Providers.HostedSolution;
+using FuseCP.Providers.Virtualization.Proxmox;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
-using RestSharp;
-using System.Threading;
-using FuseCP.Providers.Virtualization.Proxmox;
-using FuseCP.Providers.HostedSolution;
+using System.Net.Http;
 using System.Security.Authentication;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Corsinvest.ProxmoxVE.Api;
-using Corsinvest.ProxmoxVE.Api.Shared;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using static Corsinvest.ProxmoxVE.Api.Shared.Models.Cluster.ClusterConfigJoin;
 
 namespace FuseCP.Providers.Virtualization
 {
@@ -40,22 +42,28 @@ namespace FuseCP.Providers.Virtualization
 
 		private const string TaskOk = "TASK OK";
 		private const string RequestRootElement = "data";
-		public ApiClient(Proxmoxvps provider): base(provider.Server.Ip, int.Parse(provider.Server.Port))
+		HttpClientHandler ClientHandler = null;
+		public ApiClient(Proxmoxvps provider, HttpClientHandler client = null) : base(provider.Server.Hostname, int.Parse(provider.Server.Port), client != null ? new HttpClient(client) : null)
 		{
-			this.baseUrl = "https://" + provider.Server.Ip + ":" + provider.Server.Port + "/api2/json";
+			this.baseUrl = "https://" + provider.Server.Hostname + ":" + provider.Server.Port + "/api2/json";
 			Provider = provider;
 			this.ValidateCertificate = provider.Server.ValidateCertificate;
-			//this.node = node;
-			//HostedSolutionLog.DebugInfo("APIClient: {0}", this.baseUrl);
-		}
+			if (client != null)
+			{
+				ClientHandler = client;
+                client.ServerCertificateCustomValidationCallback = !this.ValidateCertificate
+					? (message, cert, chain, errors) => true : null;
+			}
+            //this.node = node;
+            //HostedSolutionLog.DebugInfo("APIClient: {0}", this.baseUrl);
+        }
 
 		RestClient GetRestClient(int timeout = 0)
 		{
 			var options = new RestClientOptions(baseUrl)
 			{
 				RemoteCertificateValidationCallback = Provider.Server.ValidateCertificate ? null :
-				(sender, certificate, chain, sslPolicyErrors) =>
-					true
+					(sender, certificate, chain, sslPolicyErrors) => true
 			};
 			if (timeout <= 0) options.Timeout = null;
 			else options.Timeout = TimeSpan.FromMilliseconds(timeout);
@@ -91,20 +99,49 @@ namespace FuseCP.Providers.Virtualization
 
 			try
 			{
-				if (!LoginAsync($"{user.Username}@{(string.IsNullOrEmpty(user.Realm) ? "pam" : user.Realm)}", user.Password).Result)
+				if (!base.LoginAsync($"{user.Username}@{(string.IsNullOrEmpty(user.Realm) ? "pam" : user.Realm)}", user.Password).Result)
 					throw new Exception($"Proxmox Server API Service at {baseUrl} unavaliable.\n{LastResult.ReasonPhrase}");
 			} catch (Exception ex)
 			{
 				throw new AuthenticationException(ex.Message, ex);
 			}
-			ApiTicket apiTicketdata = new ApiTicket();
-			dynamic data = LastResult.ToData();
-			apiTicketdata.ticket = data.ticket;
+ 			var res = LastResult;
+			var cookies = ClientHandler.CookieContainer;
+			cookies.Add(new Uri(baseUrl), new Cookie("PVEAuthCookie", this.PVEAuthCookie));
+
+            ApiTicket apiTicketdata = new ApiTicket();
+            dynamic data = res.ToData();
+            apiTicketdata.ticket = data.ticket;
             apiTicketdata.username = data.username;
             apiTicketdata.CSRFPreventionToken = data.CSRFPreventionToken;
             apiTicket = apiTicketdata;
 
-			return LastResult;
+			return res;
+        }
+
+        public async Task<Result> LoginAsync(User user)
+        {
+            try
+            {
+                if (!await base.LoginAsync($"{user.Username}@{(string.IsNullOrEmpty(user.Realm) ? "pam" : user.Realm)}", user.Password))
+                    throw new Exception($"Proxmox Server API Service at {baseUrl} unavaliable.\n{LastResult.ReasonPhrase}");
+            }
+            catch (Exception ex)
+            {
+                throw new AuthenticationException(ex.Message, ex);
+            }
+            var res = LastResult;
+            var cookies = ClientHandler.CookieContainer;
+            cookies.Add(new Uri(baseUrl), new Cookie("PVEAuthCookie", this.PVEAuthCookie));
+
+            ApiTicket apiTicketdata = new ApiTicket();
+            dynamic data = res.ToData();
+            apiTicketdata.ticket = data.ticket;
+            apiTicketdata.username = data.username;
+            apiTicketdata.CSRFPreventionToken = data.CSRFPreventionToken;
+            apiTicket = apiTicketdata;
+
+            return res;
         }
 
 

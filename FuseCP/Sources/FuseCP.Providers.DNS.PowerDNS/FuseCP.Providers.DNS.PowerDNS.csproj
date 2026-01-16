@@ -21,8 +21,10 @@
     <ItemGroup>
         <PackageReference Include="MySql.Data" Version="9.4.0" />
         <!-- System.Security.Permissions does no show up in output folder, so copy it manually -->
-        <PackageReference Include="System.Security.Permissions" Version="10.0.0" GeneratePathProperty="true" />
-    </ItemGroup>
+        <PackageReference Include="System.Security.Permissions" Version="10.0.2" GeneratePathProperty="true" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.2" />
+		<PackageReference Include="System.Text.Json" Version="10.0.2" />
+	</ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\FuseCP.Providers.Base\FuseCP.Providers.Base.csproj" />
         <ProjectReference Include="..\FuseCP.Server.Utils\FuseCP.Server.Utils.csproj" />

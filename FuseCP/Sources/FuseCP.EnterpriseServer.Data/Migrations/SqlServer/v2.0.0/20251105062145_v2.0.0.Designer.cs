@@ -15473,7 +15473,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                         new
                         {
                             ThemeId = 1,
-                            DisplayName = "FuseCP v1",
+                            DisplayName = "SolidCP v1",
                             DisplayOrder = 1,
                             Enabled = 1,
                             LTRName = "Default",
@@ -16424,7 +16424,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "FuseCPPolicy",
                             PropertyName = "DemoMessage",
-                            PropertyValue = "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.FuseCP.net\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>"
+                            PropertyValue = "When user account is in demo mode the majority of operations are\r\ndisabled, especially those ones that modify or delete records.\r\nYou are welcome to ask your questions or place comments about\r\nthis demo on  <a href=\"http://forum.fusecp.com\"\r\ntarget=\"_blank\">FuseCP  Support Forum</a>"
                         },
                         new
                         {
@@ -16746,7 +16746,7 @@ namespace FuseCP.EnterpriseServer.Data.Migrations.SqlServer
                             UserId = 1,
                             SettingsName = "WebPolicy",
                             PropertyName = "ParkingPageContent",
-                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.FuseCP.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>"
+                            PropertyValue = "<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <title>The web site is under construction</title>\r\n<style type=\"text/css\">\r\n	H1 { font-size: 16pt; margin-bottom: 4px; }\r\n	H2 { font-size: 14pt; margin-bottom: 4px; font-weight: normal; }\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"PageOutline\">\r\n	<h1>This web site has just been created from <a href=\"https://www.fusecp.com\">FuseCP </a> and it is still under construction.</h1>\r\n	<h2>The web site is hosted by <a href=\"https://fusecp.com\">FuseCP</a>.</h2>\r\n</div>\r\n</body>\r\n</html>"
                         },
                         new
                         {

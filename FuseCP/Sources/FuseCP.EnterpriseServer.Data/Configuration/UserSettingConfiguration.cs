@@ -1174,7 +1174,7 @@ Best regards"
 @"When user account is in demo mode the majority of operations are
 disabled, especially those ones that modify or delete records.
 You are welcome to ask your questions or place comments about
-this demo on  <a href=""http://forum.FuseCP.net""
+this demo on  <a href=""http://forum.fusecp.com""
 target=""_blank"">FuseCP  Support Forum</a>"
 				 },
 			new UserSetting() { UserId = 1, SettingsName = "FuseCPPolicy", PropertyName = "ForbiddenIP", PropertyValue = "" },
@@ -1503,7 +1503,7 @@ Best regards,
 </head>
 <body>
 <div id=""PageOutline"">
-	<h1>This web site has just been created from <a href=""https://www.FuseCP.com"">FuseCP </a> and it is still under construction.</h1>
+	<h1>This web site has just been created from <a href=""https://www.fusecp.com"">FuseCP </a> and it is still under construction.</h1>
 	<h2>The web site is hosted by <a href=""https://fusecp.com"">FuseCP</a>.</h2>
 </div>
 </body>

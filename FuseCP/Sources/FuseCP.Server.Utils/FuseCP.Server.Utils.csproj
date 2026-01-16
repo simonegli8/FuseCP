@@ -1,34 +1,44 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <PublishUrl>publish\</PublishUrl>
-        <OutputPath>..\FuseCP.Server\bin\netstandard</OutputPath>
-        <ServerPath>..\FuseCP.Server\bin\netstandard</ServerPath>
+		<!--<TargetFrameworks>net48;net10.0;netstandard2.0</TargetFrameworks>-->
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<PublishUrl>publish\</PublishUrl>
+        <!--<OutputPath>..\FuseCP.Server\bin\netstandard</OutputPath>-->
+        <!--<ServerPath>..\FuseCP.Server\bin\netstandard</ServerPath>-->
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <LangVersion>11</LangVersion>
         <Nullable>disable</Nullable>
     </PropertyGroup>
-    <ItemGroup>
+	<PropertyGroup Condition="$(TargetFramework) == 'net48'">
+		<ServerPath>..\FuseCP.Server\bin</ServerPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework) == 'net10.0'">
+		<ServerPath>..\FuseCP.Server\bin_dotnet</ServerPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework) == 'netstandard2.0'">
+		<ServerPath>..\FuseCP.Server\bin\netstandard</ServerPath>
+	</PropertyGroup>
+	<ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-        <PackageReference Include="System.Diagnostics.EventLog" Version="10.0.0" />
-        <PackageReference Include="System.DirectoryServices" Version="10.0.0" />
-        <PackageReference Include="System.Management" Version="10.0.0" />
+        <PackageReference Include="System.Diagnostics.EventLog" Version="10.0.2" />
+        <PackageReference Include="System.DirectoryServices" Version="10.0.2" />
+        <PackageReference Include="System.Management" Version="10.0.2" />
         <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
-        <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.0" />
+        <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.2" />
+		<PackageReference Include="System.IO.Compression" Version="4.1.1"/>
         <PackageReference Include="Mono.Posix" Version="7.1.0-final.1.21458.1" GeneratePathProperty="true" />
 		<PackageReference Include="Mono.Unix" Version="7.1.0-final.1.21458.1" GeneratePathProperty="true" />
 	</ItemGroup>
     <ItemGroup>
         <Reference Include="System.DirectoryServices" />
         <Reference Include="System.Management" />
-        <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-            <HintPath>..\..\Lib\System.Management.Automation.dll</HintPath>
-            <SpecificVersion>False</SpecificVersion>
-            <Private>false</Private>
-        </Reference>
-    </ItemGroup>
+		<Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+			<HintPath>..\..\Lib\References\Microsoft\Windows2012\System.Management.Automation.dll</HintPath>
+			<SpecificVersion>False</SpecificVersion>
+		</Reference>
+	</ItemGroup>
     <ItemGroup>
         <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
     </ItemGroup>
@@ -36,13 +46,35 @@
         <ProjectReference Include="..\FuseCP.Providers.Base\FuseCP.Providers.Base.csproj" />
     </ItemGroup>
 
-    <Target Name="CopyPackageReferences" AfterTargets="Build">
-        <ItemGroup>
-            <CopyToOutputFiles Include="$(PkgMono_Posix)\lib\netstandard2.0\Mono.Posix.*" />
-			<CopyToOutputFiles Include="$(PkgMono_Unix)\lib\netstandard2.0\Mono.Unix.*" />
+	<Target Name="CopyMonoPosixNETStandard" AfterTargets="Build" Condition="$(TargetFramework) == 'netstandard2.0'">
+		<ItemGroup>
+			<CopyFiles Include="$(PkgMono_Posix)lib\netstandard2.0\Mono.Posix.*" />
+			<CopyFiles Include="$(PkgMono_Unix)lib\netstandard2.0\Mono.Unix.*" />
 			<RuntimeFiles Include="$(PkgMono_Unix)\runtimes\**\*.*" />
 		</ItemGroup>
-        <Copy SourceFiles="@(CopyToOutputFiles)" DestinationFolder="$(ServerPath)\%(RecursiveDir)" />
-		<Copy SourceFiles="@(RuntimeFiles)" DestinationFolder="$(ServerPath)\runtimes\%(RecursiveDir)" SkipUnchangedFiles="true" />
+		<Message Text="Copy Files: @(CopyFiles)" Importance="high" />
+		<Copy SourceFiles="@(CopyFiles)" DestinationFolder="$(ServerPath)\%(RecursiveDir)" />
+		<Copy SourceFiles="@(RuntimeFiles)" DestinationFolder="$(ServerPath)\runtimes\%(RecursiveDir)" />
 	</Target>
+	<Target Name="CopyMonoPosixNET10" AfterTargets="Build" Condition="$(TargetFramework) == 'net10.0'">
+		<ItemGroup>
+			<CopyFiles Include="$(PkgMono_Posix)lib\net6.0\Mono.Posix.*" />
+			<CopyFiles Include="$(PkgMono_Unix)lib\net6.0\Mono.Unix.*" />
+			<RuntimeFiles Include="$(PkgMono_Unix)\runtimes\**\*.*" />
+		</ItemGroup>
+		<Message Text="Copy Files: @(CopyFiles)" Importance="high" />
+		<Copy SourceFiles="@(CopyFiles)" DestinationFolder="$(ServerPath)\%(RecursiveDir)" />
+		<Copy SourceFiles="@(RuntimeFiles)" DestinationFolder="$(ServerPath)\runtimes\%(RecursiveDir)" />
+	</Target>
+	<Target Name="CopyMonoPosixNET48" AfterTargets="Build" Condition="$(TargetFramework) == 'net48'">
+		<ItemGroup>
+			<CopyFiles Include="$(PkgMono_Posix)lib\net45\Mono.Posix.*" />
+			<CopyFiles Include="$(PkgMono_Unix)lib\net45\Mono.Unix.*" />
+			<RuntimeFiles Include="$(PkgMono_Unix)\runtimes\**\*.*" />
+		</ItemGroup>
+		<Message Text="Copy Files: @(CopyFiles)" Importance="high" />
+		<Copy SourceFiles="@(CopyFiles)" DestinationFolder="$(ServerPath)\%(RecursiveDir)" />
+		<Copy SourceFiles="@(RuntimeFiles)" DestinationFolder="$(ServerPath)\runtimes\%(RecursiveDir)" />
+	</Target>
+
 </Project>

@@ -21,86 +21,112 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace FuseCP.Providers.OS
+namespace FuseCP.Providers.OS;
+
+public class SkiaSharp
 {
-    public class SkiaSharp
+    public bool IsLinuxMusl
     {
-        public bool IsLinuxMusl
+        get
         {
-            get
-            {
-                if (!OSInfo.IsLinux) return false;
-                return OS.Shell.Default.Exec("ldd /bin/ls").OutputAndError().Result.Contains("musl");
-            }
+            if (!OSInfo.IsLinux) return false;
+            return OS.Shell.Default.Exec("ldd /bin/ls").OutputAndError().Result.Contains("musl");
         }
+    }
 
-        static readonly SkiaSharp Current = new SkiaSharp(); 
+    static readonly SkiaSharp Current = new SkiaSharp(); 
 
-        static Dictionary<string, IntPtr> loadedNativeDlls = new Dictionary<string, IntPtr>();
-        public IntPtr SkiaDllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+    static Dictionary<string, IntPtr> loadedNativeDlls = new Dictionary<string, IntPtr>();
+    public IntPtr SkiaDllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+    {
+        if (libraryName.Contains("SkiaSharp"))
         {
-            if (libraryName.Contains("SkiaSharp"))
+            lock (this)
             {
-                lock (this)
+                IntPtr dll;
+                if (loadedNativeDlls.TryGetValue(libraryName, out dll)) return dll;
+
+                var runtimeInformation = typeof(RuntimeInformation);
+                var runtimeIdentifier = (string)runtimeInformation.GetProperty("RuntimeIdentifier")?.GetValue(null);
+                if (runtimeIdentifier == "linux-x64" && IsLinuxMusl) runtimeIdentifier = "linux-musl-x64";
+                if (runtimeIdentifier.StartsWith("osx-")) runtimeIdentifier = "osx";
+                runtimeIdentifier = runtimeIdentifier.Replace("linux-", "");
+                var currentDllPath = Path.GetDirectoryName(new Uri(Assembly.Load("SkiaSharp").CodeBase).LocalPath);
+                string libraryFileName = libraryName;
+                if (OSInfo.IsLinux && !libraryFileName.EndsWith(".so")) libraryFileName += ".so";
+                if (OSInfo.IsMac && !libraryFileName.EndsWith(".dylib")) libraryFileName += ".dylib";
+                if (!libraryFileName.StartsWith("lib")) libraryFileName = "lib" + libraryFileName;
+                var nativeDllPath = Path.Combine(currentDllPath, "runtimes", runtimeIdentifier, "native", libraryFileName);
+
+                if (File.Exists(nativeDllPath))
                 {
-                    IntPtr dll;
-                    if (loadedNativeDlls.TryGetValue(libraryName, out dll)) return dll;
+                    // call NativeLibrary.Load via reflection, because it's not available in NET Standard
+                    var nativeLibrary = Type.GetType("System.Runtime.InteropServices.NativeLibrary, System.Runtime.InteropServices");
+                    var load = nativeLibrary.GetMethod("Load", new Type[] { typeof(string), typeof(Assembly), typeof(DllImportSearchPath?) });
+                    dll = (IntPtr)load?.Invoke(null, new object[] { nativeDllPath, assembly, searchPath });
+                    loadedNativeDlls.Add(libraryName, dll);
 
-                    var runtimeInformation = typeof(RuntimeInformation);
-                    var runtimeIdentifier = (string)runtimeInformation.GetProperty("RuntimeIdentifier")?.GetValue(null);
-                    if (runtimeIdentifier == "linux-x64" && IsLinuxMusl) runtimeIdentifier = "linux-musl-x64";
-                    runtimeIdentifier = runtimeIdentifier.Replace("linux-", "");
-                    var currentDllPath = Path.GetDirectoryName(new Uri(Assembly.Load("SkiaSharp").CodeBase).LocalPath);
-                    string libraryFileName = libraryName;
-                    if (!libraryFileName.EndsWith(".so")) libraryFileName += ".so";
-                    if (!libraryFileName.StartsWith("lib")) libraryFileName = "lib" + libraryFileName;
-                    var nativeDllPath = Path.Combine(currentDllPath, runtimeIdentifier, libraryFileName);
+                    Console.WriteLine($"Loaded native library: {nativeDllPath}");
 
-                    if (File.Exists(nativeDllPath))
-                    {
-                        // call NativeLibrary.Load via reflection, because it's not available in NET Standard
-                        var nativeLibrary = Type.GetType("System.Runtime.InteropServices.NativeLibrary, System.Runtime.InteropServices");
-                        var load = nativeLibrary.GetMethod("Load", new Type[] { typeof(string), typeof(Assembly), typeof(DllImportSearchPath?) });
-                        dll = (IntPtr)load?.Invoke(null, new object[] { nativeDllPath, assembly, searchPath });
-                        loadedNativeDlls.Add(libraryName, dll);
-
-                        Console.WriteLine($"Loaded native library: {nativeDllPath}");
-
-                        return dll;
-                    }
+                    return dll;
                 }
             }
-
-            // Otherwise, fallback to default import resolver.
-            return IntPtr.Zero;
         }
 
-        static bool nativeSkiaDllLoaded = false;
-        public static void LoadNativeDlls()
+        // Otherwise, fallback to default import resolver.
+        return IntPtr.Zero;
+    }
+
+    static bool nativeSkiaDllLoaded = false;
+    public static void LoadNativeDlls()
+    {
+        if (nativeSkiaDllLoaded) return;
+        nativeSkiaDllLoaded = true;
+
+        if (OSInfo.IsCore && (OSInfo.IsLinux || OSInfo.IsMac || OSInfo.IsWindows))
         {
-            if (nativeSkiaDllLoaded) return;
-            nativeSkiaDllLoaded = true;
+            // call NativeLibrary.SetDllImportResolver via reflection, because it's not available in NET Standard
+            var nativeLibrary = Type.GetType("System.Runtime.InteropServices.NativeLibrary, System.Runtime.InteropServices");
+            var dllImportResolver = Type.GetType("System.Runtime.InteropServices.DllImportResolver, System.Runtime.InteropServices");
 
-            if (OSInfo.IsLinux || OSInfo.IsMac)
+            Assembly skiaSharp = AppDomain.CurrentDomain.GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name == "SkiaSharp");
+            if (skiaSharp == null)
             {
-                // call NativeLibrary.SetDllImportResolver via reflection, becuase it's not available in NET Standard
-                var nativeLibrary = Type.GetType("System.Runtime.InteropServices.NativeLibrary, System.Runtime.InteropServices");
-                var dllImportResolver = Type.GetType("System.Runtime.InteropServices.DllImportResolver, System.Runtime.InteropServices");
-
-                Assembly skiaSharp = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SkiaSharp");
-                if (skiaSharp == null)
-                {
-                    skiaSharp = Assembly.Load("SkiaSharp");
-                }
-                var setDllImportResolver = nativeLibrary.GetMethod("SetDllImportResolver", new Type[] { typeof(Assembly), dllImportResolver });
-                //var importResolverMethod = this.GetType().GetMethod(nameof(SkiaDllImportResolver));
-
-                var skiaDllImportResolver = Delegate.CreateDelegate(dllImportResolver, Current, nameof(SkiaDllImportResolver));
-                setDllImportResolver?.Invoke(null, new object[] { skiaSharp, skiaDllImportResolver });
-
-                Console.WriteLine("Added SkiaSharp DllImportResolver");
+                skiaSharp = Assembly.Load("SkiaSharp");
             }
+            var setDllImportResolver = nativeLibrary.GetMethod("SetDllImportResolver", new Type[] { typeof(Assembly), dllImportResolver });
+            //var importResolverMethod = this.GetType().GetMethod(nameof(SkiaDllImportResolver));
+
+            var skiaDllImportResolver = Delegate.CreateDelegate(dllImportResolver, Current, nameof(SkiaDllImportResolver));
+            setDllImportResolver?.Invoke(null, new object[] { skiaSharp, skiaDllImportResolver });
+
+            Console.WriteLine("Added SkiaSharp DllImportResolver");
+        } else if (OSInfo.IsWindows)
+        {
+            Assembly skiaSharp = AppDomain.CurrentDomain.GetAssemblies()
+                .FirstOrDefault(a => a.GetName().Name == "SkiaSharp");
+            if (skiaSharp == null)
+            {
+                skiaSharp = Assembly.Load("SkiaSharp");
+            }
+            var skiaSharpPath = Path.GetDirectoryName(new Uri(skiaSharp.CodeBase).LocalPath);
+            var runtimeInformation = typeof(RuntimeInformation);
+            var archValue = runtimeInformation.GetProperty("OSArchitecture")?.GetValue(null);
+            var arch = Enum.GetName(typeof(System.Runtime.InteropServices.Architecture), archValue).ToLower();
+            var path = Path.Combine(skiaSharpPath, "runtimes", $"win-{arch}", "native");
+            AddEnvironmentPaths(path);
         }
+    }
+
+    static void AddEnvironmentPaths(params IEnumerable<string> paths)
+    {
+        var path = new[] { Environment.GetEnvironmentVariable("PATH") ?? string.Empty };
+
+        paths = paths.Where(p => !string.IsNullOrEmpty(p));
+
+        string newPath = string.Join(Path.PathSeparator.ToString(), path.Concat(paths));
+
+        Environment.SetEnvironmentVariable("PATH", newPath);
     }
 }

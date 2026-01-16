@@ -1,17 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <RootNamespace>FuseCP.Providers.Database</RootNamespace>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0</TargetFrameworks>
         <PublishUrl>publish\</PublishUrl>
         <WarningsAsErrors>618</WarningsAsErrors>
-        <OutputPath>..\FuseCP.Server\bin\netstandard\</OutputPath>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <LangVersion>11</LangVersion>
         <Nullable>disable</Nullable>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<PropertyGroup Condition="$(TargetFramework) == 'netstandard2.0'">
+		<OutputPath>..\FuseCP.Server\bin\netstandard\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework) == 'net48'">
+		<OutputPath>..\FuseCP.Server\bin\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework) == 'net10.0'">
+		<OutputPath>..\FuseCP.Server\bin_dotnet\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <DebugType>portable</DebugType>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -36,5 +45,7 @@
         <PackageReference Include="MySql.Data" Version="9.4.0" />
         <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    </ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.2" />
+		<PackageReference Include="System.Text.Json" Version="10.0.2" />
+	</ItemGroup>
 </Project>

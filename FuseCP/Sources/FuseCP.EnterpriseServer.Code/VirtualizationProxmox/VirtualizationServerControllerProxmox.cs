@@ -989,15 +989,21 @@ namespace FuseCP.EnterpriseServer
                 TaskManager.Write("VPS_CREATE_CREATE_VM");
                 TaskManager.IndicatorCurrent = -1; // Some providers (for example HyperVProxmoxR2) could not provide progress 
                 // create virtual machine
+                bool encrypted = true;
                 try
                 {
                     // create send password for VM Creation plaintext to Creation Script if needed
                     vm.AdministratorPassword = CryptoUtils.Decrypt(vm.AdministratorPassword);
+                    encrypted = false;
                     vm = vs.CreateVirtualMachine(vm);
                     vm.AdministratorPassword = CryptoUtils.Encrypt(vm.AdministratorPassword);
+                    encrypted = true;
                 }
                 catch (Exception ex)
                 {
+                    if (encrypted == false)
+                        vm.AdministratorPassword = CryptoUtils.Encrypt(vm.AdministratorPassword);
+
                     TaskManager.WriteError(ex, "VPS_CREATE_CREATE_VM_ERROR");
                     return;
                 }
@@ -3426,7 +3432,7 @@ namespace FuseCP.EnterpriseServer
                 VirtualizationServerProxmox vs = GetVirtualizationProxy(vm.ServiceId);
 
                 // check VM state
-                VirtualMachine vps = vs.GetVirtualMachine(vm.VirtualMachineId);
+                VirtualMachine vps = !string.IsNullOrEmpty(vm.VirtualMachineId) ? vs.GetVirtualMachine(vm.VirtualMachineId) : null;
 
                 JobResult result = null;
 
