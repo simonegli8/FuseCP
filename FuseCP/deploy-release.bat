@@ -9,7 +9,7 @@ IF not defined NoRebuild (
 IF not defined MsBuildSwitches ( Set MsBuildSwitches=/v:n /m)
 IF not defined FuseCPVersion ( Set FuseCPVersion=2.0.0)
 IF not defined FuseCPFileVersion ( Set FuseCPFileVersion=2.0.0)
-IF not defined Configuration ( Set Configuration=Release)
+Set Configuration=Release
 
 IF EXIST "%ProgramFiles%\Microsoft Visual Studio\18\Community\MSBuild\Current\bin\MSBuild.exe" (
 	Set FCPMSBuild="%ProgramFiles%\Microsoft Visual Studio\18\Community\MSBuild\Current\Bin\MSBuild.exe"
