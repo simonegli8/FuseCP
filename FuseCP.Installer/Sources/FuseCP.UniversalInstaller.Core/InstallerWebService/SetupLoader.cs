@@ -245,8 +245,8 @@ public class SetupLoader
 					if (info.FullFilePath.EndsWith(".7z", StringComparison.OrdinalIgnoreCase) ||
 						info.FullFilePath.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
 					{
-						setupFileName = Path.ChangeExtension(setupFileName, Path.GetExtension(info.FullFilePath));
-					}
+						setupFileName = setupFileName = setupFileName + Path.GetExtension(info.FullFilePath);
+                    }
 					else RaiseNoUzipStatusEvent();
 
 					downloadSetupTask = GetDownloadFileTask(new RemoteFile(info, true), setupFileName, exeFolder, null, token);
