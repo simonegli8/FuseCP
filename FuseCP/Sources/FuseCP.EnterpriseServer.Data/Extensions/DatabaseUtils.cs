@@ -122,8 +122,38 @@ namespace FuseCP.EnterpriseServer.Data
 		public static string InstallScript(DbType type) => InstallScript($"install.{type.ToString().ToLower()}.sql");
 
 
+        public static string BuildMasterConnectionString(DbType type, string server, string login,
+    string password, string database, int port, string installationFolder, string enterpriseServerPath,
+    bool integrated)
+        {
+            if (server == null) server = "";
+            if (login == null) login = "";
+            if (password == null) password = "";
+            if (database == null) database = "";
+            if (installationFolder == null) installationFolder = "";
+            if (enterpriseServerPath == null) enterpriseServerPath = "";
+            return type switch
+            {
+                DbType.SqlServer => BuildSqlServerMasterConnectionString(server, login, password),
+                DbType.MySql or DbType.MariaDb => BuildMySqlMasterConnectionString(server, port, login, password),
+                DbType.Sqlite or DbType.SqliteFX => BuildSqliteMasterConnectionString(database, installationFolder, enterpriseServerPath, integrated),
+                DbType.PostgreSql => BuildPostgreMasterConnectionString(server, login, password, port),
+                _ => throw new NotSupportedException("DbType not supported.")
+            };
+        }
+        public static string BuildPostgreConnectionString(string server, string database, string login, string password, int port)
+        {
+            if (port <= 0) port = 5432;
+            if (database == null) return $"DbType=PostgreSql;Host={server};Port={port};Username={login};Password={password}";
+            else return $"DbType=PostgreSql;Host={server};Port={port};Database={database};Username={login};Password={password}";
+        }
+        public static string BuildPostgreMasterConnectionString(string server, string login, string password, int port)
+        {
+            return BuildPostgreConnectionString(server, null, login, password, port);
+        }
 
-		public static string BuildSqlServerMasterConnectionString(string dbServer, string dbLogin, string dbPassw)
+
+        public static string BuildSqlServerMasterConnectionString(string dbServer, string dbLogin, string dbPassw)
 		{
 			return BuildSqlServerConnectionString(dbServer, "master", dbLogin, dbPassw);
 		}
@@ -147,7 +177,8 @@ namespace FuseCP.EnterpriseServer.Data
 
 		public static string BuildMySqlConnectionString(string server, int port, string user, string password, string database)
 		{
-			return $"DbType=MySql;Server={server};Port={port};User={user};Password={password};Database={database}";
+            if (port <= 0) port = 3306;
+            return $"DbType=MySql;Server={server};Port={port};User={user};Password={password};Database={database}";
 		}
 
 		public static string BuildSqliteMasterConnectionString(string database, string installationFolder,
@@ -191,7 +222,9 @@ namespace FuseCP.EnterpriseServer.Data
 				case Data.DbType.Sqlite:
 				case Data.DbType.SqliteFX:
 					return BuildSqliteConnectionString(database, enterpriseServerPath, integrated);
-				default: throw new NotSupportedException($"DbType {type} not supported.");
+                case Data.DbType.PostgreSql:
+                    return BuildPostgreConnectionString(server, database, user, password, port);
+                default: throw new NotSupportedException($"DbType {type} not supported.");
 			}
 		}
 
