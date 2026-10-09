@@ -10451,9 +10451,12 @@ namespace FuseCP.EnterpriseServer
 					.Where(p => p.PackageId == packageId)
 					.Select(p => new { p.ServerId, p.PlanId, p.ParentPackageId })
 					.FirstOrDefault();
-				// get resource groups
-				var groups = ResourceGroups
-					.GroupJoin(HostingPlanResources.Where(r => r.PlanId == package.PlanId), r => r.GroupId, hr => hr.GroupId, (r, hr) => new
+                var packagePlanId = package?.PlanId;
+                var packageServerId = package?.ServerId;
+                var parentPackageId = package?.ParentPackageId;
+                // get resource groups
+                var groups = ResourceGroups
+					.GroupJoin(HostingPlanResources.Where(r => r.PlanId == packagePlanId), r => r.GroupId, hr => hr.GroupId, (r, hr) => new
 					{
 						Group = r,
 						Resources = hr
@@ -10476,11 +10479,11 @@ namespace FuseCP.EnterpriseServer
                         g.CalculateDiskSpace,
                         g.CalculateBandwidth,
                         Enabled = g.GroupName == "Service Levels" ?
-							Clone.GetPackageServiceLevelResource(packageId, g.GroupId, package.ServerId) :
-							Clone.GetPackageAllocatedResource(packageId, g.GroupId, package.ServerId),
+							Clone.GetPackageServiceLevelResource(packageId, g.GroupId, packageServerId) :
+							Clone.GetPackageAllocatedResource(packageId, g.GroupId, packageServerId),
 						ParentEnabled = g.GroupName == "Service Levels" ?
-							Clone.GetPackageServiceLevelResource(package.ParentPackageId, g.GroupId, package.ServerId) :
-							Clone.GetPackageAllocatedResource(package.ParentPackageId, g.GroupId, package.ServerId)
+							Clone.GetPackageServiceLevelResource(parentPackageId, g.GroupId, packageServerId) :
+							Clone.GetPackageAllocatedResource(parentPackageId, g.GroupId, packageServerId)
 					});
 				// return quotas
 				var nofOrgs = GetPackageAllocatedQuota(packageId, 205); // 205 - HostedSolution.Organizations
@@ -10506,7 +10509,7 @@ namespace FuseCP.EnterpriseServer
 							q.AllocatedQuota * nofOrgs :
 							q.AllocatedQuota,
 						QuotaValuePerOrganization = q.AllocatedQuota,
-						ParentQuotaValue = Clone.GetPackageAllocatedQuota(package.ParentPackageId, q.Quota.QuotaId),
+						ParentQuotaValue = Clone.GetPackageAllocatedQuota(package?.ParentPackageId, q.Quota.QuotaId),
 						QuotaUsedValue = Clone.CalculateQuotaUsage(packageId, q.Quota.QuotaId),
 						q.Quota.PerOrganization
 					});
@@ -11122,6 +11125,8 @@ namespace FuseCP.EnterpriseServer
 						Server = p.Server
 					});
 				var package = packages.FirstOrDefault();
+				if (package == null) return;
+
 				var services = PackageServices
 					.Where(ps => ps.PackageId == packageId)
 					.Join(Services, ps => ps.ServiceId, s => s.ServiceId, (ps, s) => new
@@ -11132,8 +11137,15 @@ namespace FuseCP.EnterpriseServer
 					})
 					.ToList();
 
-				// get the list of available groups from hosting plan
-				var packageGroups = services
+                // tracks the server chosen for each group's service during this run, keyed by GroupId;
+                // seeded from pre-existing assignments and updated as new ones are made below - this is
+                // what the SQL implementation gets "for free" by re-querying PackageServices live within
+                // the same batch, since a plain in-memory snapshot of `services` never sees later additions
+                var groupServerIds = new Dictionary<int, int>();
+                foreach (var s in services) groupServerIds[s.GroupId] = s.ServerId;
+
+                // get the list of available groups from hosting plan
+                var packageGroups = services
 					.Select(s => s.GroupId)
 					.ToList();
 				var groups = ResourceGroups
@@ -11706,12 +11718,11 @@ namespace FuseCP.EnterpriseServer
 #else
 							(string.IsNullOrEmpty(itemName) || EF.Functions.Like(l.ItemName, itemName)));
 #endif
-					logs = logs.Where(l => l.UserId == null && isAdmin)
-						.Concat(logs
-							.Join(childUsers, l => l.UserId, u => u, (l, u) => l));
-					logs.ExecuteDelete();
-				}
-			}
+                    // Batch delete can't translate a Concat (UNION) of queries, so delete in two steps
+                    if (isAdmin) logs.Where(l => l.UserId == null).ExecuteDelete();
+                    logs.Join(childUsers, l => l.UserId, u => u, (l, u) => l).ExecuteDelete();
+                }
+            }
 			else
 			{
 				SqlHelper.ExecuteNonQuery(NativeConnectionString, CommandType.StoredProcedure,
